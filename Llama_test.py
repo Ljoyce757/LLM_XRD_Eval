@@ -109,53 +109,65 @@ def phase_list(run_conditions):
 
 def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     """
-    Extracts the largest dictionary-like block from the LLM output string and parses it as a Python dict.
-    If the dictionary is too large, parses it in parts using a streaming parser.
+    Extracts a dictionary-like block from the LLM output string and parses it as a Python dict.
+    Handles code blocks, JSON, and common formatting issues.
     """
-    # Try to find a JSON code block first
+
+    dict_str = None
+
+    # 1. Try to find a code block with or without 'json'
     code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", llm_output, re.DOTALL)
     if code_block:
         dict_str = code_block.group(1)
     else:
-        # Fallback: find the largest curly-brace block (greedy)
+        # 2. Try to find the largest curly-brace block (greedy)
         curly_block = re.search(r"(\{.*\})", llm_output, re.DOTALL)
         if curly_block:
             dict_str = curly_block.group(1)
-        else:
-            print("No dictionary found in output.")
-            return None
 
+    if not dict_str:
+        print("No dictionary found in output.")
+        return None
+
+    # 3. Check size for streaming parse (optional, as before)
     dict_size_mb = len(dict_str.encode('utf-8')) / 1024 / 1024
     if dict_size_mb > max_size_mb:
         print(f"Dictionary is large ({dict_size_mb:.2f} MB). Parsing in parts using streaming parser...")
-        # Write to a temporary file
+        import tempfile, ijson
         with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
             tmpfile.write(dict_str)
             tmpfile.flush()
             tmpfile.seek(0)
-            # Use ijson to stream through the top-level keys
             result = {}
             for key, value in ijson.kvitems(tmpfile, ''):
                 result[key] = value
         return result
 
-    # Try to parse as JSON
+    # 4. Try parsing as JSON
     try:
         return json.loads(dict_str)
     except Exception:
-        # Try to fix common issues
-        dict_str_fixed = dict_str.replace("'", '"')
-        dict_str_fixed = re.sub(r",\s*}", "}", dict_str_fixed)
-        dict_str_fixed = re.sub(r",\s*]", "]", dict_str_fixed)
-        try:
-            return json.loads(dict_str_fixed)
-        except Exception:
-            try:
-                # Try using ast.literal_eval as a last resort
-                return ast.literal_eval(dict_str)
-            except Exception as e:
-                print(f"Failed to parse dictionary: {e}")
-                return None
+        pass
+
+    # 5. Try to fix common issues and parse again
+    dict_str_fixed = dict_str
+    dict_str_fixed = dict_str_fixed.replace("'", '"')  # single to double quotes
+    dict_str_fixed = re.sub(r",\s*}", "}", dict_str_fixed)  # trailing commas in dict
+    dict_str_fixed = re.sub(r",\s*]", "]", dict_str_fixed)  # trailing commas in list
+    dict_str_fixed = re.sub(r"(\w+):", r'"\1":', dict_str_fixed)  # unquoted keys
+
+    try:
+        return json.loads(dict_str_fixed)
+    except Exception:
+        pass
+
+    # 6. Try ast.literal_eval as last resort
+    try:
+        import ast
+        return ast.literal_eval(dict_str)
+    except Exception as e:
+        print(f"Failed to parse dictionary: {e}")
+        return None
 
 def put_response_in_json(extracted_dict, json_file,run_name,save_json_file):
     if extracted_dict is not None:
@@ -304,22 +316,22 @@ save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
 base1 = "Data/llm_prompt_v4_response"
-existing1 = glob.glob(f"{base1}*.json")
-nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
-next_num1 = max(nums1) + 1 if nums1 else 1
+# existing1 = glob.glob(f"{base1}*.json")
+# nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
+next_num1 = next_num
 save_promptresponse = f"{base1}{next_num1}.json"  # File to save the results
 
 os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exists
 
-# for run in json_file:
-#     if "Synth_Conditions" in json_file[run]:
-#         has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
-#         if has_interpretation:
-#             run_name = run
-#             print(f"Running Llama response for: {run_name}")
-#             Llama_response_oneRun(json_file, run_name, save_json_file)
+for run in json_file:
+    if "Synth_Conditions" in json_file[run]:
+        has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
+        if has_interpretation:
+            run_name = run
+            print(f"Running Llama response for: {run_name}")
+            Llama_response_oneRun(json_file, run_name, save_json_file)
 #Comment out 
-Llama_response_oneRun(json_file, "TRI_104" ,save_json_file) # Example run for debugging
+#Llama_response_oneRun(json_file,"TRI_104",save_json_file) # Example run for debugging or running an individual sample 
 
 end_time = time.time()  # End timer
 elapsed = end_time - start_time

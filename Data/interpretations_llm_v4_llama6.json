@@ -241,10 +241,10 @@
                 "V3O5 (space group 15)": "P2\u2081/c (SG 15) is a known polymorph of V\u2083O\u2085. Its formation is plausible under reducing conditions.",
                 "V2O3 (space group 167)": "R-3c (SG 167) is a stable structure for V\u2082O\u2083. It may form under reducing conditions.",
                 "V6O13 (space group 69)": "This phase is less common and may form under specific conditions. Its presence at 7.65% is plausible.",
-                "V5O9 (space group 2)": "This phase is also less common. Its presence at 22.5% suggests a possible kinetic product."
+                "V5O9 (space group 2)": "This phase is less common and may form under specific conditions. Its presence at 22.5% is plausible."
             },
             "LLM_interpretation_likelihood_llama": 0.65,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible vanadium oxide phases, but the presence of multiple less common phases reduces its overall likelihood."
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the absence of Ca-containing phases is notable. The composition balance score of 0.593 suggests some elemental imbalance."
         },
         "I_2": {
             "phases": [
@@ -299,18 +299,18 @@
                 "V3O5 (space group 15)": 0.8,
                 "V2O3 (space group 167)": 0.4,
                 "V6O13 (space group 12)": 0.2,
-                "Ca5V3O13 (space group 176)": 0.6,
-                "CaO (space group 225)": 0.5
+                "Ca5V3O13 (space group 176)": 0.8,
+                "CaO (space group 225)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "V3O5 (space group 15)": "Same as I_1.",
-                "V2O3 (space group 167)": "Same as I_1.",
-                "V6O13 (space group 12)": "Different space group than I_1; its presence at 4.5% is less likely.",
-                "Ca5V3O13 (space group 176)": "This phase includes Ca and V, consistent with the target composition. Its formation is plausible.",
-                "CaO (space group 225)": "CaO is a simple oxide that may form as a by-product. Its presence at 10.68% is plausible."
+                "V3O5 (space group 15)": "P2\u2081/c (SG 15) is a known polymorph of V\u2083O\u2085. Its formation is plausible under reducing conditions.",
+                "V2O3 (space group 167)": "R-3c (SG 167) is a stable structure for V\u2082O\u2083. It may form under reducing conditions.",
+                "V6O13 (space group 12)": "This phase is less common and may form under specific conditions. Its presence at 4.5% is plausible.",
+                "Ca5V3O13 (space group 176)": "This phase includes Ca and V, making it a plausible product. Its presence at 33.62% is significant.",
+                "CaO (space group 225)": "This is a simple and stable oxide that may form as a by-product. Its presence at 10.68% is plausible."
             },
-            "LLM_interpretation_likelihood_llama": 0.8,
-            "LLM_interpretation_explanation_llama": "This interpretation includes a mix of vanadium oxides and calcium-containing phases, consistent with the target composition and precursors."
+            "LLM_interpretation_likelihood_llama": 0.85,
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, including Ca-containing phases. The composition balance score of 1.0 suggests a good match."
         },
         "I_3": {
             "phases": [
@@ -360,17 +360,17 @@
             "LLM_phases_likelihood_llama": {
                 "V3O5 (space group 15)": 0.8,
                 "V2O3 (space group 167)": 0.6,
-                "V6O13 (space group 12)": 0.3,
-                "CaV3O7 (space group 62)": 0.5
+                "V6O13 (space group 12)": 0.4,
+                "CaV3O7 (space group 62)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "V3O5 (space group 15)": "Same as I_1.",
-                "V2O3 (space group 167)": "Same as I_1.",
-                "V6O13 (space group 12)": "Same as I_2.",
-                "CaV3O7 (space group 62)": "This phase includes Ca and V, consistent with the target composition. Its formation is plausible."
+                "V3O5 (space group 15)": "P2\u2081/c (SG 15) is a known polymorph of V\u2083O\u2085. Its formation is plausible under reducing conditions.",
+                "V2O3 (space group 167)": "R-3c (SG 167) is a stable structure for V\u2082O\u2083. It may form under reducing conditions.",
+                "V6O13 (space group 12)": "This phase is less common and may form under specific conditions. Its presence at 9.12% is plausible.",
+                "CaV3O7 (space group 62)": "This phase includes Ca and V, making it a plausible product. Its presence at 27.17% is significant."
             },
             "LLM_interpretation_likelihood_llama": 0.75,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the presence of multiple vanadium oxides and a calcium-containing phase requires careful consideration of the synthesis conditions."
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, including Ca-containing phases. The composition balance score of 0.931 suggests a good match."
         },
         "I_4": {
             "phases": [
@@ -419,12 +419,12 @@
                 "V6O13 (space group 69)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "V3O5 (space group 15)": "Same as I_1.",
-                "V2O3 (space group 167)": "Same as I_1.",
-                "V6O13 (space group 69)": "Same as I_1."
+                "V3O5 (space group 15)": "P2\u2081/c (SG 15) is a known polymorph of V\u2083O\u2085. Its formation is plausible under reducing conditions.",
+                "V2O3 (space group 167)": "R-3c (SG 167) is a stable structure for V\u2082O\u2083. It may form under reducing conditions.",
+                "V6O13 (space group 69)": "This phase is less common and may form under specific conditions. Its presence at 17.5% is plausible."
             },
-            "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation includes only vanadium oxides, which is chemically consistent but lacks calcium-containing phases expected from the precursors."
+            "LLM_interpretation_likelihood_llama": 0.65,
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the absence of Ca-containing phases is notable. The composition balance score of 0.593 suggests some elemental imbalance."
         },
         "I_5": {
             "phases": [
@@ -474,17 +474,17 @@
             "LLM_phases_likelihood_llama": {
                 "V3O5 (space group 13)": 0.4,
                 "V2O3 (space group 167)": 0.7,
-                "V6O13 (space group 69)": 0.4,
-                "V5O9 (space group 2)": 0.2
+                "V6O13 (space group 69)": 0.6,
+                "V5O9 (space group 2)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "V3O5 (space group 13)": "C2/c (SG 13) is less common for V\u2083O\u2085. Its presence at 40.59% is less likely.",
-                "V2O3 (space group 167)": "Same as I_1.",
-                "V6O13 (space group 69)": "Same as I_1.",
-                "V5O9 (space group 2)": "Same as I_1."
+                "V3O5 (space group 13)": "C2/c (SG 13) is less commonly reported for V\u2083O\u2085 and may reflect a metastable polymorph. Its 40.59% presence is questionable.",
+                "V2O3 (space group 167)": "R-3c (SG 167) is a stable structure for V\u2082O\u2083. It may form under reducing conditions.",
+                "V6O13 (space group 69)": "This phase is less common and may form under specific conditions. Its presence at 22.47% is plausible.",
+                "V5O9 (space group 2)": "This phase is less common and may form under specific conditions. Its presence at 7.56% is plausible."
             },
-            "LLM_interpretation_likelihood_llama": 0.5,
-            "LLM_interpretation_explanation_llama": "This interpretation includes less common polymorphs and phases, reducing its overall likelihood."
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "This interpretation includes questionable polymorphs and lacks Ca-containing phases. The composition balance score of 0.593 suggests some elemental imbalance."
         },
         "I_6": {
             "phases": [
@@ -520,13 +520,13 @@
             "posterior_probability": 0.07460112700872346,
             "adjusted_posterior_probability": 0.007460112700872346,
             "LLM_phases_likelihood_llama": {
-                "V3O5 (space group 13)": 0.1
+                "V3O5 (space group 13)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "V3O5 (space group 13)": "This interpretation includes only one phase, which is chemically inconsistent with the target composition and precursors."
+                "V3O5 (space group 13)": "SG 13 is not typically associated with V\u2083O\u2085; SG 15 or 12 are more common. This single-phase interpretation is highly implausible."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to the lack of calcium-containing phases and other vanadium oxides."
+            "LLM_interpretation_likelihood_llama": 0.0,
+            "LLM_interpretation_explanation_llama": "This single-phase interpretation is highly implausible due to the incorrect space group for V\u2083O\u2085."
         },
         "I_7": {
             "phases": [
@@ -562,13 +562,13 @@
             "posterior_probability": 0.07810656560897634,
             "adjusted_posterior_probability": 0.007810656560897635,
             "LLM_phases_likelihood_llama": {
-                "V3O5 (space group 15)": 0.1
+                "V3O5 (space group 15)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "V3O5 (space group 15)": "This interpretation includes only one phase, which is chemically inconsistent with the target composition and precursors."
+                "V3O5 (space group 15)": "P2\u2081/c (SG 15) is a known polymorph of V\u2083O\u2085. However, a single-phase product is unlikely given the precursors and conditions."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to the lack of other vanadium oxides and calcium-containing phases."
+            "LLM_interpretation_likelihood_llama": 0.2,
+            "LLM_interpretation_explanation_llama": "This single-phase interpretation is unlikely due to the complexity of the synthesis and the presence of multiple possible phases."
         },
         "I_8": {
             "phases": [
@@ -604,13 +604,13 @@
             "posterior_probability": 0.07865120401412574,
             "adjusted_posterior_probability": 0.007865120401412575,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 167)": 0.1
+                "V2O3 (space group 167)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "This interpretation includes only one phase, which is chemically inconsistent with the target composition and precursors."
+                "V2O3 (space group 167)": "While V\u2082O\u2083 is a plausible phase, a single-phase product from these precursors and conditions is highly unlikely."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to the lack of vanadium oxides and calcium-containing phases."
+            "LLM_interpretation_likelihood_llama": 0.0,
+            "LLM_interpretation_explanation_llama": "This single-phase interpretation is highly implausible due to the expected presence of multiple phases."
         },
         "Synth_Conditions": {
             "Target": "CaV2O3",
