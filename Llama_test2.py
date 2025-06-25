@@ -112,31 +112,49 @@ def phase_list(run_conditions):
 
 def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     """
-    Extracts a dictionary-like block from the LLM output string and parses it as a Python dict.
-    Handles code blocks, JSON, and common formatting issues.
+    Extracts and parses a dictionary from a language model output string.
+    Handles markdown code blocks, malformed JSON, and large payloads.
     """
 
-    dict_str = None
+    def extract_dict_string(text):
+        # Try to extract JSON from code block
+        code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
+        if code_block:
+            return code_block.group(1)
 
-    # 1. Try to find a code block with or without 'json'
-    code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", llm_output, re.DOTALL)
-    if code_block:
-        dict_str = code_block.group(1)
-    else:
-        # 2. Try to find the largest curly-brace block (greedy)
-        curly_block = re.search(r"(\{.*\})", llm_output, re.DOTALL)
+        # Fall back to the largest brace block
+        curly_block = re.search(r"(\{.*\})", text, re.DOTALL)
         if curly_block:
-            dict_str = curly_block.group(1)
+            return curly_block.group(1)
 
-    if not dict_str:
-        print("No dictionary found in output.")
         return None
 
-    # 3. Check size for streaming parse (optional, as before)
-    dict_size_mb = len(dict_str.encode('utf-8')) / 1024 / 1024
-    if dict_size_mb > max_size_mb:
-        print(f"Dictionary is large ({dict_size_mb:.2f} MB). Parsing in parts using streaming parser...")
-        import tempfile, ijson
+    def is_large_payload(text, limit_mb):
+        size_mb = len(text.encode('utf-8')) / 1024 / 1024
+        return size_mb > limit_mb, size_mb
+
+    def try_json_parse(text):
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            return None
+
+    def clean_json_string(text):
+        # Fix common LLM formatting issues
+        text = text.replace("'", '"')
+        text = re.sub(r",\s*([}\]])", r"\1", text)  # Remove trailing commas
+        text = re.sub(r'(?<!")(\b\w+\b)\s*:', r'"\1":', text)  # Quote unquoted keys
+        return text
+
+    dict_str = extract_dict_string(llm_output)
+    if not dict_str:
+        print("No dictionary-like structure found in the output.")
+        return None
+
+    # Handle large payloads with ijson
+    too_large, size_mb = is_large_payload(dict_str, max_size_mb)
+    if too_large:
+        print(f"Dictionary is large ({size_mb:.2f} MB). Using streaming parser.")
         with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
             tmpfile.write(dict_str)
             tmpfile.flush()
@@ -146,30 +164,24 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
                 result[key] = value
         return result
 
-    # 4. Try parsing as JSON
-    try:
-        return json.loads(dict_str)
-    except Exception:
-        pass
+    # Try standard JSON parse
+    parsed = try_json_parse(dict_str)
+    if parsed is not None:
+        return parsed
 
-    # 5. Try to fix common issues and parse again
-    dict_str_fixed = dict_str
-    dict_str_fixed = dict_str_fixed.replace("'", '"')  # single to double quotes
-    dict_str_fixed = re.sub(r",\s*}", "}", dict_str_fixed)  # trailing commas in dict
-    dict_str_fixed = re.sub(r",\s*]", "]", dict_str_fixed)  # trailing commas in list
-    dict_str_fixed = re.sub(r"(\w+):", r'"\1":', dict_str_fixed)  # unquoted keys
+    # Try again after cleaning
+    cleaned = clean_json_string(dict_str)
+    parsed = try_json_parse(cleaned)
+    if parsed is not None:
+        return parsed
 
-    try:
-        return json.loads(dict_str_fixed)
-    except Exception:
-        pass
-
-    # 6. Try ast.literal_eval as last resort
+    # Last resort: literal_eval
     try:
         return ast.literal_eval(dict_str)
     except Exception as e:
-        print(f"Failed to parse dictionary: {e}")
+        print(f"Failed to parse dictionary using literal_eval: {e}")
         return None
+
 
 def put_response_in_json(extracted_dict, json_file,run_name,save_json_file):
     if extracted_dict is not None:
