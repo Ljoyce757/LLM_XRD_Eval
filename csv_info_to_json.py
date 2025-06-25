@@ -1,5 +1,6 @@
 import csv
 import json
+import ast
 # === To Import CSV Data into JSON ===
 def read_json_file(file_path):
     """
@@ -24,29 +25,56 @@ def read_csv_file(file_path):
             data.append(row)
     return data
 
+def remove_after_underscore(s):
+    """
+    Returns the part of the string before the first underscore.
+    
+    Example:
+    remove_after_underscore("TI122025_61") -> "TI122025"
+    """
+    return s.split('_')[0]
+
 def csv_info_to_json(csv_file_path, json_file_path):
     csv_data = read_csv_file(csv_file_path)
     json_data = read_json_file(json_file_path)
 
     for row in csv_data: #iterate over each row in the CSV file
-        run_name = row["Run Name in ALAB"].strip()
+        run_name = row["Name"].strip()
+        run_name = run_name.replace("-","_")
         if run_name not in json_data:
-            json_data[run_name] = {}
+            continue
         # Populate the JSON data with the relevant fields from the CSV
-        json_data[run_name]["Synth_Conditions"] = {
-            "Target": row["Target"],
-            "Precursor 1": row["Precursor 1"],
-            "Precursor 2": row["Precursor 2"],
-            "Precursor 3": row["Precursor 3"],
-            "Furnace": row["Furnace"],
-            "Temperature (C)": float(row["Temperature (C)"]),
-            "Temperature (K)": float(row["Temperature (C)"]) + 273.15,
-            "Dwell Duration (h)": float(row["Dwell Duration (h)"])
-        }
+        temperature = row["Temperature (C)"]
+        duration = row["Dwell Duration (h)"]
+        precursors = ast.literal_eval(row["Precursors"])
+        furnace = row["Furnace"]
+        if len(row["Precursors"]) == 3 and all([temperature,duration,precursors,furnace]):
+            json_data[run_name]["Synth_Conditions"] = {
+                "Target": row["Target"],
+                "Precursor 1": remove_after_underscore(precursors[0]),
+                "Precursor 2": remove_after_underscore(precursors[1]),
+                "Precursor 3": remove_after_underscore(precursors[2]),
+                "Furnace": furnace,
+                "Temperature (C)": float(temperature),
+                "Temperature (K)": float(temperature) + 273.15,
+                "Dwell Duration (h)": float(row["Dwell Duration (h)"])
+            }
+        elif all([temperature,duration,precursors,furnace]): 
+            json_data[run_name]["Synth_Conditions"] = {
+                "Target": row["Target"],
+                "Precursor 1": remove_after_underscore(precursors[0]),
+                "Precursor 2": remove_after_underscore(precursors[1]),
+                "Furnace": furnace,
+                "Temperature (C)": float(temperature),
+                "Temperature (K)": float(temperature) + 273.15,
+                "Dwell Duration (h)": float(row["Dwell Duration (h)"])
+            }
     # Save back to the JSON file
     with open(json_file_path, "w", encoding="utf-8") as jsonfile:
         json.dump(json_data, jsonfile, indent=4)
 #', '.join(phases)
 
-csv_info_to_json('Data/Dara-AIF_Evaluation2_Liam - Data.csv', 'Data/interpretations_llm_v1.json')
+csv_info_to_json('Data/synthesis_ARR.csv', 'Data/test_final_weights.json')
+csv_info_to_json('Data/synthesis_PG.csv', 'Data/test_final_weights.json')
+csv_info_to_json('Data/synthesis_TRI.csv', 'Data/test_final_weights.json')
 

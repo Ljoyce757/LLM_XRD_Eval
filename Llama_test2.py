@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import re
 import time 
 import glob
+from pymatgen.core import Composition
 
 load_dotenv()
 
@@ -88,7 +89,9 @@ def interpret_dict_list(run_interpretations):
                 phase_str = run_interpretations[interpret]["phases"][i] # e.g., "ZrTiO4_18"
                 phase_name, space_group = split_phase_and_spacegroup(phase_str) #splits string into phase name and space group 
                 wf = round(run_interpretations[interpret]["weight_fraction"][i],2) # get the weight fraction and round to 2 decimal places
-                written_phase = f"{phase_name} (space group {space_group}, weight fraction {wf}%)"
+                detailed_info = describe_clean_composition(phase_name)
+                written_phase = (f"{phase_name} (space group {space_group}, weight fraction {round(wf, 2)}%, "
+                            f"{detailed_info.split(', ', 1)[1]})")
                 interpret_dict[interpret].append(written_phase)
     return interpret_dict
 def comp_bal_score(run_interpretations):
@@ -99,7 +102,7 @@ def comp_bal_score(run_interpretations):
     return comp_bal_dict
 
 def phase_list(run_conditions):
-    if run_conditions["Precursor 3"] == '': 
+    if "Precursor 3" not in run_conditions: 
     # If there are only two precursors, ignore the third
         phases = [run_conditions["Precursor 1"], run_conditions["Precursor 2"]]
     else:   
@@ -163,7 +166,6 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
 
     # 6. Try ast.literal_eval as last resort
     try:
-        import ast
         return ast.literal_eval(dict_str)
     except Exception as e:
         print(f"Failed to parse dictionary: {e}")
@@ -204,13 +206,36 @@ def store_prompt_response(run_name, llm_input_response, extracted_dict, prompt, 
         response_dict[run_name]["Extracted_Dict"] = "No dictionary found in response"
     save_json(llm_input_response, response_dict) #save to the json file
 
-# --- Full function ---
-def Llama_response_oneRun(json_file, run_name,save_json_file):
+def describe_clean_composition(formula_str, digits=4, max_denominator=30):
+    comp = Composition(formula_str)
+
+    # Get rounded fractional composition
+    frac_dict = {el: round(amt, digits) for el, amt in comp.fractional_composition.get_el_amt_dict().items()}
+
+    # Reconstruct and quantize
+    frac_comp = Composition(frac_dict)
+    quantized_formula_str = frac_comp.get_integer_formula_and_factor(max_denominator=max_denominator)[0]
+    quantized_dict = Composition(quantized_formula_str).get_el_amt_dict()
+
+    # Format with clean chemical formula style
+    ordered_elements = list(frac_dict.keys())
+    quantized_str = ''.join(
+        f"{el}" if int(quantized_dict[el]) == 1 else f"{el}{int(quantized_dict[el])}"
+        for el in ordered_elements if el in quantized_dict
+    )
+
+    return f"{formula_str}, fractional_composition = {frac_dict}, approximately equal to {quantized_str}"
+
+# === Full function ===
+def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1):
     """
     This function is used to run the Llama AI model on a specific run's data.
     It loads the JSON file, extracts the necessary information, and constructs a prompt for the model.
     """
     #get information from json file to fill in these conditions
+    if run_name not in json_file:
+        print("Sample not in json_file data set")
+        return # avoids a key error if the run_name is not in the json_file
     run_interpretations = {k: v for k, v in json_file[run_name].items() if k.startswith("I_")}# all data from the run name in the json file
     run_conditions = json_file[run_name]["Synth_Conditions"] # synthesis conditions for the run
 
@@ -237,7 +262,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file):
     # score: the composition balance score for a given interpretation
 
     # --- Combine Into One Statement ---
-    synthesis_data = f"Solid state synthesis; {synth_conditions}.\nTarget: {target_phase}\nPrecursors: {precursors}\nTemperature: {temp_k} K ({temp_c}°C)\nDwell Duration: {time_dwell} hours\nFurnace: {furnace_type}"
+    synthesis_data = f"Solid state synthesis: {synth_conditions}.\n    Target: {target_phase}\n    Precursors: {precursors}\n    Temperature: {temp_k} K ({temp_c}°C)\n    Dwell Duration: {time_dwell} hours\n    Furnace: {furnace_type}"
     # Solid state synthesis; gram-quantity precursors are mixed and heated in a furnace.
     # Target: ZrTiO4  
     # Precursors: ZrO2, TiO2  
@@ -249,7 +274,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file):
     # ---Prompt Information---
     prompt = textwrap.dedent(f"""\
     Given the following synthesis data:
-    {textwrap.indent(synthesis_data, '    ')}
+    {synthesis_data}
 
     Below are multiple proposed phase interpretations. For each interpretation, determine the likelihood that the listed solid phases have formed under the given synthesis conditions.
 
@@ -271,6 +296,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file):
         prompt += f"- {name}: {round(score, 3)}\n"
 
     prompt += load_prompt_template("llm_prompt_template_2.txt")
+    #print(prompt)
     #--- Prompt --- 
     try:
         response = client.chat.completions.create(
@@ -282,13 +308,20 @@ def Llama_response_oneRun(json_file, run_name,save_json_file):
                 temperature=0,
                 seed=42,
                 stream=False,
-                # max_tokens=5000
+                #max_tokens=5000
             )
         
         content = response.choices[0].message.content.strip() # Get the content from the response 
         
         extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
-
+        if not extracted_dict and retries < 5: # if it cannot get the dictionary
+            failed_dict = load_json("Data/prompt2/LLM_failedDictionary.json")
+            if save_json_file not in failed_dict:
+                failed_dict[save_json_file] = {}
+            failed_dict[save_json_file][run_name] = content
+            save_json("Data/prompt2/LLM_failedDictionary.json", failed_dict)
+            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) #recursively call the function again
+            return # exit out of this run 
 
         #stores prompt and response information for every run (usefull for debugging)
         store_prompt_response(run_name, save_promptresponse, extracted_dict,prompt, content) 
@@ -308,14 +341,14 @@ start_time = time.time()  # Start timer
 json_file = load_json("Data/test_final_weights.json")
 
 # === Find the next available file name ===
-base = "Data/interpretations_llm_v4_llama"
+base = "Data/prompt2/interpretations_llm_v5.1_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/llm_prompt_v4_response"
+base1 = "Data/prompt2/llm_prompt_v5.1_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num
@@ -329,10 +362,10 @@ for run in json_file:
         if has_interpretation:
             run_name = run
             print(f"Running Llama response for: {run_name}")
-            Llama_response_oneRun(json_file, run_name, save_json_file)
+            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse)
             
 #Comment out 
-#Llama_response_oneRun(json_file,"TRI_104",save_json_file) # Example run for debugging or running an individual sample 
+#Llama_response_oneRun(json_file,"TRI_106",save_json_file) # Example run for debugging or running an individual sample 
 
 end_time = time.time()  # End timer
 elapsed = end_time - start_time

@@ -15,7 +15,7 @@ Instructions:
 - If likely phases are **missing**, reduce the interpretation likelihood even if the present phases are individually plausible. For example, if only one phase is present but synthesis conditions suggest a multiphase product, reduce the score accordingly.
 - Respect the reported weight fractions when considering importance or impact on interpretation.
 - Consider the composition balance when evaluating interpretation likelihood. The balance score should be close to 1.0—if it is significantly lower (e.g., < 0.9), this indicates missing or excess elements and should result in a substantial penalty to the interpretation likelihood.
-- Even if all listed phases are individually plausible, if any key precursor element (e.g., Ca, Na, V) is completely missing from the phase set, the interpretation likelihood must be harshly penalized (e.g., assigned a near-zero score). This issue overrides other plausibility factors.
+- Even if all listed phases are individually plausible, if any key precursor element is completely missing from the phase set, the interpretation likelihood must be harshly penalized (e.g., assigned a near-zero score). This issue overrides other plausibility factors.
 
 **Completeness Check – Requirement:**
 - Penalize interpretations that **omit plausible or expected phases** based on the synthesis conditions, but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.

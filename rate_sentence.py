@@ -1,5 +1,4 @@
-from typing import List, Union, Iterable
-from itertools import zip_longest
+from typing import List
 from moverscore_v2 import word_mover_score
 from collections import defaultdict
 import numpy as np
