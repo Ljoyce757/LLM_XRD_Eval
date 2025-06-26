@@ -344,13 +344,10 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
             print(f"Error calling model: {e}")
 # --- End of the Big Function ---
 
-# --- Example Usage for One Run ---
-#Llama_response_oneRun("interpretations_llm_v1.json", "TRI_197") # Example run for debugging
-
 # --- Main Execution for All Runs --- 
 start_time = time.time()  # Start timer
 
-json_file = load_json("Data/train_final_weights.json")
+json_file = load_json("Data/test_final_weights.json")
 
 # === Find the next available file name ===
 base = "Data/prompt2/interpretations_llm_v5.1_llama"
@@ -368,16 +365,16 @@ save_promptresponse = f"{base1}{next_num1}.json"  # File to save the results
 
 os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exists
 
-# for run in json_file:
-#     if "Synth_Conditions" in json_file[run]:
-#         has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
-#         if has_interpretation:
-#             run_name = run
-#             print(f"Running Llama response for: {run_name}")
-#             Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse)
+for run in json_file:
+    if "Synth_Conditions" in json_file[run]:
+        has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
+        if has_interpretation:
+            run_name = run
+            print(f"Running Llama response for: {run_name}")
+            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse)
             
 #Comment out 
-Llama_response_oneRun(json_file,"TRI_181",save_json_file, save_promptresponse) # Example run for debugging or running an individual sample 
+#Llama_response_oneRun(json_file,"TRI_181",save_json_file, save_promptresponse) # Example run for debugging or running an individual sample 
 
 end_time = time.time()  # End timer
 elapsed = end_time - start_time
