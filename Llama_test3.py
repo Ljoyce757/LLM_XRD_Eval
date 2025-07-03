@@ -386,12 +386,13 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     {synthesis_data}
 
     Below are multiple proposed phase interpretations. For each interpretation, determine the likelihood that the listed solid phases have formed under the given synthesis conditions.
-    ** If a phase has a different space group it must be treated as a separate phase **
     Take into account:
     - Whether the oxidation state is thermodynamically plausible (based on precursors, temperature, and synthesis atmosphere).
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
     - Whether the overall elemental composition of the phases, weighted by their fractions, matches the expected target composition. Interpretations with large elemental imbalances (e.g., excess or missing cations) should be penalized. Use the provided composition balance score as an indicator of this match.
 
+    ** When evaluating using the "approximately equal phase" the label given in the response is the exact phase given in the interpretation **
+    ** If a phase has a different space group it must be treated as a separate phase **
     """)
 
     # Add interpretation info
@@ -427,7 +428,9 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
             failed_dict = load_json("Data/prompt3/LLM_failedDictionary.json")
             if save_json_file not in failed_dict:
                 failed_dict[save_json_file] = {}
-            failed_dict[save_json_file][run_name] = content
+            if retries not in failed_dict[save_json_file]:
+                failed_dict[save_json_file][retries] = {}
+            failed_dict[save_json_file][retries][run_name] = content
             save_json("Data/prompt3/LLM_failedDictionary.json", failed_dict)
             Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) #recursively call the function again
             return # exit out of this run 
@@ -447,14 +450,14 @@ start_time = time.time()  # Start timer
 json_file = load_json("Data/test_final_weights.json")
 
 # === Find the next available file name ===
-base = "Data/prompt3/interpretations_llm_v1_llama"
+base = "Data/prompt3/interpretations_llm_v2_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt3/llm_prompt_v1_response"
+base1 = "Data/prompt3/llm_prompt_v2_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num

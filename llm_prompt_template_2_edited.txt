@@ -21,7 +21,6 @@ Instructions:
 - Phases with the same "approximately equal to" must be assigned the same phase likelihood, regardless of their formula or how they appear across interpretations.
 - Do not penalize complex or unusual formulas if their "approximately equal to" matches a known plausible phase.
 - When evaluating interpretation plausibility, consider the combined presence and total weight of all phases with the same approximately equal to identity.
-- the "approximately equal phase" is provided to help assign phase likelihood, do not include it as a phase in the response.
 
 **Completeness Check – Requirement:**
 - Penalize interpretations that **omit plausible or expected phases** based on the synthesis conditions, but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.
