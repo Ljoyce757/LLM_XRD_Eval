@@ -424,11 +424,11 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
         
         extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
         if not extracted_dict and retries < 5: # if it cannot get the dictionary
-            failed_dict = load_json("Data/prompt2/LLM_failedDictionary.json")
+            failed_dict = load_json("Data/prompt3/LLM_failedDictionary.json")
             if save_json_file not in failed_dict:
                 failed_dict[save_json_file] = {}
             failed_dict[save_json_file][run_name] = content
-            save_json("Data/prompt2/LLM_failedDictionary.json", failed_dict)
+            save_json("Data/prompt3/LLM_failedDictionary.json", failed_dict)
             Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) #recursively call the function again
             return # exit out of this run 
 
@@ -447,14 +447,14 @@ start_time = time.time()  # Start timer
 json_file = load_json("Data/test_final_weights.json")
 
 # === Find the next available file name ===
-base = "Data/prompt2/interpretations_llm_v5.1_llama"
+base = "Data/prompt3/interpretations_llm_v1_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt2/llm_prompt_v5.1_response"
+base1 = "Data/prompt3/llm_prompt_v1_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num
