@@ -110,23 +110,110 @@ def phase_list(run_conditions):
         phases = [run_conditions["Precursor 1"], run_conditions["Precursor 2"], run_conditions["Precursor 3"]]
     return phases
 
+# def extract_dict_from_llm_output(llm_output, max_size_mb=10):
+#     """
+#     Extracts and parses a dictionary from a language model output string.
+#     Handles markdown code blocks, malformed JSON, and large payloads.
+#     """
+
+#     def extract_dict_string(text):
+#         # Try to extract JSON from code block
+#         code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
+#         if code_block:
+#             return code_block.group(1)
+
+#         # Fall back to the largest brace block
+#         curly_block = re.search(r"(\{.*\})", text, re.DOTALL)
+#         if curly_block:
+#             return curly_block.group(1)
+
+#         return None
+
+#     def is_large_payload(text, limit_mb):
+#         size_mb = len(text.encode('utf-8')) / 1024 / 1024
+#         return size_mb > limit_mb, size_mb
+
+#     def try_json_parse(text):
+#         try:
+#             return json.loads(text)
+#         except json.JSONDecodeError:
+#             return None
+
+#     def clean_json_string(text):
+#         # Fix common LLM formatting issues
+#         text = text.replace("'", '"')
+#         text = re.sub(r",\s*([}\]])", r"\1", text)  # Remove trailing commas
+#         text = re.sub(r'(?<!")(\b\w+\b)\s*:', r'"\1":', text)  # Quote unquoted keys
+#         return text
+
+#     dict_str = extract_dict_string(llm_output)
+#     if not dict_str:
+#         print("No dictionary-like structure found in the output.")
+#         return None
+
+#     # Handle large payloads with ijson
+#     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
+#     if too_large:
+#         print(f"Dictionary is large ({size_mb:.2f} MB). Using streaming parser.")
+#         with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
+#             tmpfile.write(dict_str)
+#             tmpfile.flush()
+#             tmpfile.seek(0)
+#             result = {}
+#             for key, value in ijson.kvitems(tmpfile, ''):
+#                 result[key] = value
+#         return result
+
+#     # Try standard JSON parse
+#     parsed = try_json_parse(dict_str)
+#     if parsed is not None:
+#         return parsed
+
+#     # Try again after cleaning
+#     cleaned = clean_json_string(dict_str)
+#     parsed = try_json_parse(cleaned)
+#     if parsed is not None:
+#         return parsed
+
+#     # Last resort: literal_eval
+#     try:
+#         return ast.literal_eval(dict_str)
+#     except Exception as e:
+#         print(f"Failed to parse dictionary using literal_eval: {e}")
+#         return None
+import re
+import json
+import ast
+import tempfile
+import ijson
+
 def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     """
-    Extracts and parses a dictionary from a language model output string.
-    Handles markdown code blocks, malformed JSON, and large payloads.
+    Extracts and parses a dictionary from LLM output.
+    Handles markdown code blocks, malformed JSON, large payloads, and nested braces.
     """
 
     def extract_dict_string(text):
-        # Try to extract JSON from code block
+        # 1. Try to extract JSON from markdown code block
         code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
         if code_block:
             return code_block.group(1)
 
-        # Fall back to the largest brace block
-        curly_block = re.search(r"(\{.*\})", text, re.DOTALL)
-        if curly_block:
-            return curly_block.group(1)
+        # 2. Try balanced brace extraction
+        return extract_balanced_braces(text)
 
+    def extract_balanced_braces(text):
+        start = text.find('{')
+        if start == -1:
+            return None
+        depth = 0
+        for i in range(start, len(text)):
+            if text[i] == '{':
+                depth += 1
+            elif text[i] == '}':
+                depth -= 1
+                if depth == 0:
+                    return text[start:i+1]
         return None
 
     def is_large_payload(text, limit_mb):
@@ -136,14 +223,20 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     def try_json_parse(text):
         try:
             return json.loads(text)
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
+            print(f"JSON decode failed: {e}")
             return None
 
     def clean_json_string(text):
-        # Fix common LLM formatting issues
+        # 1. Replace single quotes with double quotes
         text = text.replace("'", '"')
-        text = re.sub(r",\s*([}\]])", r"\1", text)  # Remove trailing commas
-        text = re.sub(r'(?<!")(\b\w+\b)\s*:', r'"\1":', text)  # Quote unquoted keys
+
+        # 2. Remove trailing commas inside objects and arrays
+        text = re.sub(r",\s*([}\]])", r"\1", text)
+
+        # 3. Quote unquoted keys (e.g., V2O3: → "V2O3":)
+        text = re.sub(r'(?<!")(\b[\w\s\-/]+\b)\s*:', r'"\1":', text)
+
         return text
 
     dict_str = extract_dict_string(llm_output)
@@ -151,10 +244,12 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
         print("No dictionary-like structure found in the output.")
         return None
 
-    # Handle large payloads with ijson
+    # print("Raw extracted string (first 500 chars):")
+    # print(dict_str[:500])
+
     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
     if too_large:
-        print(f"Dictionary is large ({size_mb:.2f} MB). Using streaming parser.")
+        print(f"Payload too large ({size_mb:.2f} MB). Using ijson.")
         with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
             tmpfile.write(dict_str)
             tmpfile.flush()
@@ -164,13 +259,15 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
                 result[key] = value
         return result
 
-    # Try standard JSON parse
+    # First attempt: raw
     parsed = try_json_parse(dict_str)
     if parsed is not None:
         return parsed
 
-    # Try again after cleaning
+    # Second attempt: cleaned
     cleaned = clean_json_string(dict_str)
+    # print("Trying cleaned version (first 500 chars):")
+    # print(cleaned[:500])
     parsed = try_json_parse(cleaned)
     if parsed is not None:
         return parsed
@@ -179,7 +276,7 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     try:
         return ast.literal_eval(dict_str)
     except Exception as e:
-        print(f"Failed to parse dictionary using literal_eval: {e}")
+        print(f"literal_eval failed: {e}")
         return None
 
 
@@ -252,7 +349,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     run_conditions = json_file[run_name]["Synth_Conditions"] # synthesis conditions for the run
 
     # --- Data from the Specific Run---
-    model = "lbl/llama"
+    model = "Llama-4-Scout-17B-16E-Instruct"
     phases = phase_list(run_conditions)
     synth_conditions = 'gram-quantity precursors are mixed and heated in a furnace'  # e.g., "gram-quantity precursors are mixed and heated in a furnace."
     target_phase = run_conditions["Target"]  # e.g., "ZrTiO4"
@@ -289,7 +386,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     {synthesis_data}
 
     Below are multiple proposed phase interpretations. For each interpretation, determine the likelihood that the listed solid phases have formed under the given synthesis conditions.
-
+    ** If a phase has a different space group it must be treated as a separate phase **
     Take into account:
     - Whether the oxidation state is thermodynamically plausible (based on precursors, temperature, and synthesis atmosphere).
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
@@ -307,7 +404,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     for name, score in composition_balance_scores.items():
         prompt += f"- {name}: {round(score, 3)}\n"
 
-    prompt += load_prompt_template("llm_prompt_template_2.txt")
+    prompt += load_prompt_template("llm_prompt_template_edited1.txt")
     #print(prompt)
     #--- Prompt --- 
     try:
