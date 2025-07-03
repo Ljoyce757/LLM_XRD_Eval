@@ -1,4 +1,4 @@
-# LLM XRD Interpretation Validation \n
+# LLM XRD Interpretation Validation
 ## File Descriptions
 - Llama_test.py: initial prompt formatting and information
 - Llama_test2.py: updated prompt (Prompt used for Chat GPT)
