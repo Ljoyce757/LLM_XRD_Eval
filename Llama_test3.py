@@ -386,6 +386,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     {synthesis_data}
 
     Below are multiple proposed phase interpretations. For each interpretation, determine the likelihood that the listed solid phases have formed under the given synthesis conditions.
+    ** If a phase has a different space group it must be treated as a separate phase **
     Take into account:
     - Whether the oxidation state is thermodynamically plausible (based on precursors, temperature, and synthesis atmosphere).
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
@@ -403,7 +404,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     for name, score in composition_balance_scores.items():
         prompt += f"- {name}: {round(score, 3)}\n"
 
-    prompt += load_prompt_template("llm_prompt_template_2.txt")
+    prompt += load_prompt_template("llm_prompt_template_2_edited.txt")
     #print(prompt)
     #--- Prompt --- 
     try:
