@@ -391,8 +391,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
     - Whether the overall elemental composition of the phases, weighted by their fractions, matches the expected target composition. Interpretations with large elemental imbalances (e.g., excess or missing cations) should be penalized. Use the provided composition balance score as an indicator of this match.
 
-    ** "Approximate equal phase" is provided if the original phase is unknown, only refer to the original phase in the response **
-    ** If a phase has a different space group it must be treated as a separate phase **
+
     """)
 
     # Add interpretation info

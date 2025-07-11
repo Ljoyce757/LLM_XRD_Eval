@@ -26,7 +26,7 @@ Instructions:
 - Penalize interpretations that **omit plausible or expected phases** based on the synthesis conditions, but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.
 - Penalize single-phase interpretations if other by-products, unreacted precursors, or side products would also be expected under the conditions.
 - If the list is incomplete (e.g., missing likely by-products or unreacted precursors), apply a modest penalty depending on severity.
-
+- Double chack that the number of phases provided in the prompt is equal to the number of phases in your response for each interpretation.
 **Explanation Requirements:**
 - For **each phase**, provide:
     1. A list of reasons / factors for a reduced likelihood score, along with the strength of each factor.
