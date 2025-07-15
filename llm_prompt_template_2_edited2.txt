@@ -7,7 +7,6 @@ Instructions:
 - If a polymorph is less stable but still possible due to mechanisms such as kinetic trapping or low synthesis duration, assign reduced likelihood (e.g., 0.5).
 - If a phase is a known precursor or may remain unreacted, assign moderate likelihood (e.g., 0.4–0.6). If it is particularly inert under these conditions, assign higher (0.7–0.8).
 - If a phase is physically implausible (e.g., CO as a solid, a gas-phase species, or a high-energy transient), assign near-zero likelihood (0.0–0.1). This should always be penalized more than plausible phases.
-- Rate phases that are in the interpretation being evaulated only.
 
 **Interpretation Likelihood (overall):**
 - This is **not an average** of individual phase likelihoods.
@@ -48,13 +47,10 @@ Finally, remember that these phase interpretations are from x-ray diffraction me
 
 **Do not** confuse gas-phase species (e.g., CO, O₂) with solid phases — disqualify them appropriately.
 Format your response as a dictionary where each interpretation key maps to a nested dictionary with:
-- "Likelihoods": {{phase (space group): value(float)}}
-- "Explanations": {{phase (space group): explanation(str)}}
+- "Likelihoods": {{phase: value}}
+- "Explanations": {{phase: explanation}}
 - "Interpretation_Likelihood": float
 - "Interpretation_Explanation": str
-
-** for the "Likelihoods" and "Explanations", the phases listed must include all phases listed under each interpretation (including polymorphs of the same phase) and cannot include any phases taken from other interpretations. **
-
 
 The following examples are provided for demonstration purposes:
 

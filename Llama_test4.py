@@ -11,6 +11,9 @@ import time
 import glob
 from pymatgen.core import Composition
 
+### Edited Base Prompt to get results closer ### 
+
+
 load_dotenv()
 
 # --- Start llama API ---
@@ -187,10 +190,103 @@ import ast
 import tempfile
 import ijson
 
+# def extract_dict_from_llm_output(llm_output, max_size_mb=10):
+#     """
+#     Extracts and parses a dictionary from LLM output.
+#     Handles markdown code blocks, malformed JSON, large payloads, and nested braces.
+#     """
+
+#     def extract_dict_string(text):
+#         # 1. Try to extract JSON from markdown code block
+#         code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
+#         if code_block:
+#             return code_block.group(1)
+
+#         # 2. Try balanced brace extraction
+#         return extract_balanced_braces(text)
+
+#     def extract_balanced_braces(text):
+#         start = text.find('{')
+#         if start == -1:
+#             return None
+#         depth = 0
+#         for i in range(start, len(text)):
+#             if text[i] == '{':
+#                 depth += 1
+#             elif text[i] == '}':
+#                 depth -= 1
+#                 if depth == 0:
+#                     return text[start:i+1]
+#         return None
+
+#     def is_large_payload(text, limit_mb):
+#         size_mb = len(text.encode('utf-8')) / 1024 / 1024
+#         return size_mb > limit_mb, size_mb
+
+#     def try_json_parse(text):
+#         try:
+#             return json.loads(text)
+#         except json.JSONDecodeError as e:
+#             print(f"JSON decode failed: {e}")
+#             return None
+
+#     def clean_json_string(text):
+#         # 1. Replace single quotes with double quotes
+#         text = text.replace("'", '"')
+
+#         # 2. Remove trailing commas inside objects and arrays
+#         text = re.sub(r",\s*([}\]])", r"\1", text)
+
+#         # 3. Quote unquoted keys (e.g., V2O3: → "V2O3":)
+#         text = re.sub(r'(?<!")(\b[\w\s\-/]+\b)\s*:', r'"\1":', text)
+
+#         return text
+
+#     dict_str = extract_dict_string(llm_output)
+#     if not dict_str:
+#         print("No dictionary-like structure found in the output.")
+#         return None
+
+#     # print("Raw extracted string (first 500 chars):")
+#     # print(dict_str[:500])
+
+#     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
+#     if too_large:
+#         print(f"Payload too large ({size_mb:.2f} MB). Using ijson.")
+#         with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
+#             tmpfile.write(dict_str)
+#             tmpfile.flush()
+#             tmpfile.seek(0)
+#             result = {}
+#             for key, value in ijson.kvitems(tmpfile, ''):
+#                 result[key] = value
+#         return result
+
+#     # First attempt: raw
+#     parsed = try_json_parse(dict_str)
+#     if parsed is not None:
+#         return parsed
+
+#     # Second attempt: cleaned
+#     cleaned = clean_json_string(dict_str)
+#     # print("Trying cleaned version (first 500 chars):")
+#     # print(cleaned[:500])
+#     parsed = try_json_parse(cleaned)
+#     if parsed is not None:
+#         return parsed
+
+#     # Last resort: literal_eval
+#     try:
+#         return ast.literal_eval(dict_str)
+#     except Exception as e:
+#         print(f"literal_eval failed: {e}")
+#         return None
+
 def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     """
     Extracts and parses a dictionary from LLM output.
-    Handles markdown code blocks, malformed JSON, large payloads, and nested braces.
+    Handles markdown code blocks, nested braces, and large payloads.
+    Does NOT modify or clean malformed JSON.
     """
 
     def extract_dict_string(text):
@@ -227,25 +323,10 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
             print(f"JSON decode failed: {e}")
             return None
 
-    def clean_json_string(text):
-        # 1. Replace single quotes with double quotes
-        text = text.replace("'", '"')
-
-        # 2. Remove trailing commas inside objects and arrays
-        text = re.sub(r",\s*([}\]])", r"\1", text)
-
-        # 3. Quote unquoted keys (e.g., V2O3: → "V2O3":)
-        text = re.sub(r'(?<!")(\b[\w\s\-/]+\b)\s*:', r'"\1":', text)
-
-        return text
-
     dict_str = extract_dict_string(llm_output)
     if not dict_str:
         print("No dictionary-like structure found in the output.")
         return None
-
-    # print("Raw extracted string (first 500 chars):")
-    # print(dict_str[:500])
 
     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
     if too_large:
@@ -259,26 +340,17 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
                 result[key] = value
         return result
 
-    # First attempt: raw
+    # First and only attempt: raw JSON parsing
     parsed = try_json_parse(dict_str)
     if parsed is not None:
         return parsed
 
-    # Second attempt: cleaned
-    cleaned = clean_json_string(dict_str)
-    # print("Trying cleaned version (first 500 chars):")
-    # print(cleaned[:500])
-    parsed = try_json_parse(cleaned)
-    if parsed is not None:
-        return parsed
-
-    # Last resort: literal_eval
+    # Optional fallback to literal_eval (if input might be Python dicts)
     try:
         return ast.literal_eval(dict_str)
     except Exception as e:
         print(f"literal_eval failed: {e}")
         return None
-
 
 def put_response_in_json(extracted_dict, json_file,run_name,save_json_file):
     if extracted_dict is not None:
@@ -403,7 +475,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     for name, score in composition_balance_scores.items():
         prompt += f"- {name}: {round(score, 3)}\n"
 
-    prompt += load_prompt_template("llm_prompt_template_2.txt")
+    prompt += load_prompt_template("llm_prompt_template_2_edited2.txt")
     #print(prompt)
     #--- Prompt --- 
     try:
