@@ -11,6 +11,9 @@ import time
 import glob
 from pymatgen.core import Composition
 
+### Base Prompt used by Chat GPT for data ### 
+
+
 load_dotenv()
 
 # --- Start llama API ---

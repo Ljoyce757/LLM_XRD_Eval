@@ -74,7 +74,7 @@ def csv_info_to_json(csv_file_path, json_file_path):
         json.dump(json_data, jsonfile, indent=4)
 #', '.join(phases)
 
-csv_info_to_json('Data/synthesis_ARR.csv', 'Data/test_final_weights.json')
-csv_info_to_json('Data/synthesis_PG.csv', 'Data/test_final_weights.json')
-csv_info_to_json('Data/synthesis_TRI.csv', 'Data/test_final_weights.json')
+csv_info_to_json('Data/synthesis_ARR.csv', 'Data/train_final_weights.json')
+csv_info_to_json('Data/synthesis_PG.csv', 'Data/train_final_weights.json')
+csv_info_to_json('Data/synthesis_TRI.csv', 'Data/train_final_weights.json')
 

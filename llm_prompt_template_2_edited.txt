@@ -7,7 +7,6 @@ Instructions:
 - If a polymorph is less stable but still possible due to mechanisms such as kinetic trapping or low synthesis duration, assign reduced likelihood (e.g., 0.5).
 - If a phase is a known precursor or may remain unreacted, assign moderate likelihood (e.g., 0.4–0.6). If it is particularly inert under these conditions, assign higher (0.7–0.8).
 - If a phase is physically implausible (e.g., CO as a solid, a gas-phase species, or a high-energy transient), assign near-zero likelihood (0.0–0.1). This should always be penalized more than plausible phases.
-- Rate phases that are in the interpretation being evaulated only.
 
 **Interpretation Likelihood (overall):**
 - This is **not an average** of individual phase likelihoods.
@@ -18,10 +17,12 @@ Instructions:
 - Take into account on how likely is an interpretation the composition balance.
 
 **Phase and Interpretation Likelihoods – Critical Rule:**
-- When scoring or evaluating phase likelihoods, judge based on the approximately equal to identity, not the formula label.
+- When scoring or evaluating phase likelihoods, judge based on the approximately equal to identity, not the formula label. 
 - Phases with the same "approximately equal to" must be assigned the same phase likelihood, regardless of their formula or how they appear across interpretations.
 - Do not penalize complex or unusual formulas if their "approximately equal to" matches a known plausible phase.
 - When evaluating interpretation plausibility, consider the combined presence and total weight of all phases with the same approximately equal to identity.
+- Do not copy, add, or infer phases from one interpretation into another. Each interpretation must be evaluated only using the exact list of phases it provides. Phases from other interpretations must not be introduced under any condition, even if they are plausible or similar.
+- Phases with the same formula but different space groups must be treated as separate, unique phases. Do not merge or remove them. If both appear in an interpretation, evaluate each separately. Their phase likelihoods may differ based on stability or polymorph identity.
 
 **Completeness Check – Requirement:**
 - Penalize interpretations that **omit plausible or expected phases** based on the synthesis conditions, but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.
@@ -47,14 +48,12 @@ Finally, remember that these phase interpretations are from x-ray diffraction me
 
 
 **Do not** confuse gas-phase species (e.g., CO, O₂) with solid phases — disqualify them appropriately.
+**Format Instructions (Use for All Interpretations)**
 Format your response as a dictionary where each interpretation key maps to a nested dictionary with:
-- "Likelihoods": {{phase (space group): value(float)}}
-- "Explanations": {{phase (space group): explanation(str)}}
+- "Likelihoods": {{phase (space group #): value(float)}}
+- "Explanations": {{phase (space group #): explanation(str)}}
 - "Interpretation_Likelihood": float
 - "Interpretation_Explanation": str
-
-** for the "Likelihoods" and "Explanations", the phases listed must include all phases listed under each interpretation (including polymorphs of the same phase) and cannot include any phases taken from other interpretations. **
-
 
 The following examples are provided for demonstration purposes:
 

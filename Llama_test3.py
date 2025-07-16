@@ -251,7 +251,7 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
         try:
             return json.loads(text)
         except json.JSONDecodeError as e:
-            print(f"JSON decode failed: {e}")
+            #print(f"JSON decode failed: {e}")
             return None
 
     dict_str = extract_dict_string(llm_output)
@@ -385,6 +385,10 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 
     # ---Prompt Information---
     prompt = textwrap.dedent(f"""\
+    ** Important **
+    - You are mixing phases from interpretation 2 into interpretation 1 in some samples. 
+    - You are improperly removing interpretation 2 in some samples.
+    - Check Format Instructions for your response.
     Given the following synthesis data:
     {synthesis_data}
 
@@ -393,8 +397,6 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     - Whether the oxidation state is thermodynamically plausible (based on precursors, temperature, and synthesis atmosphere).
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
     - Whether the overall elemental composition of the phases, weighted by their fractions, matches the expected target composition. Interpretations with large elemental imbalances (e.g., excess or missing cations) should be penalized. Use the provided composition balance score as an indicator of this match.
-
-
     """)
 
     # Add interpretation info
@@ -467,7 +469,7 @@ save_promptresponse = f"{base1}{next_num1}.json"  # File to save the results
 
 os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exists
 
-run_name = ["ARR_39", "TRI_84", "TRI_87"] #DEBUG for adjusting prompt with specific samples
+run_name = ["TRI_41","ARR_39", "TRI_84", "TRI_87"] #DEBUG for adjusting prompt with specific samples
 
 #for run in json_file:
 for run in run_name: # (use for DEBUG)

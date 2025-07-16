@@ -17,7 +17,7 @@ Instructions:
 - Take into account on how likely is an interpretation the composition balance.
 
 **Phase and Interpretation Likelihoods – Critical Rule:**
-- When scoring or evaluating phase likelihoods, judge based on the approximately equal to identity, not the formula label.
+- When scoring or evaluating phase likelihoods, judge based on the approximately equal to identity, not the formula label. 
 - Phases with the same "approximately equal to" must be assigned the same phase likelihood, regardless of their formula or how they appear across interpretations.
 - Do not penalize complex or unusual formulas if their "approximately equal to" matches a known plausible phase.
 - When evaluating interpretation plausibility, consider the combined presence and total weight of all phases with the same approximately equal to identity.
