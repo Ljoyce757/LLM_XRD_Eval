@@ -386,9 +386,8 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     # ---Prompt Information---
     prompt = textwrap.dedent(f"""\
     ** Important **
-    - You are mixing phases from interpretation 2 into interpretation 1 in some samples. 
-    - You are improperly removing interpretation 2 in some samples.
-    - Check Format Instructions for your response.
+    - You are mixing phases from interpretation 2 into interpretation 1 in some samples. include both. Then check Format Instructions for how to format your response.
+    
     Given the following synthesis data:
     {synthesis_data}
 
@@ -428,6 +427,22 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
         content = response.choices[0].message.content.strip() # Get the content from the response 
         
         extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
+
+        if extracted_dict and retries < 5: #for every response that has a dictionary
+            for interpret in extracted_dict: # could be useful to make sure llama is outputing the correct amount of phases
+                num_phases = len(list(extracted_dict[interpret]["Likelihoods"].keys()))
+                num_phases_prompt = len(json_file[run_name][interpret]["phases"])
+                if num_phases != num_phases_prompt:
+                    print(f"Did not include correct number of phases in {interpret}")
+                    Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
+                    return # exit out
+            for interpret in json_file[run_name]: 
+                if interpret != "Synth_Conditions":
+                    if not interpret in extracted_dict: # filters out all interpretations that Llama did not include in its response
+                        print(f"Did not evaluate interpretation: {interpret}") # prints a statement saying that the interpretation was not included
+                        Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
+                        return # exit out     
+
         if not extracted_dict and retries < 5: # if it cannot get the dictionary
             failed_dict = load_json("Data/prompt3/LLM_failedDictionary.json")
             if save_json_file not in failed_dict:
@@ -469,7 +484,7 @@ save_promptresponse = f"{base1}{next_num1}.json"  # File to save the results
 
 os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exists
 
-run_name = ["TRI_41","ARR_39", "TRI_84", "TRI_87"] #DEBUG for adjusting prompt with specific samples
+run_name = ["TRI_41","ARR_39", "TRI_87"] #DEBUG for adjusting prompt with specific samples
 
 #for run in json_file:
 for run in run_name: # (use for DEBUG)

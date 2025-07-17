@@ -23,6 +23,9 @@ Instructions:
 - When evaluating interpretation plausibility, consider the combined presence and total weight of all phases with the same approximately equal to identity.
 - Do not copy, add, or infer phases from one interpretation into another. Each interpretation must be evaluated only using the exact list of phases it provides. Phases from other interpretations must not be introduced under any condition, even if they are plausible or similar.
 - Phases with the same formula but different space groups must be treated as separate, unique phases. Do not merge or remove them. If both appear in an interpretation, evaluate each separately. Their phase likelihoods may differ based on stability or polymorph identity.
+- Penalize interpretations with phases that normally appear in gas form (e.g. CO, O2).
+- Penalize interpretations with unfavorable space groups.
+
 
 **Completeness Check – Requirement:**
 - Penalize interpretations that **omit plausible or expected phases** based on the synthesis conditions, but do **not assign 0** unless they are physically implausible or thermodynamically forbidden.
@@ -48,8 +51,9 @@ Finally, remember that these phase interpretations are from x-ray diffraction me
 
 
 **Do not** confuse gas-phase species (e.g., CO, O₂) with solid phases — disqualify them appropriately.
-**Format Instructions (Use for All Interpretations)**
+**Format Instructions**
 Format your response as a dictionary where each interpretation key maps to a nested dictionary with:
+For ** ALL interpretations ** provide:
 - "Likelihoods": {{phase (space group #): value(float)}}
 - "Explanations": {{phase (space group #): explanation(str)}}
 - "Interpretation_Likelihood": float
