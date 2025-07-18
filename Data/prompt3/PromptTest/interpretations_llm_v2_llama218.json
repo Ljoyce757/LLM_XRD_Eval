@@ -58,16 +58,13 @@
                 "V2O5 (space group 59)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V20CrO52 (space group 59)": "V20CrO52, approximately equal to V5O13, has a low Cr content and high V content. Its formation is plausible under these conditions but might be kinetically limited.",
-                "V3Cr7O15 (space group 167)": "V3Cr7O15 is a plausible phase given the precursors and conditions. It has a balanced composition and is likely stable at 400\u00b0C.",
-                "Cr2O3 (space group 167)": "Cr2O3 is a precursor and may persist if not fully consumed. Its 0% weight fraction suggests complete reaction or limited presence.",
-                "V2O5 (space group 59)": "V2O5 is a precursor and may remain unreacted. Its 48.82% weight fraction indicates significant presence, consistent with incomplete reaction."
+                "V20CrO52 (space group 59)": "V20CrO52, approximately equal to V5O13, has a complex structure and may form under specific conditions but is less common. Its presence at 4.34% weight fraction is plausible.",
+                "V3Cr7O15 (space group 167)": "V3Cr7O15 is a plausible phase given the precursors and conditions. It matches a known structure type for such compositions.",
+                "Cr2O3 (space group 167)": "Cr2O3 is a stable precursor and may remain unreacted. However, its 0% weight fraction suggests complete reaction or incorporation into other phases.",
+                "V2O5 (space group 59)": "V2O5 is a stable precursor and may persist due to incomplete reaction. Its 48.82% weight fraction indicates significant presence."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases with significant weight fractions. However, the presence of V20CrO52 and absence of VCrO4 raise questions about completeness and stoichiometry.",
-            "prior_probability_llama": 0.8581416666666668,
-            "unnormalized_posterior_llama": 0.7945919422344797,
-            "posterior_probability_llama": 0.13876455148312036
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the presence of V20CrO52 and absence of Cr2O3 raise questions. The composition balance score of 0.971 supports its credibility."
         },
         "I_2": {
             "phases": [
@@ -119,18 +116,15 @@
             "LLM_phases_likelihood_llama": {
                 "V20CrO52 (space group 59)": 0.6,
                 "V3Cr7O15 (space group 167)": 0.8,
-                "VCrO3 (space group 167)": 0.5
+                "VCrO3 (space group 167)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "V20CrO52 (space group 59)": "Similar to I_1, V20CrO52 has a low Cr content. Its 53.64% weight fraction is substantial, suggesting favorable formation conditions.",
-                "V3Cr7O15 (space group 167)": "As in I_1, V3Cr7O15 is a plausible and stable phase under these conditions.",
-                "VCrO3 (space group 167)": "VCrO3 has a 1:1 V:Cr ratio, matching the target. However, its 0% weight fraction and stability at 400\u00b0C are questionable."
+                "V20CrO52 (space group 59)": "Same as in I_1; its 53.64% weight fraction suggests a dominant role.",
+                "V3Cr7O15 (space group 167)": "Same as in I_1; 46.36% weight fraction is substantial.",
+                "VCrO3 (space group 167)": "VCrO3 is less stable and not expected to form in significant amounts under these conditions; its 0% weight fraction is consistent with this."
             },
             "LLM_interpretation_likelihood_llama": 0.65,
-            "LLM_interpretation_explanation_llama": "This interpretation is plausible but raises concerns due to VCrO3's low likelihood and the absence of Cr2O3 and V2O5 as significant phases.",
-            "prior_probability_llama": 0.8410416666666667,
-            "unnormalized_posterior_llama": 0.7790312851489125,
-            "posterior_probability_llama": 0.13604709679161006
+            "LLM_interpretation_explanation_llama": "The omission of Cr2O3 and presence of V20CrO52 and V3Cr7O15 make this interpretation less likely than I_1 but still plausible given the conditions."
         },
         "I_3": {
             "phases": [
@@ -185,15 +179,12 @@
                 "Cr2O3 (space group 167)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V2O5 (space group 59)": "V2O5 is a precursor and may remain unreacted. Its 51.19% weight fraction is significant, indicating incomplete reaction.",
-                "V3Cr7O15 (space group 167)": "V3Cr7O15 is stable and has a balanced composition. Its 48.81% weight fraction suggests major phase presence.",
-                "Cr2O3 (space group 167)": "Cr2O3 is a precursor with 0% weight fraction, suggesting complete consumption or limited presence."
+                "V2O5 (space group 59)": "V2O5 is a stable precursor; its 51.19% weight fraction is significant.",
+                "V3Cr7O15 (space group 167)": "V3Cr7O15 is plausible; 48.81% weight fraction suggests substantial formation.",
+                "Cr2O3 (space group 167)": "Cr2O3 may persist; its 0% weight fraction indicates complete reaction."
             },
             "LLM_interpretation_likelihood_llama": 0.8,
-            "LLM_interpretation_explanation_llama": "This interpretation is chemically plausible, with V2O5 and Cr2O3 as precursors and V3Cr7O15 as a product. The phase set is consistent with synthesis conditions.",
-            "prior_probability_llama": 0.9017333333333333,
-            "unnormalized_posterior_llama": 0.8323825084763576,
-            "posterior_probability_llama": 0.1453641539911708
+            "LLM_interpretation_explanation_llama": "This interpretation is plausible with stable precursors and a product phase. The composition balance score of 0.974 supports its likelihood."
         },
         "I_4": {
             "phases": [
@@ -245,18 +236,15 @@
             "LLM_phases_likelihood_llama": {
                 "V2O5 (space group 59)": 0.7,
                 "V3Cr7O15 (space group 167)": 0.8,
-                "VCrO3 (space group 167)": 0.5
+                "VCrO3 (space group 167)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "V2O5 (space group 59)": "Similar to I_3, V2O5 is a precursor with significant presence.",
-                "V3Cr7O15 (space group 167)": "As in I_3, V3Cr7O15 is stable and major.",
-                "VCrO3 (space group 167)": "VCrO3 has a 1:1 V:Cr ratio but low likelihood due to stability and 0% weight fraction concerns."
+                "V2O5 (space group 59)": "Same as in I_3; 51.19% weight fraction is significant.",
+                "V3Cr7O15 (space group 167)": "Same as in I_3; 48.81% weight fraction is substantial.",
+                "VCrO3 (space group 167)": "VCrO3 is less stable; its 0% weight fraction is expected."
             },
             "LLM_interpretation_likelihood_llama": 0.75,
-            "LLM_interpretation_explanation_llama": "This interpretation is similar to I_3 but includes VCrO3, which has a low likelihood. The absence of Cr2O3 and presence of V3Cr7O15 support its plausibility.",
-            "prior_probability_llama": 0.8809,
-            "unnormalized_posterior_llama": 0.8131352353418663,
-            "posterior_probability_llama": 0.14200288252361712
+            "LLM_interpretation_explanation_llama": "Similar to I_3 but with VCrO3 omitted; still plausible with a composition balance score of 0.974."
         },
         "I_5": {
             "phases": [
@@ -311,15 +299,12 @@
                 "Cr2O3 (space group 167)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V20CrO52 (space group 59)": "Similar to I_1 and I_2, V20CrO52 has a low Cr content and substantial weight fraction.",
-                "V3Cr7O15 (space group 167)": "As in I_1, I_2, and I_3, V3Cr7O15 is plausible and stable.",
-                "Cr2O3 (space group 167)": "Cr2O3 has 0% weight fraction, suggesting complete reaction or limited presence."
+                "V20CrO52 (space group 59)": "Same as in I_1; 53.64% weight fraction is dominant.",
+                "V3Cr7O15 (space group 167)": "Same as in I_1; 46.36% weight fraction is substantial.",
+                "Cr2O3 (space group 167)": "Cr2O3 may persist; 0% weight fraction suggests complete incorporation."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation is similar to I_1 and I_2 but with Cr2O3 instead of VCrO3. The phase set is plausible, but concerns about V20CrO52 and Cr2O3 remain.",
-            "prior_probability_llama": 0.8618750000000002,
-            "unnormalized_posterior_llama": 0.7983255891131402,
-            "posterior_probability_llama": 0.13941658154657247
+            "LLM_interpretation_explanation_llama": "Similar to I_1 and I_2; plausible but with questions on Cr2O3 and V20CrO52."
         },
         "I_6": {
             "phases": [
@@ -371,18 +356,15 @@
             "LLM_phases_likelihood_llama": {
                 "V20CrO52 (space group 59)": 0.6,
                 "Cr2O3 (space group 167)": 0.7,
-                "VCrO3 (space group 167)": 0.5
+                "VCrO3 (space group 167)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "V20CrO52 (space group 59)": "V20CrO52 has a low Cr content and 54.31% weight fraction.",
-                "Cr2O3 (space group 167)": "Cr2O3 is a precursor with 45.69% weight fraction, indicating significant presence.",
-                "VCrO3 (space group 167)": "VCrO3 has a 1:1 V:Cr ratio but low likelihood due to stability and 0% weight fraction concerns."
+                "V20CrO52 (space group 59)": "V20CrO52 at 54.31% weight fraction is dominant.",
+                "Cr2O3 (space group 167)": "Cr2O3 may persist; 45.69% weight fraction suggests significant presence.",
+                "VCrO3 (space group 167)": "VCrO3 is less stable; 0% weight fraction is expected."
             },
             "LLM_interpretation_likelihood_llama": 0.6,
-            "LLM_interpretation_explanation_llama": "This interpretation includes V20CrO52 and Cr2O3 as major phases but raises concerns due to VCrO3's low likelihood and absence of V3Cr7O15.",
-            "prior_probability_llama": 0.8331,
-            "unnormalized_posterior_llama": 0.7717082957311394,
-            "posterior_probability_llama": 0.13476823743240823
+            "LLM_interpretation_explanation_llama": "This interpretation omits V3Cr7O15 and V2O5, making it less plausible."
         },
         "I_7": {
             "phases": [
@@ -424,16 +406,13 @@
             "adjusted_posterior_probability": 0.008606215047555536,
             "unnormalized_posterior": 0.46561582002380536,
             "LLM_phases_likelihood_llama": {
-                "VCrO3 (space group 167)": 0.0
+                "VCrO3 (space group 167)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "VCrO3 (space group 167)": "VCrO3 is the target composition but as a single phase with 100% weight fraction is highly unlikely given the precursors and conditions."
+                "VCrO3 (space group 167)": "VCrO3 is a target phase but may not form directly from these precursors under given conditions; 100% weight fraction is unrealistic for a single-phase product from mixed precursors."
             },
-            "LLM_interpretation_likelihood_llama": 0.0,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly implausible as it suggests complete formation of VCrO3 from Cr2O3 and V2O5, which is thermodynamically and kinetically unlikely.",
-            "prior_probability_llama": 0.5833333333333334,
-            "unnormalized_posterior_llama": 0.43457476535555173,
-            "posterior_probability_llama": 0.07589250430965251
+            "LLM_interpretation_likelihood_llama": 0.2,
+            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to the single-phase nature and direct formation of VCrO3 from given precursors."
         },
         "I_8": {
             "phases": [
@@ -478,13 +457,10 @@
                 "V2O5 (space group 59)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V2O5 (space group 59)": "V2O5 is a precursor and may remain unreacted. Its 100% weight fraction indicates no reaction occurred."
+                "V2O5 (space group 59)": "V2O5 is a stable precursor; 100% weight fraction suggests no reaction occurred."
             },
             "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "This interpretation suggests no reaction, which is unlikely given the synthesis conditions and duration.",
-            "prior_probability_llama": 0.34375,
-            "unnormalized_posterior_llama": 0.2440094370030656,
-            "posterior_probability_llama": 0.04261289132653607
+            "LLM_interpretation_explanation_llama": "This interpretation is unlikely as it suggests no reaction occurred to form the target phase."
         },
         "I_9": {
             "phases": [
@@ -529,13 +505,10 @@
                 "Cr2O3 (space group 167)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "Cr2O3 (space group 167)": "Cr2O3 is a precursor and may remain unreacted. Its 100% weight fraction indicates no reaction with V2O5."
+                "Cr2O3 (space group 167)": "Cr2O3 is a stable precursor; 100% weight fraction suggests no reaction occurred."
             },
             "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "Similar to I_8, this suggests no reaction, which is unlikely given the conditions.",
-            "prior_probability_llama": 0.34375,
-            "unnormalized_posterior_llama": 0.25842917729295695,
-            "posterior_probability_llama": 0.0451311005953124
+            "LLM_interpretation_explanation_llama": "Similar to I_8; this interpretation is unlikely as it implies no reaction to form the target phase."
         },
         "Synth_Conditions": {
             "Target": "VCrO4",
@@ -587,7 +560,15 @@
             "trustworthy": false,
             "unnormalized_posterior": 0.23075990536514004,
             "posterior_probability": 0.5000659137617277,
-            "adjusted_posterior_probability": 0.050006591376172776
+            "adjusted_posterior_probability": 0.050006591376172776,
+            "LLM_phases_likelihood_llama": {
+                "Ga33O50 (space group 12)": 0.0
+            },
+            "LLM_phases_explanation_llama": {
+                "Ga33O50 (space group 12)": "Ga33O50 corresponds approximately to Ga2O3. However, the formula provided does not match common gallium oxide stoichiometries, and its formation under given conditions is improbable as a solid crystalline material. The space group 12 does not align with common Ga2O3 structures."
+            },
+            "LLM_interpretation_likelihood_llama": 0.0,
+            "LLM_interpretation_explanation_llama": "The interpretation includes Ga33O50, which does not correspond to a known gallium oxide phase under the synthesis conditions. Therefore, the overall interpretation likelihood is 0."
         },
         "I_2": {
             "phases": [
@@ -628,7 +609,15 @@
             "trustworthy": false,
             "unnormalized_posterior": 0.23069907237092885,
             "posterior_probability": 0.4999340862382723,
-            "adjusted_posterior_probability": 0.04999340862382723
+            "adjusted_posterior_probability": 0.04999340862382723,
+            "LLM_phases_likelihood_llama": {
+                "Ga2O3 (space group 12)": 0.6
+            },
+            "LLM_phases_explanation_llama": {
+                "Ga2O3 (space group 12)": "Ga2O3 with space group 12 is a plausible phase. However, Ga2O3 commonly has a space group of 167 (C2/c). The presence of Ga2O3 as a precursor or unreacted phase is reasonable."
+            },
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "The interpretation includes Ga2O3, which is a plausible unreacted precursor. However, achieving the target GaSbO4 composition seems unlikely with only Ga2O3 present."
         },
         "Synth_Conditions": {
             "Target": "GaSbO4",
@@ -680,18 +669,17 @@
             "adjusted_posterior_probability": 0.1282791706953507,
             "unnormalized_posterior": 0.8335933528400595,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.9,
-                "LiVO3 (space group 15)": 0.8
+                "LiV3O8 (space group 11)": 0.8,
+                "LiVO3 (space group 15)": 0.7,
+                "LiVO3 (space group 9)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (P2\u2081/m, SG 11) is a known and stable phase under these conditions. Its formation is expected.",
-                "LiVO3 (space group 15)": "LiVO\u2083 (C2/c, SG 15) is also a plausible phase; however, its stability might be lower than LiV\u2083O\u2088 at high temperatures."
+                "LiV3O8 (space group 11)": "C2/m (SG 11) is a known and stable structure for LiV\u2083O\u2088 at room temperature. However, at 500\u202f\u00b0C, it might be near a phase transition but remains plausible.",
+                "LiVO3 (space group 15)": "P2\u2081/c (SG 15) and Pna2\u2081 (SG 9) are both known polymorphs of LiVO\u2083. SG 15 is commonly reported and stable; SG 9 may be metastable or kinetically trapped.",
+                "LiVO3 (space group 9)": "Pna2\u2081 (SG 9) is another known structure for LiVO\u2083, potentially less stable or kinetically favored under certain conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "This interpretation seems plausible with major LiV\u2083O\u2088 and minor LiVO\u2083. However, the presence of both phases requires careful consideration of redox and kinetic factors.",
-            "prior_probability_llama": 0.9368518518518519,
-            "unnormalized_posterior_llama": 0.8723932089403933,
-            "posterior_probability_llama": 0.12522221670246056
+            "LLM_interpretation_explanation_llama": "The presence of LiV\u2083O\u2088 and two LiVO\u2083 polymorphs suggests a complex phase diagram. LiV\u2083O\u2088 is expected, and both LiVO\u2083 structures are plausible, though their relative stability may vary with temperature."
         },
         "I_2": {
             "phases": [
@@ -732,18 +720,15 @@
             "adjusted_posterior_probability": 0.12766086171174335,
             "unnormalized_posterior": 0.8295754109096394,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.9,
-                "LiVO3 (space group 9)": 0.8
+                "LiV3O8 (space group 11)": 0.8,
+                "LiVO3 (space group 9)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "Same as I_1; LiV\u2083O\u2088 (P2\u2081/m, SG 11) is expected.",
-                "LiVO3 (space group 9)": "LiVO\u2083 (P2\u2081/c, SG 9) is another possible polymorph; its lower symmetry might be kinetically stabilized."
+                "LiV3O8 (space group 11)": "Same as I_1; C2/m (SG 11) is stable for LiV\u2083O\u2088.",
+                "LiVO3 (space group 9)": "Pna2\u2081 (SG 9) is a plausible polymorph of LiVO\u2083, potentially kinetically trapped."
             },
-            "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "Similar to I_1, this interpretation is plausible but requires consideration of phase stability and kinetics.",
-            "prior_probability_llama": 0.9371824074074074,
-            "unnormalized_posterior_llama": 0.8681739977894675,
-            "posterior_probability_llama": 0.12461659647566353
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "Similar to I_1, but with only one LiVO\u2083 polymorph. Still chemically plausible."
         },
         "I_3": {
             "phases": [
@@ -784,18 +769,15 @@
             "adjusted_posterior_probability": 0.10831856141979333,
             "unnormalized_posterior": 0.7038838207270233,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.95,
+                "LiV3O8 (space group 11)": 0.9,
                 "C (space group 166)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (P2\u2081/m, SG 11) is the dominant phase as expected.",
-                "C (space group 166)": "Graphite (R-3m, SG 166) might form in small amounts due to reduction of CO\u2083\u00b2\u207b, but 2.54% is a minor phase."
+                "LiV3O8 (space group 11)": "Dominant phase; C2/m (SG 11) is stable for LiV\u2083O\u2088.",
+                "C (space group 166)": "Graphite (R-3m, SG 166) is unlikely as a product in this synthesis; it implies reduction of V and Li species, which is not expected in air."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible with LiV\u2083O\u2088 as the main product and minor carbon residue.",
-            "prior_probability_llama": 0.9542824074074074,
-            "unnormalized_posterior_llama": 0.8099821496014386,
-            "posterior_probability_llama": 0.11626381226157192
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "The presence of graphite is highly unlikely under these conditions, reducing the interpretation's credibility."
         },
         "I_4": {
             "phases": [
@@ -836,18 +818,15 @@
             "adjusted_posterior_probability": 0.10804765881773362,
             "unnormalized_posterior": 0.7021234210680611,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.95,
+                "LiV3O8 (space group 11)": 0.9,
                 "C (space group 191)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "Same as I_3; LiV\u2083O\u2088 (P2\u2081/m, SG 11) is expected.",
-                "C (space group 191)": "Graphite (Im-3m, SG 191) is another possible form of carbon; however, it is less common."
+                "LiV3O8 (space group 11)": "Same as I_3; SG 11 is stable for LiV\u2083O\u2088.",
+                "C (space group 191)": "Hexagonal diamond (P6\u2083/mmc, SG 191) is an unlikely form of carbon under these conditions."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "Similar to I_3, this interpretation is plausible with LiV\u2083O\u2088 dominant and minor carbon.",
-            "prior_probability_llama": 0.9542824074074074,
-            "unnormalized_posterior_llama": 0.8079564000985575,
-            "posterior_probability_llama": 0.11597303874266435
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "Similar to I_3, graphite's presence is questionable; hexagonal diamond is even less likely."
         },
         "I_5": {
             "phases": [
@@ -888,18 +867,15 @@
             "adjusted_posterior_probability": 0.10808256304580563,
             "unnormalized_posterior": 0.7023502383475081,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.95,
+                "LiV3O8 (space group 11)": 0.9,
                 "C (space group 194)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "Same as I_3; LiV\u2083O\u2088 (P2\u2081/m, SG 11) is expected.",
-                "C (space group 194)": "Graphite (P6\u2083/mmc, SG 194) is a possible form of carbon; its likelihood is similar to I_4."
+                "LiV3O8 (space group 11)": "Stable LiV\u2083O\u2088 polymorph.",
+                "C (space group 194)": "P6\u2083/mmc (SG 194) is another form of graphite; still unlikely."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "This interpretation is also plausible with LiV\u2083O\u2088 dominant and minor carbon.",
-            "prior_probability_llama": 0.9542824074074074,
-            "unnormalized_posterior_llama": 0.8082174061654159,
-            "posterior_probability_llama": 0.11601050322304986
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "Similar to I_3 and I_4; graphite's presence reduces credibility."
         },
         "I_6": {
             "phases": [
@@ -940,18 +916,15 @@
             "adjusted_posterior_probability": 0.11547939143099473,
             "unnormalized_posterior": 0.7504168647574634,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.9,
+                "LiV3O8 (space group 11)": 0.8,
                 "V4O7 (space group 2)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (P2\u2081/m, SG 11) is expected as the main product.",
-                "V4O7 (space group 2)": "V\u2084O\u2087 might form under specific redox conditions but is less stable than LiV\u2083O\u2088."
+                "LiV3O8 (space group 11)": "Stable LiV\u2083O\u2088 polymorph.",
+                "V4O7 (space group 2)": "P Triclinic (SG 2) V\u2084O\u2087 is a reduced vanadium oxide; its presence is plausible but less likely than LiV\u2083O\u2088."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation includes a plausible by-product (V\u2084O\u2087) but with lower likelihood due to its minor stability.",
-            "prior_probability_llama": 0.8687712962962962,
-            "unnormalized_posterior_llama": 0.7504168647574634,
-            "posterior_probability_llama": 0.10771388668874954
+            "LLM_interpretation_explanation_llama": "The presence of V\u2084O\u2087 suggests some reduction; chemically plausible but less likely."
         },
         "I_7": {
             "phases": [
@@ -992,18 +965,15 @@
             "adjusted_posterior_probability": 0.1283173267306357,
             "unnormalized_posterior": 0.8338413012576547,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.9,
-                "LiVO3 (space group 15)": 0.8
+                "Li14V43O114 (space group 11)": 0.2,
+                "LiVO3 (space group 15)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (P2\u2081/m, SG 11) is expected.",
-                "LiVO3 (space group 15)": "LiVO\u2083 (C2/c, SG 15) is plausible with similar considerations as I_1."
+                "Li14V43O114 (space group 11)": "This phase is not commonly reported and seems unlikely to form directly from the given precursors.",
+                "LiVO3 (space group 15)": "Stable LiVO\u2083 polymorph."
             },
-            "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "Similar to I_1 and I_2, this interpretation seems plausible but requires consideration of phase stability.",
-            "prior_probability_llama": 0.9368518518518519,
-            "unnormalized_posterior_llama": 0.8726526981924856,
-            "posterior_probability_llama": 0.12525946346117495
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "The presence of Li\u2081\u2084V\u2084\u2083O\u2081\u2081\u2084 significantly reduces plausibility due to its unusual composition and structure."
         },
         "I_8": {
             "phases": [
@@ -1040,16 +1010,13 @@
             "adjusted_posterior_probability": 0.05695474205627218,
             "unnormalized_posterior": 0.3701075874865273,
             "LLM_phases_likelihood_llama": {
-                "LiVO3 (space group 9)": 0.6
+                "LiVO3 (space group 9)": 0.2
             },
             "LLM_phases_explanation_llama": {
-                "LiVO3 (space group 9)": "LiVO\u2083 (P2\u2081/c, SG 9) might be metastable or kinetically stabilized."
+                "LiVO3 (space group 9)": "Pna2\u2081 (SG 9) LiVO\u2083 is metastable or kinetically trapped; 100% yield is unlikely given potential for LiV\u2083O\u2088 formation."
             },
-            "LLM_interpretation_likelihood_llama": 0.4,
-            "LLM_interpretation_explanation_llama": "This single-phase interpretation lacks the expected main product, LiV\u2083O\u2088, reducing its plausibility.",
-            "prior_probability_llama": 0.7337962962962963,
-            "unnormalized_posterior_llama": 0.3701075874865273,
-            "posterior_probability_llama": 0.05312477452656259
+            "LLM_interpretation_likelihood_llama": 0.2,
+            "LLM_interpretation_explanation_llama": "This interpretation lacks the expected LiV\u2083O\u2088 and seems chemically incomplete."
         },
         "I_9": {
             "phases": [
@@ -1086,16 +1053,13 @@
             "adjusted_posterior_probability": 0.11885972409167081,
             "unnormalized_posterior": 0.7723831966338969,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.95
+                "LiV3O8 (space group 11)": 0.9
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (P2\u2081/m, SG 11) is the expected and dominant phase."
+                "LiV3O8 (space group 11)": "Stable and expected LiV\u2083O\u2088 polymorph."
             },
-            "LLM_interpretation_likelihood_llama": 0.95,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible with LiV\u2083O\u2088 as the sole and expected product.",
-            "prior_probability_llama": 0.9751157407407407,
-            "unnormalized_posterior_llama": 0.8068603139045977,
-            "posterior_probability_llama": 0.11581570791810265
+            "LLM_interpretation_likelihood_llama": 0.9,
+            "LLM_interpretation_explanation_llama": "A straightforward and chemically plausible interpretation with a single expected phase."
         },
         "Synth_Conditions": {
             "Target": "LiV2O3",
@@ -1145,20 +1109,17 @@
             "adjusted_posterior_probability": 0.024414903007868905,
             "unnormalized_posterior": 0.4923212907213699,
             "LLM_phases_likelihood_llama": {
-                "K2V3O8 (approximately equal to K2V3O8)": 0.6,
-                "V2O5 (approximately equal to V2O5)": 0.7,
-                "KV3O8 (approximately equal to KV3O8)": 0.6
+                "K2V3O8 (space group 100)": 0.6,
+                "V2O5 (space group 11)": 0.4,
+                "KV3O8 (space group 11)": 0.5
             },
             "LLM_phases_explanation_llama": {
-                "K2V3O8 (approximately equal to K2V3O8)": "K2V3O8 is a plausible vanadate phase. However, its stability at 400\u202f\u00b0C under Argon needs verification. If stable, it\u2019s a likely product.",
-                "V2O5 (approximately equal to V2O5)": "V\u2082O\u2085 is stable at high temperatures but tends to reduce under Argon. Its presence suggests incomplete reduction or oxidation conditions.",
-                "KV3O8 (approximately equal to KV3O8)": "KV\u2083O\u2088 is another possible vanadate. Its stability and formation depend on V/K ratio and redox conditions. Plausible but requires verification."
+                "K2V3O8 (space group 100)": "K2V3O8 is a plausible phase under these conditions, but its stability compared to other vanadates must be considered. The space group 100 suggests a possible distortion or less common polymorph.",
+                "V2O5 (space group 11)": "V2O5 is stable under oxidizing conditions but may not form directly from V2O3 and K2CO3 without oxidation. Its presence at 19.2% suggests possible oxidation of vanadium during synthesis.",
+                "KV3O8 (space group 11)": "KV3O8 is a known phase and could form under these conditions. However, its stability and preference over other K-V-O phases like K2V3O8 need evaluation."
             },
-            "LLM_interpretation_likelihood_llama": 0.65,
-            "LLM_interpretation_explanation_llama": "The interpretation includes plausible phases, but their stability and weight fractions need scrutiny. K\u2082V\u2083O\u2088 and KV\u2083O\u2088 are chemically consistent, while V\u2082O\u2085 suggests some oxidation.",
-            "prior_probability_llama": 0.8483333333333334,
-            "unnormalized_posterior_llama": 0.6320089204972946,
-            "posterior_probability_llama": 0.26759863329075056
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation includes multiple plausible phases, but the presence of V2O5 suggests oxidation of V2O3, which is possible but not directly expected under argon. The composition balance score of 0.938 supports its plausibility."
         },
         "I_2": {
             "phases": [
@@ -1205,20 +1166,17 @@
             "adjusted_posterior_probability": 0.28581988510436446,
             "unnormalized_posterior": 0.5763496775025563,
             "LLM_phases_likelihood_llama": {
-                "K10V21O57 (approximately equal to K3V7O19)": 0.8,
-                "V2O5 (approximately equal to V2O5)": 0.7,
-                "KV3O8 (approximately equal to KV3O8)": 0.8
+                "K10V21O57 (space group 100)": 0.4,
+                "V2O5 (space group 11)": 0.6,
+                "KV3O8 (space group 11)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "K10V21O57 (approximately equal to K3V7O19)": "K\u2083V\u2087O\u2081\u2089 or related phases are plausible at high temperatures. Their complex structure and stability under Argon require verification.",
-                "V2O5 (approximately equal to V2O5)": "As mentioned, V\u2082O\u2085 is stable but may reduce under Argon. Its 19.2% presence suggests significant oxidation influence.",
-                "KV3O8 (approximately equal to KV3O8)": "KV\u2083O\u2088 is plausible with proper V/K ratios. Its stability at 400\u202f\u00b0C and Argon atmosphere needs confirmation."
+                "K10V21O57 (space group 100)": "This phase, approximately equal to K3V7O19, is less common and its formation depends on specific conditions. The space group 100 indicates a possible complex structure.",
+                "V2O5 (space group 11)": "As in I_1, V2O5 suggests oxidation of vanadium. Its higher likelihood here reflects its significant weight fraction (19.2%).",
+                "KV3O8 (space group 11)": "KV3O8 is a plausible phase as in I_1. Its moderate weight fraction (17.85%) and stability make it a reasonable component."
             },
-            "LLM_interpretation_likelihood_llama": 0.75,
-            "LLM_interpretation_explanation_llama": "This interpretation seems plausible with a mix of vanadates and V\u2082O\u2085. The phases are chemically reasonable, but detailed stability checks are needed.",
-            "prior_probability_llama": 0.859375,
-            "unnormalized_posterior_llama": 0.6558461847442882,
-            "posterior_probability_llama": 0.27769155939829154
+            "LLM_interpretation_likelihood_llama": 0.55,
+            "LLM_interpretation_explanation_llama": "This interpretation suggests a complex product set with possible oxidation of vanadium to form V2O5. The phases are plausible but the interpretation's likelihood is reduced due to the complexity and assumed oxidation."
         },
         "I_3": {
             "phases": [
@@ -1261,18 +1219,15 @@
             "adjusted_posterior_probability": 0.28050532490206703,
             "unnormalized_posterior": 0.5656329806655129,
             "LLM_phases_likelihood_llama": {
-                "K10V21O57 (approximately equal to K3V7O19)": 0.85,
-                "KV3O8 (approximately equal to KV3O8)": 0.85
+                "K10V21O57 (space group 100)": 0.5,
+                "KV3O8 (space group 11)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "K10V21O57 (approximately equal to K3V7O19)": "K\u2083V\u2087O\u2081\u2089-type phases are known and could form under these conditions. Verification of stability at 400\u202f\u00b0C is required.",
-                "KV3O8 (approximately equal to KV3O8)": "KV\u2083O\u2088 is another likely vanadate product. Its presence indicates suitable V/K ratios and redox conditions."
+                "K10V21O57 (space group 100)": "As in I_2, this phase's formation is condition-dependent. Its higher weight fraction (63.68%) here makes it a more significant component.",
+                "KV3O8 (space group 11)": "KV3O8 is a stable phase under these conditions. Its higher likelihood reflects its dominant weight fraction (36.32%) and known stability."
             },
-            "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible, with two likely vanadate phases. Their stability and match to synthesis conditions make it a strong candidate.",
-            "prior_probability_llama": 0.9141666666666667,
-            "unnormalized_posterior_llama": 0.6917495872798972,
-            "posterior_probability_llama": 0.2928934040834217
+            "LLM_interpretation_likelihood_llama": 0.65,
+            "LLM_interpretation_explanation_llama": "This interpretation is more plausible than I_2 due to the absence of V2O5, suggesting less oxidation occurred. The composition balance score of 0.96 supports its chemical plausibility."
         },
         "I_4": {
             "phases": [
@@ -1311,16 +1266,13 @@
             "adjusted_posterior_probability": 0.18952575991487955,
             "unnormalized_posterior": 0.38217463618908915,
             "LLM_phases_likelihood_llama": {
-                "KV3O8 (approximately equal to KV3O8)": 0.9
+                "KV3O8 (space group 11)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "KV3O8 (approximately equal to KV3O8)": "KV\u2083O\u2088 is a plausible product under these conditions. Its stability and formation from K\u2082CO\u2083 and V\u2082O\u2083 require verification but seem likely."
+                "KV3O8 (space group 11)": "KV3O8 is a plausible and stable phase. Its sole presence suggests a simplified reaction pathway or complete conversion to this phase under the synthesis conditions."
             },
-            "LLM_interpretation_likelihood_llama": 0.4,
-            "LLM_interpretation_explanation_llama": "This single-phase interpretation is less likely due to the simplicity of the product. Other interpretations suggest multiple phases are more realistic.",
-            "prior_probability_llama": 0.7135416666666666,
-            "unnormalized_posterior_llama": 0.38217463618908915,
-            "posterior_probability_llama": 0.16181640322753615
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible due to the known stability of KV3O8. However, the absence of other expected phases like K2V3O8 or possible unreacted precursors reduces its overall likelihood slightly."
         },
         "Synth_Conditions": {
             "Target": "KVO2",
@@ -1373,17 +1325,14 @@
             "unnormalized_posterior": 0.7805855168615579,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "CaCO3 (space group 167)": 0.6
+                "CaCO3 (space group 14)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "V2O3 with space group 167 (R-3c) is a plausible and stable phase under the synthesis conditions. However, the reducing atmosphere in Argon may not significantly affect its stability directly.",
-                "CaCO3 (space group 167)": "CaCO3 with space group 167 is not the typical polymorph; it usually crystallizes in space group 141 (R3c, calcite). However, its presence as an unreacted precursor is plausible."
+                "V2O3 (space group 167)": "V\u2082O\u2083 (R-3c, SG 167) is a plausible reduced vanadium oxide under Argon atmosphere. However, at 773.15 K, it might not fully reduce; its stability is moderate.",
+                "CaCO3 (space group 14)": "Monoclinic CaCO\u2083 (P2\u2081/m, SG 14) is a stable polymorph at low temperatures. However, at 773.15 K, it may decompose; its presence here seems less likely unless kinetics are sluggish."
             },
-            "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "The interpretation includes V2O3 and CaCO3, which could be present as unreacted precursors. However, achieving the target CaV2O3 might require further reaction.",
-            "prior_probability_llama": 0.8724074074074073,
-            "unnormalized_posterior_llama": 0.7996821506871369,
-            "posterior_probability_llama": 0.3092299757345001
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases but their stability and presence need scrutiny. V\u2082O\u2083 and CaCO\u2083 could coexist if reaction kinetics are limited."
         },
         "I_2": {
             "phases": [
@@ -1425,17 +1374,14 @@
             "unnormalized_posterior": 0.7535154191810008,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "CaCO3 (space group 14)": 0.4
+                "CaCO3 (space group 167)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "As discussed, V2O3 is plausible.",
-                "CaCO3 (space group 14)": "CaCO3 in space group 14 (P2\u2081/c, aragonite) is less common at these conditions; calcite (R3c, SG 141) is typical. Its lower likelihood is due to the polymorph."
+                "V2O3 (space group 167)": "Same as I_1; V\u2082O\u2083 is plausible under reducing conditions.",
+                "CaCO3 (space group 167)": "Trigonal CaCO\u2083 (R-3c, SG 167) is less common but could form under specific conditions. However, it is not the typical structure at these temperatures."
             },
-            "LLM_interpretation_likelihood_llama": 0.6,
-            "LLM_interpretation_explanation_llama": "Similar to I_1, but the less common CaCO3 polymorph slightly reduces the interpretation likelihood.",
-            "prior_probability_llama": 0.8299046296296296,
-            "unnormalized_posterior_llama": 0.7535154191810008,
-            "posterior_probability_llama": 0.2913777112427684
+            "LLM_interpretation_likelihood_llama": 0.65,
+            "LLM_interpretation_explanation_llama": "Similar to I_1, but with a different CaCO\u2083 polymorph. The interpretation remains plausible but with moderate likelihood due to phase stability concerns."
         },
         "I_3": {
             "phases": [
@@ -1476,18 +1422,15 @@
             "adjusted_posterior_probability": 0.2770034370515096,
             "unnormalized_posterior": 0.745920331022696,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.5,
-                "CaCO3 (space group 167)": 0.6
+                "V2O3 (space group 15)": 0.4,
+                "CaCO3 (space group 167)": 0.5
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "V2O3 in space group 15 (C2/c) is not the typical structure; R-3c (SG 167) is more common. This reduces its likelihood.",
-                "CaCO3 (space group 167)": "As discussed, CaCO3 in SG 167 is not typical."
+                "V2O3 (space group 15)": "C2/c (SG 15) is not a typical structure for V\u2082O\u2083; R-3c (SG 167) is more common. This suggests either a metastable form or misidentification.",
+                "CaCO3 (space group 167)": "As discussed, trigonal CaCO\u2083 is less typical at these temperatures but could persist kinetically."
             },
-            "LLM_interpretation_likelihood_llama": 0.55,
-            "LLM_interpretation_explanation_llama": "The use of less common polymorphs for both phases reduces the overall likelihood of this interpretation.",
-            "prior_probability_llama": 0.8106268518518518,
-            "unnormalized_posterior_llama": 0.745920331022696,
-            "posterior_probability_llama": 0.2884407581985171
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "This interpretation is less likely due to the uncommon V\u2082O\u2083 polymorph and typical stability concerns with CaCO\u2083 at the synthesis temperature."
         },
         "I_4": {
             "phases": [
@@ -1527,13 +1470,10 @@
                 "CaCO3 (space group 167)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "CaCO3 (space group 167)": "This interpretation suggests only CaCO3 formed, which is highly unlikely given the target composition and presence of V2O3 as a precursor."
+                "CaCO3 (space group 167)": "This interpretation implies complete reaction to form CaV\u2082O\u2083, which is not observed. It is highly unlikely given the precursors and conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.0,
-            "LLM_interpretation_explanation_llama": "This interpretation is implausible as it ignores the V2O3 precursor and target composition.",
-            "prior_probability_llama": 0.10802469135802471,
-            "unnormalized_posterior_llama": 0.05397139695756349,
-            "posterior_probability_llama": 0.02087025921136755
+            "LLM_interpretation_explanation_llama": "This interpretation is implausible as it suggests a single-phase product not supported by the synthesis data or expected reactions."
         },
         "I_5": {
             "phases": [
@@ -1570,16 +1510,13 @@
             "adjusted_posterior_probability": 0.011779177717695351,
             "unnormalized_posterior": 0.31719202605867436,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.0
+                "V2O3 (space group 15)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "This interpretation ignores the CaCO3 precursor and target composition, focusing only on V2O3, which is highly unlikely."
+                "V2O3 (space group 15)": "As mentioned, C2/c (SG 15) for V\u2082O\u2083 is not typical. This single-phase interpretation under-represents the expected reaction complexity and product phases."
             },
-            "LLM_interpretation_likelihood_llama": 0.0,
-            "LLM_interpretation_explanation_llama": "This interpretation is implausible as it ignores the CaCO3 precursor and target composition.",
-            "prior_probability_llama": 0.345679012345679,
-            "unnormalized_posterior_llama": 0.23295414372833786,
-            "posterior_probability_llama": 0.09008129561284692
+            "LLM_interpretation_likelihood_llama": 0.05,
+            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely as it neglects potential Ca-containing phases and over-simplifies the reaction outcome."
         },
         "Synth_Conditions": {
             "Target": "CaV2O3",
@@ -1637,18 +1574,15 @@
             "posterior_probability": 0.2357588707990961,
             "adjusted_posterior_probability": 0.2357588707990961,
             "LLM_phases_likelihood_llama": {
-                "WO3 (space group 2)": 0.8,
-                "CoWO4 (space group 13)": 0.9
+                "WO3 (space group 2)": 0.6,
+                "CoWO4 (space group 13)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "WO3 (space group 2)": "P2\u2081/m (SG 2) is a common and stable polymorph for WO\u2083 at high temperatures. Its presence as 69.28% is plausible as an unreacted precursor.",
-                "CoWO4 (space group 13)": "P2\u2081/c (SG 13) is a known structure for CoWO\u2084. Its formation is expected, and 30.72% presence indicates a partially reacted system."
+                "WO3 (space group 2)": "P2\u2081/m (SG 2) is a common and stable structure for WO\u2083 at high temperatures. As an unreacted precursor, its presence is plausible, especially given short dwell times.",
+                "CoWO4 (space group 13)": "P2\u2081/c (SG 13) is a known structure for CoWO\u2084. Its formation is expected under these synthesis conditions, and 30.72% weight fraction suggests a significant product."
             },
             "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "This interpretation is plausible with WO\u2083 as a major unreacted phase and significant CoWO\u2084 formation. The composition balance score of 0.878 supports this.",
-            "prior_probability_llama": 0.8660416666666667,
-            "unnormalized_posterior_llama": 0.7769279412735498,
-            "posterior_probability_llama": 0.28061916858323416
+            "LLM_interpretation_explanation_llama": "This interpretation includes likely phases with significant weight fractions. WO\u2083 as an unreacted precursor and CoWO\u2084 as a product are chemically consistent."
         },
         "I_2": {
             "phases": [
@@ -1695,18 +1629,15 @@
             "posterior_probability": 0.24549703351373567,
             "adjusted_posterior_probability": 0.24549703351373567,
             "LLM_phases_likelihood_llama": {
-                "WO3 (space group 14)": 0.7,
-                "CoWO4 (space group 13)": 0.95
+                "WO3 (space group 14)": 0.6,
+                "CoWO4 (space group 13)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "WO3 (space group 14)": "P2\u2081/c (SG 14) is another stable form of WO\u2083. Its 63.78% presence suggests incomplete reaction.",
-                "CoWO4 (space group 13)": "As in I_1, CoWO\u2084 (SG 13) is expected and reasonably formed at 36.22%."
+                "WO3 (space group 14)": "P2\u2081/c (SG 14) is another stable form of WO\u2083. Similar to SG 2, its presence as an unreacted precursor is reasonable.",
+                "CoWO4 (space group 13)": "Same as I_1; P2\u2081/c (SG 13) CoWO\u2084 is expected and has a significant weight fraction."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "Similar to I_1, but with slightly better balance score (0.898), suggesting this might be more likely.",
-            "prior_probability_llama": 0.8986,
-            "unnormalized_posterior_llama": 0.7883740163328018,
-            "posterior_probability_llama": 0.284753384764729
+            "LLM_interpretation_likelihood_llama": 0.85,
+            "LLM_interpretation_explanation_llama": "Similar to I_1, this interpretation is plausible with WO\u2083 and CoWO\u2084 phases. The difference in WO\u2083 space group does not significantly impact likelihood."
         },
         "I_3": {
             "phases": [
@@ -1749,16 +1680,13 @@
             "posterior_probability": 0.09434167731347358,
             "adjusted_posterior_probability": 0.009434167731347358,
             "LLM_phases_likelihood_llama": {
-                "WO3 (space group 2)": 0.4
+                "WO3 (space group 2)": 0.9
             },
             "LLM_phases_explanation_llama": {
-                "WO3 (space group 2)": "WO\u2083 (SG 2) as 100% implies no reaction to CoWO\u2084, which is unlikely given the synthesis conditions and duration."
+                "WO3 (space group 2)": "WO\u2083 (SG 2) is stable and expected as an unreacted precursor. A 100% presence suggests incomplete reaction, which is plausible given short dwell times."
             },
-            "LLM_interpretation_likelihood_llama": 0.1,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely as it suggests no formation of CoWO\u2084.",
-            "prior_probability_llama": 0.26041666666666663,
-            "unnormalized_posterior_llama": 0.19995883674747322,
-            "posterior_probability_llama": 0.07222327778167772
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation is less likely due to the absence of CoWO\u2084, which is expected as a product. However, WO\u2083 presence is chemically plausible."
         },
         "I_4": {
             "phases": [
@@ -1801,16 +1729,13 @@
             "posterior_probability": 0.09559165421152713,
             "adjusted_posterior_probability": 0.009559165421152713,
             "LLM_phases_likelihood_llama": {
-                "WO3 (space group 14)": 0.4
+                "WO3 (space group 14)": 0.9
             },
             "LLM_phases_explanation_llama": {
-                "WO3 (space group 14)": "Similar to I_3, WO\u2083 (SG 14) at 100% is implausible due to expected CoWO\u2084 formation."
+                "WO3 (space group 14)": "Similar to I_3; WO\u2083 (SG 14) is stable and likely as an unreacted precursor. The absence of CoWO\u2084 reduces interpretation likelihood."
             },
-            "LLM_interpretation_likelihood_llama": 0.1,
-            "LLM_interpretation_explanation_llama": "This interpretation is as unlikely as I_3.",
-            "prior_probability_llama": 0.26041666666666663,
-            "unnormalized_posterior_llama": 0.19221802135055138,
-            "posterior_probability_llama": 0.0694273670344342
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "Similar to I_3, this interpretation lacks CoWO\u2084 and relies solely on WO\u2083, making it less likely."
         },
         "I_5": {
             "phases": [
@@ -1853,16 +1778,13 @@
             "posterior_probability": 0.1687099091770478,
             "adjusted_posterior_probability": 0.1687099091770478,
             "LLM_phases_likelihood_llama": {
-                "CoWO4 (space group 13)": 0.6
+                "CoWO4 (space group 13)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "CoWO4 (space group 13)": "CoWO\u2084 (SG 13) at 100% suggests complete reaction, which might be kinetically limited at 0.02 hours."
+                "CoWO4 (space group 13)": "CoWO\u2084 (SG 13) is expected but at 100% weight fraction implies complete reaction without any unreacted precursors, which is less likely given typical solid-state kinetics."
             },
-            "LLM_interpretation_likelihood_llama": 0.6,
-            "LLM_interpretation_explanation_llama": "Plausible if the reaction was very fast, but the short dwell time raises questions.",
-            "prior_probability_llama": 0.8333333333333334,
-            "unnormalized_posterior_llama": 0.48111248831480297,
-            "posterior_probability_llama": 0.17377336982449354
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "This interpretation is less likely due to the absence of unreacted precursors or by-products, which are common in solid-state synthesis."
         },
         "I_6": {
             "phases": [
@@ -1908,13 +1830,10 @@
                 "WO3 (space group 11)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "WO3 (space group 11)": "SG 11 is not a standard or stable form for WO\u2083; its presence is highly questionable."
+                "WO3 (space group 11)": "SG 11 is not a commonly reported or stable structure for WO\u2083. Its presence is highly unlikely."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is unlikely due to the implausible WO\u2083 polymorph.",
-            "prior_probability_llama": 0.23958333333333331,
-            "unnormalized_posterior_llama": 0.16401894274392276,
-            "posterior_probability_llama": 0.059242121308255305
+            "LLM_interpretation_likelihood_llama": 0.1,
+            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to the implausible WO\u2083 polymorph."
         },
         "I_7": {
             "phases": [
@@ -1960,13 +1879,10 @@
                 "WO3 (space group 62)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "WO3 (space group 62)": "SG 62 is not associated with common WO\u2083 structures; this phase is chemically implausible here."
+                "WO3 (space group 62)": "SG 62 is not associated with WO\u2083. This phase assignment is incorrect or highly metastable."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to the unknown/rare WO\u2083 polymorph.",
-            "prior_probability_llama": 0.23958333333333331,
-            "unnormalized_posterior_llama": 0.16601010513957284,
-            "posterior_probability_llama": 0.05996131070317603
+            "LLM_interpretation_likelihood_llama": 0.1,
+            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely due to incorrect or highly metastable WO\u2083 phase assignment."
         },
         "Synth_Conditions": {
             "Target": "CoWO4",
@@ -2022,14 +1938,11 @@
                 "Li4CO5 (space group 15)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 with space group 11 (P2\u2081/m) is a known polymorph of LiV\u2083O\u2088. The synthesis conditions (673.15 K, Ar atmosphere) could support its formation. However, stability at this temperature needs verification.",
-                "Li4CO5 (space group 15)": "Li\u2084CO\u2085 might form as an intermediate or side product. However, detailed structural information and common synthesis conditions suggest it could be less stable or a metastable phase under these conditions."
+                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (SG 11) is a known phase and can form under these conditions. However, its stability compared to LiVO\u2082 needs consideration. The synthesis target is LiVO\u2082, suggesting possible off-stoichiometry.",
+                "Li4CO5 (space group 15)": "Li\u2084CO\u2085 is not a common phase and may indicate incomplete reaction or stabilization by impurities. Its presence suggests residual carbonate."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "The interpretation seems plausible with LiV\u2083O\u2088 as a major phase. However, the presence of Li\u2084CO\u2085 and its 14.14% weight fraction suggests either incomplete reaction or side reactions. The composition balance score of 0.98 supports the likelihood.",
-            "prior_probability_llama": 0.8635666666666668,
-            "unnormalized_posterior_llama": 0.7913924579331951,
-            "posterior_probability_llama": 0.3262632218367028
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases but with a significant deviation from the target composition. LiV\u2083O\u2088 is a possible product but not the target."
         },
         "I_2": {
             "phases": [
@@ -2066,16 +1979,13 @@
             "adjusted_posterior_probability": 0.3375586503748273,
             "unnormalized_posterior": 0.7677153859588507,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.95
+                "LiV3O8 (space group 11)": 0.9
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 with space group 11 (P2\u2081/m) is a stable polymorph. The single-phase interpretation with 100% LiV\u2083O\u2088 suggests complete reaction under synthesis conditions."
+                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (SG 11) is a stable phase under reducing conditions. However, it does not match the target LiVO\u2082, suggesting a possible kinetic product."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible with a dominant LiV\u2083O\u2088 phase. The composition balance score of 0.938 supports the likelihood, though slightly lower than I_1.",
-            "prior_probability_llama": 0.921875,
-            "unnormalized_posterior_llama": 0.8235492322104034,
-            "posterior_probability_llama": 0.33952032667057686
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation is less likely due to the absence of other expected phases or unreacted precursors. LiV\u2083O\u2088 alone does not align well with the target composition."
         },
         "I_3": {
             "phases": [
@@ -2116,18 +2026,15 @@
             "adjusted_posterior_probability": 0.3312614162333589,
             "unnormalized_posterior": 0.75339347913163,
             "LLM_phases_likelihood_llama": {
-                "Li14V43O114 (space group 11)": 0.8,
-                "Li4CO5 (space group 15)": 0.6
+                "Li14V43O114 (space group 11)": 0.7,
+                "Li4CO5 (space group 15)": 0.5
             },
             "LLM_phases_explanation_llama": {
-                "Li14V43O114 (space group 11)": "Li\u2081\u2084V\u2084\u2083O\u2081\u2081\u2084 is approximately equal to LiV\u2083O\u2088 in composition. Its formation seems plausible under the given conditions, similar to LiV\u2083O\u2088.",
-                "Li4CO5 (space group 15)": "Similar explanation as in I_1 for Li\u2084CO\u2085."
+                "Li14V43O114 (space group 11)": "Li\u2081\u2084V\u2084\u2083O\u2081\u2081\u2084 approximates to LiV\u2083O\u2088 in composition. Its large formula unit may reflect a complex or superstructure phase. Plausible under kinetically controlled conditions.",
+                "Li4CO5 (space group 15)": "As in I_1, Li\u2084CO\u2085 suggests residual carbonate. Its lower weight fraction here reduces its impact."
             },
-            "LLM_interpretation_likelihood_llama": 0.75,
-            "LLM_interpretation_explanation_llama": "The interpretation includes plausible phases, but the use of a different formula for approximately equal to LiV\u2083O\u2088 might indicate structural or compositional variations. The composition balance score of 0.98 supports the likelihood.",
-            "prior_probability_llama": 0.8844000000000001,
-            "unnormalized_posterior_llama": 0.8106840162355683,
-            "posterior_probability_llama": 0.33421645149272033
+            "LLM_interpretation_likelihood_llama": 0.65,
+            "LLM_interpretation_explanation_llama": "This interpretation includes complex phases that approximate the target but with significant deviations. The presence of Li\u2084CO\u2085 is a concern for completeness."
         },
         "Synth_Conditions": {
             "Target": "LiVO2",
@@ -2180,17 +2087,14 @@
             "unnormalized_posterior": 0.6966826317355226,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "Ca5V3O13 (space group 176)": 0.4
+                "Ca5V3O13 (space group 176)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "V2O3 with space group 167 (R-3c) is a common and stable polymorph of V\u2082O\u2083 at high temperatures, including 973.15 K. Its presence is plausible.",
-                "Ca5V3O13 (space group 176)": "Ca\u2085V\u2083O\u2081\u2083 forms under specific conditions and might be stable at 973.15 K. However, its formation from CaCO\u2083 and V\u2082O\u2083 requires careful consideration of redox and kinetics. The presence at 18.23% weight fraction suggests it could be a product but with moderate likelihood due to potential competition from other Ca-V-O phases."
+                "V2O3 (space group 167)": "V\u2082O\u2083 (R-3c, SG 167) is a plausible product under reducing conditions. However, its stability at 973.15 K and in Argon atmosphere is reasonable.",
+                "Ca5V3O13 (space group 176)": "Ca\u2085V\u2083O\u2081\u2083 may form as a by-product under specific conditions. Its presence is plausible but might be less stable or kinetically trapped."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation includes V\u2082O\u2083, a known stable phase under the synthesis conditions, and Ca\u2085V\u2083O\u2081\u2083, which could form given sufficient reaction time and suitable redox conditions. The composition balance score of 0.95 supports this interpretation.",
-            "prior_probability_llama": 0.8459046296296295,
-            "unnormalized_posterior_llama": 0.7327769773469057,
-            "posterior_probability_llama": 0.33575680767253613
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the presence of Ca\u2085V\u2083O\u2081\u2083 requires specific conditions. The composition balance score of 0.95 supports its credibility."
         },
         "I_2": {
             "phases": [
@@ -2230,13 +2134,10 @@
                 "V2O3 (space group 167)": 0.9
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "V\u2082O\u2083 (R-3c, SG 167) is stable and expected under inert/reducing conditions like those provided by flowing Argon. A 100% presence suggests complete reaction or no reaction at all."
+                "V2O3 (space group 167)": "V\u2082O\u2083 (R-3c, SG 167) is a stable reduced vanadium oxide and expected to form under Argon atmosphere. A single-phase product suggests complete reaction or limited Ca incorporation."
             },
-            "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "The sole presence of V\u2082O\u2083 with a perfect composition balance score indicates a straightforward synthesis product. However, the absence of any Ca-containing phases is suspicious given the target composition and starting materials.",
-            "prior_probability_llama": 0.470679012345679,
-            "unnormalized_posterior_llama": 0.38893580864738864,
-            "posterior_probability_llama": 0.17820953651381116
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "This interpretation is less likely due to the absence of Ca-containing phases, which are expected given the precursors. The composition balance score of 0.593 also indicates a potential mismatch."
         },
         "I_3": {
             "phases": [
@@ -2277,18 +2178,17 @@
             "adjusted_posterior_probability": 0.30603413287352094,
             "unnormalized_posterior": 0.6724845333582626,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.6,
-                "Ca5V3O13 (space group 176)": 0.5
+                "V2O3 (space group 15)": 0.5,
+                "V2O3 (space group 167)": 0.5,
+                "Ca5V3O13 (space group 176)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "V\u2082O\u2083 with space group 15 (C2/c) is less common than the R-3c (SG 167) form but could be stable or kinetically trapped at 973.15 K.",
-                "Ca5V3O13 (space group 176)": "As discussed, Ca\u2085V\u2083O\u2081\u2083 could form under these conditions but with moderate likelihood due to potential phase competition."
+                "V2O3 (space group 15)": "C2/c (SG 15) is less common for V\u2082O\u2083; R-3c (SG 167) is more typical. SG 15 might indicate a metastable form.",
+                "V2O3 (space group 167)": "R-3c (SG 167) is the accepted structure for V\u2082O\u2083. Its presence is expected.",
+                "Ca5V3O13 (space group 176)": "As in I_1, Ca\u2085V\u2083O\u2081\u2083 is plausible but requires specific conditions for stability."
             },
-            "LLM_interpretation_likelihood_llama": 0.65,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases but with a lower score due to the less common V\u2082O\u2083 polymorph and moderate likelihood of Ca\u2085V\u2083O\u2081\u2083 formation. The composition balance score of 0.985 supports the phase set.",
-            "prior_probability_llama": 0.8452935185185184,
-            "unnormalized_posterior_llama": 0.7073516969247348,
-            "posterior_probability_llama": 0.32410699981471397
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "This interpretation includes a mix of plausible phases. The presence of both V\u2082O\u2083 polymorphs and Ca\u2085V\u2083O\u2081\u2083 suggests complex synthesis conditions. The high composition balance score of 0.985 supports its plausibility."
         },
         "I_4": {
             "phases": [
@@ -2325,16 +2225,13 @@
             "adjusted_posterior_probability": 0.018425426268735032,
             "unnormalized_posterior": 0.4048834053219247,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.9
+                "V2O3 (space group 15)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "Similar to I_3, V\u2082O\u2083 (SG 15) is less commonly reported and might be metastable or kinetically favored."
+                "V2O3 (space group 15)": "As mentioned, SG 15 for V\u2082O\u2083 is less typical; SG 167 is more stable. However, its presence cannot be ruled out under kinetic control."
             },
-            "LLM_interpretation_likelihood_llama": 0.2,
-            "LLM_interpretation_explanation_llama": "The sole presence of V\u2082O\u2083 with a low composition balance score makes this interpretation less likely, as it does not account for the Ca content from the starting materials.",
-            "prior_probability_llama": 0.4290123456790123,
-            "unnormalized_posterior_llama": 0.35339901626215087,
-            "posterior_probability_llama": 0.16192665599893863
+            "LLM_interpretation_likelihood_llama": 0.3,
+            "LLM_interpretation_explanation_llama": "This single-phase interpretation with an unlikely polymorph and a low composition balance score of 0.593 makes it less credible."
         },
         "Synth_Conditions": {
             "Target": "CaV2O3",
@@ -2387,17 +2284,14 @@
             "unnormalized_posterior": 0.240476079045924,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "CO (space group 194)": 0.0
+                "CO (space group 194)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "V2O3 is a plausible product under reducing conditions. The formation of V\u2082O\u2083 from V\u2082O\u2085 and Na\u2082CO\u2083 at 700\u202f\u00b0C in Argon is reasonable, as it can form through reduction of V\u2082O\u2085.",
-                "CO (space group 194)": "CO is a gas at room temperature and standard pressure, and it is highly unlikely to form as a solid under these synthesis conditions."
+                "V2O3 (space group 167)": "V\u2082O\u2083 (R-3c, SG 167) is a plausible reduced vanadium oxide under Argon atmosphere. However, its formation from V\u2082O\u2085 requires significant reduction. The 59.18% weight fraction suggests it could be a major product.",
+                "CO (space group 194)": "CO (SG 194) is unlikely as a solid at 973.15 K; it is typically a gas at these temperatures. Its presence as a solid is highly improbable."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "The presence of V\u2082O\u2083 is plausible, but CO as a solid is not feasible. The interpretation needs to account for Na and C-containing phases.",
-            "prior_probability_llama": 0.59375,
-            "unnormalized_posterior_llama": 0.44216569372960224,
-            "posterior_probability_llama": 0.3430774173276911
+            "LLM_interpretation_likelihood_llama": 0.2,
+            "LLM_interpretation_explanation_llama": "The presence of CO as a solid is highly improbable. Although V\u2082O\u2083 is plausible, the interpretation is penalized for including a gas-phase species as a solid."
         },
         "I_2": {
             "phases": [
@@ -2434,16 +2328,13 @@
             "adjusted_posterior_probability": 0.0293981376722106,
             "unnormalized_posterior": 0.291428775563902,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 167)": 0.95
+                "V2O3 (space group 167)": 0.9
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "This interpretation is chemically consistent with reduction of V\u2082O\u2085 to V\u2082O\u2083 under Argon. However, it does not account for Na\u2082CO\u2083 reaction products."
+                "V2O3 (space group 167)": "V\u2082O\u2083 (R-3c, SG 167) is a stable reduced vanadium oxide. As the sole product, it suggests complete reaction of precursors to this phase under reducing conditions."
             },
-            "LLM_interpretation_likelihood_llama": 0.4,
-            "LLM_interpretation_explanation_llama": "The interpretation omits expected phases related to Na and C from the precursors, reducing its likelihood.",
-            "prior_probability_llama": 0.38541666666666663,
-            "unnormalized_posterior_llama": 0.26299669989913105,
-            "posterior_probability_llama": 0.20405976729229705
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "This interpretation is plausible with V\u2082O\u2083 as a likely product under reducing conditions. However, the absence of other potential phases or unreacted precursors slightly reduces its likelihood."
         },
         "I_3": {
             "phases": [
@@ -2485,17 +2376,14 @@
             "unnormalized_posterior": 0.22519812628477168,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 15)": 0.6,
-                "CO (space group 194)": 0.0
+                "CO (space group 194)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "C2/c (SG 15) is less common for V\u2082O\u2083; the typical structure is R-3c (SG 167).",
-                "CO (space group 194)": "As in I_1, CO as a solid is implausible."
+                "V2O3 (space group 15)": "V\u2082O\u2083 with SG 15 (C2/c) is less common; the typical structure is R-3c (SG 167). This may indicate a metastable form or misidentification.",
+                "CO (space group 194)": "CO (SG 194) is highly unlikely as a solid at synthesis temperatures; it should exist as a gas."
             },
-            "LLM_interpretation_likelihood_llama": 0.6,
-            "LLM_interpretation_explanation_llama": "The use of a less common V\u2082O\u2083 polymorph and the presence of implausible CO reduce this interpretation's credibility.",
-            "prior_probability_llama": 0.46875,
-            "unnormalized_posterior_llama": 0.34944536837292156,
-            "posterior_probability_llama": 0.2711354955362502
+            "LLM_interpretation_likelihood_llama": 0.15,
+            "LLM_interpretation_explanation_llama": "Similar to I_1, the presence of CO as a solid is improbable. The use of a less common V\u2082O\u2083 polymorph further reduces the interpretation's credibility."
         },
         "I_4": {
             "phases": [
@@ -2532,16 +2420,13 @@
             "adjusted_posterior_probability": 0.023626561511253395,
             "unnormalized_posterior": 0.23421415222905298,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.95
+                "V2O3 (space group 15)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "As discussed, SG 15 is less typical for V\u2082O\u2083. Still, it could form under specific conditions."
+                "V2O3 (space group 15)": "V\u2082O\u2083 with SG 15 is less common; SG 167 (R-3c) is more typical and stable for V\u2082O\u2083. This suggests a possible metastable form or structural misassignment."
             },
-            "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "This single-phase interpretation omits expected by-products from Na\u2082CO\u2083 and does not account for C-containing phases.",
-            "prior_probability_llama": 0.34375,
-            "unnormalized_posterior_llama": 0.23421415222905298,
-            "posterior_probability_llama": 0.18172731984376164
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation is more plausible than those including CO but is still penalized for the less common V\u2082O\u2083 polymorph. The single-phase product suggests complete reaction but lacks evidence for unreacted precursors or side products."
         },
         "Synth_Conditions": {
             "Target": "NaVO2",
@@ -2602,15 +2487,12 @@
                 "V4O7 (space group 2)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "Li3VO4 (space group 31)": "Li\u2083VO\u2084 (SG 31) is a plausible product under reducing conditions. However, its stability at 873.15 K needs verification.",
-                "V2O3 (space group 167)": "V\u2082O\u2083 (SG 167) is a reduced vanadium oxide and could form under hydrogen flow. However, it might not be stable in the presence of Li\u2082CO\u2083.",
-                "V4O7 (space group 2)": "V\u2084O\u2087 is a metastable phase and might form kinetically. Its presence is less likely but possible."
+                "Li3VO4 (space group 31)": "Li\u2083VO\u2084 (SG 31) is a known compound and likely forms under these conditions. The oxidation state of vanadium (+5) is plausible given the precursors and atmosphere.",
+                "V2O3 (space group 167)": "V\u2082O\u2083 (SG 167) is a plausible reduced vanadium oxide phase. The presence of hydrogen in the atmosphere could facilitate reduction.",
+                "V4O7 (space group 2)": "V\u2084O\u2087 is a less common Magn\u00e9li phase. Its formation could be kinetically favored but is less stable than V\u2082O\u2083 or Li\u2083VO\u2084 under these conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.65,
-            "LLM_interpretation_explanation_llama": "The interpretation seems plausible with a good composition balance score (0.964). However, the presence of multiple vanadium oxides suggests complex redox conditions.",
-            "prior_probability_llama": 0.8331083333333333,
-            "unnormalized_posterior_llama": 0.7427270184538773,
-            "posterior_probability_llama": 0.21059615370850587
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the combination and their weight fractions need to align with synthesis conditions and stoichiometry."
         },
         "I_2": {
             "phases": [
@@ -2657,18 +2539,15 @@
             "LLM_phases_likelihood_llama": {
                 "Li3VO4 (space group 31)": 0.8,
                 "V2O3 (space group 167)": 0.7,
-                "V2O3 (space group 15)": 0.4
+                "V2O3 (space group 15)": 0.5
             },
             "LLM_phases_explanation_llama": {
                 "Li3VO4 (space group 31)": "Same as in I_1.",
                 "V2O3 (space group 167)": "Same as in I_1.",
-                "V2O3 (space group 15)": "V\u2082O\u2083 (SG 15) is another possible polymorph but less commonly reported. Its low weight fraction reduces its impact."
+                "V2O3 (space group 15)": "V\u2082O\u2083 with SG 15 is less common. This may indicate a metastable form or misassignment."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "Similar to I_1, with an even better composition balance score (0.98). The duplicate V\u2082O\u2083 entry seems redundant.",
-            "prior_probability_llama": 0.8635666666666668,
-            "unnormalized_posterior_llama": 0.730830544439253,
-            "posterior_probability_llama": 0.20722297405040158
+            "LLM_interpretation_explanation_llama": "The presence of multiple V\u2082O\u2083 polymorphs is questionable but not impossible if considering kinetic trapping or defects."
         },
         "I_3": {
             "phases": [
@@ -2718,21 +2597,18 @@
             "unnormalized_posterior": 0.6488872088584887,
             "LLM_phases_likelihood_llama": {
                 "Li3VO4 (space group 62)": 0.4,
-                "V2O3 (space group 167)": 0.7,
-                "V4O7 (space group 2)": 0.6,
+                "V2O3 (space group 167)": 0.3,
+                "V4O7 (space group 2)": 0.2,
                 "Li (space group 194)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "Li3VO4 (space group 62)": "Li\u2083VO\u2084 (SG 62) is less common and might be kinetically trapped. However, its 17.52% weight fraction is low.",
+                "Li3VO4 (space group 62)": "Li\u2083VO\u2084 with SG 62 is less common than SG 31. This could be a metastable or misidentified phase.",
                 "V2O3 (space group 167)": "Same as in I_1.",
                 "V4O7 (space group 2)": "Same as in I_1.",
-                "Li (space group 194)": "Elemental Li is highly unlikely to form and persist under these conditions, especially in a tube furnace with flowing gases."
+                "Li (space group 194)": "Elemental Li is highly unlikely to form and persist in a solid-state synthesis under these conditions, especially in an Argon and Hydrogen atmosphere which might react with Li."
             },
-            "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "The presence of metallic Li is highly implausible, significantly reducing the interpretation's credibility.",
-            "prior_probability_llama": 0.701275,
-            "unnormalized_posterior_llama": 0.612495432425924,
-            "posterior_probability_llama": 0.17366970505723936
+            "LLM_interpretation_likelihood_llama": 0.2,
+            "LLM_interpretation_explanation_llama": "The presence of elemental Li and the less common Li\u2083VO\u2084 polymorph make this interpretation highly unlikely."
         },
         "I_4": {
             "phases": [
@@ -2783,14 +2659,11 @@
             },
             "LLM_phases_explanation_llama": {
                 "Li3VO4 (space group 31)": "Same as in I_1.",
-                "V2O3 (space group 15)": "V\u2082O\u2083 (SG 15) is another possible polymorph. Its combination with SG 167 in other interpretations suggests similar likelihoods.",
+                "V2O3 (space group 15)": "Same as in I_2.",
                 "V4O7 (space group 2)": "Same as in I_1."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation has a good balance score (0.968) and seems chemically plausible.",
-            "prior_probability_llama": 0.8561000000000001,
-            "unnormalized_posterior_llama": 0.7703329775732684,
-            "posterior_probability_llama": 0.21842367130989904
+            "LLM_interpretation_explanation_llama": "This interpretation is plausible with common phases, but careful consideration of polymorph stability is needed."
         },
         "I_5": {
             "phases": [
@@ -2837,18 +2710,15 @@
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 15)": 0.7,
                 "Li3VO4 (space group 62)": 0.4,
-                "V4O7 (space group 2)": 0.6
+                "V4O7 (space group 2)": 0.3
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "Same as in I_4.",
+                "V2O3 (space group 15)": "Same as in I_2.",
                 "Li3VO4 (space group 62)": "Same as in I_3.",
                 "V4O7 (space group 2)": "Same as in I_1."
             },
-            "LLM_interpretation_likelihood_llama": 0.55,
-            "LLM_interpretation_explanation_llama": "This interpretation has a lower balance score (0.927) and includes less common polymorphs, reducing its likelihood.",
-            "prior_probability_llama": 0.769975,
-            "unnormalized_posterior_llama": 0.6703974245001767,
-            "posterior_probability_llama": 0.19008749587395415
+            "LLM_interpretation_likelihood_llama": 0.45,
+            "LLM_interpretation_explanation_llama": "The lower composition balance score and less common polymorphs reduce the likelihood of this interpretation."
         },
         "Synth_Conditions": {
             "Target": "LiVO2",
@@ -2905,19 +2775,16 @@
             "unnormalized_posterior": 0.768893518145653,
             "LLM_phases_likelihood_llama": {
                 "Mg2V2O7 (space group 2)": 0.6,
-                "MgV2O6 (space group 12)": 0.9,
-                "VO2 (space group 58)": 0.8
+                "MgV2O6 (space group 12)": 0.8,
+                "VO2 (space group 58)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "Mg2V2O7 (space group 2)": "Mg\u2082V\u2082O\u2087 can form under certain conditions but might not be stable at 773.15 K. Its presence at 31.42% is plausible.",
-                "MgV2O6 (space group 12)": "MgV\u2082O\u2086 is a known compound and likely stable under synthesis conditions. 61.5% weight fraction suggests major product.",
-                "VO2 (space group 58)": "VO\u2082 is a plausible phase under reducing or specific conditions. However, its 7.09% weight fraction is minor."
+                "Mg2V2O7 (space group 2)": "Mg\u2082V\u2082O\u2087 can form under certain conditions but may not be stable at 773.15 K. Its presence depends on Mg:V ratio and local redox conditions.",
+                "MgV2O6 (space group 12)": "MgV\u2082O\u2086 is a plausible product and matches the expected vanadate chemistry. SG 12 is a common setting for this structure.",
+                "VO2 (space group 58)": "VO\u2082 (SG 58) is a known polymorph of vanadium dioxide and can exist under reducing conditions. However, its stability in air at 773.15 K is questionable."
             },
-            "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases with significant weight fractions. However, stability and kinetic factors may influence the exact distribution.",
-            "prior_probability_llama": 0.9260666666666667,
-            "unnormalized_posterior_llama": 0.8051183371446755,
-            "posterior_probability_llama": 0.15388795727788612
+            "LLM_interpretation_likelihood_llama": 0.65,
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases but their stability and proportions need scrutiny. The presence of VO\u2082 suggests reducing conditions, which might not align with air synthesis."
         },
         "I_2": {
             "phases": [
@@ -2962,20 +2829,17 @@
             "adjusted_posterior_probability": 0.1320293372463635,
             "unnormalized_posterior": 0.6743452957970681,
             "LLM_phases_likelihood_llama": {
-                "MgV2O6 (space group 12)": 0.9,
+                "MgV2O6 (space group 12)": 0.8,
                 "VO2 (space group 14)": 0.5,
-                "VO2 (space group 58)": 0.5
+                "VO2 (space group 58)": 0.3
             },
             "LLM_phases_explanation_llama": {
-                "MgV2O6 (space group 12)": "As above, MgV\u2082O\u2086 is likely stable and a major product at 76.24%.",
-                "VO2 (space group 14)": "VO\u2082 (SG 14) is a metastable polymorph; its 21.13% presence suggests specific conditions.",
-                "VO2 (space group 58)": "VO\u2082 (SG 58) is another polymorph; 2.63% is a minor phase."
+                "MgV2O6 (space group 12)": "As above, MgV\u2082O\u2086 is chemically plausible and SG 12 is appropriate.",
+                "VO2 (space group 14)": "VO\u2082 (SG 14) is another polymorph of vanadium dioxide. It is less common than SG 58 but could form under specific conditions.",
+                "VO2 (space group 58)": "VO\u2082 (SG 58) coexisting with SG 14 suggests complex reduction behavior. However, multiple VO\u2082 polymorphs are less likely."
             },
-            "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "The presence of multiple VO\u2082 polymorphs suggests complex conditions or kinetic trapping. MgV\u2082O\u2086 is plausible, but interpretation credibility is reduced.",
-            "prior_probability_llama": 0.8385416666666667,
-            "unnormalized_posterior_llama": 0.7096051805446272,
-            "posterior_probability_llama": 0.13563185269769312
+            "LLM_interpretation_likelihood_llama": 0.5,
+            "LLM_interpretation_explanation_llama": "The presence of multiple VO\u2082 polymorphs and their combined weight make this interpretation less likely under typical synthesis conditions."
         },
         "I_3": {
             "phases": [
@@ -3017,17 +2881,14 @@
             "unnormalized_posterior": 0.6474366284256216,
             "LLM_phases_likelihood_llama": {
                 "Mg2V2O7 (space group 2)": 0.95,
-                "VO2 (space group 58)": 0.8
+                "VO2 (space group 58)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "Mg2V2O7 (space group 2)": "Dominant phase at 95.42%, suggesting near-complete reaction to this compound.",
-                "VO2 (space group 58)": "Minor VO\u2082 presence (4.58%) is plausible as a side product."
+                "Mg2V2O7 (space group 2)": "Dominant phase with high likelihood due to expected stability under synthesis conditions.",
+                "VO2 (space group 58)": "VO\u2082 (SG 58) is plausible as a minor phase under reducing conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible with a dominant Mg\u2082V\u2082O\u2087 phase and a minor VO\u2082 phase.",
-            "prior_probability_llama": 0.9581000000000001,
-            "unnormalized_posterior_llama": 0.7091137069251854,
-            "posterior_probability_llama": 0.13553791387173109
+            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible with a dominant Mg\u2082V\u2082O\u2087 phase and a minor VO\u2082 phase, consistent with vanadate chemistry."
         },
         "I_4": {
             "phases": [
@@ -3068,18 +2929,15 @@
             "adjusted_posterior_probability": 0.1588721439860511,
             "unnormalized_posterior": 0.8114460404377956,
             "LLM_phases_likelihood_llama": {
-                "Mg2V2O7 (space group 2)": 0.8,
-                "MgV2O6 (space group 12)": 0.7
+                "Mg2V2O7 (space group 2)": 0.95,
+                "MgV2O6 (space group 12)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "Mg2V2O7 (space group 2)": "Mg\u2082V\u2082O\u2087 at 62.34% suggests a major pathway but might compete with other phases.",
-                "MgV2O6 (space group 12)": "MgV\u2082O\u2086 at 37.66% indicates another stable product."
+                "Mg2V2O7 (space group 2)": "Expected stable phase under synthesis conditions.",
+                "MgV2O6 (space group 12)": "Plausible as a secondary phase."
             },
-            "LLM_interpretation_likelihood_llama": 0.75,
-            "LLM_interpretation_explanation_llama": "Both phases are plausible, but their coexistence and exact weight fractions depend on synthesis specifics.",
-            "prior_probability_llama": 0.8937333333333333,
-            "unnormalized_posterior_llama": 0.7753008066502093,
-            "posterior_probability_llama": 0.14818872196405927
+            "LLM_interpretation_likelihood_llama": 0.85,
+            "LLM_interpretation_explanation_llama": "Plausible interpretation with expected phases, but minor phase presence needs verification."
         },
         "I_5": {
             "phases": [
@@ -3120,18 +2978,15 @@
             "adjusted_posterior_probability": 0.13672344850668527,
             "unnormalized_posterior": 0.6983206630326044,
             "LLM_phases_likelihood_llama": {
-                "MgV2O6 (space group 12)": 0.95,
-                "VO2 (space group 58)": 0.8
+                "MgV2O6 (space group 12)": 0.8,
+                "VO2 (space group 58)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "MgV2O6 (space group 12)": "MgV\u2082O\u2086 dominates at 86.57%, suggesting stable formation.",
-                "VO2 (space group 58)": "VO\u2082 at 13.43% is a minor but plausible phase."
+                "MgV2O6 (space group 12)": "Chemically plausible and expected phase.",
+                "VO2 (space group 58)": "Plausible under reducing conditions."
             },
-            "LLM_interpretation_likelihood_llama": 0.92,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible with a dominant MgV\u2082O\u2086 phase and minor VO\u2082.",
-            "prior_probability_llama": 0.9409416666666667,
-            "unnormalized_posterior_llama": 0.7931506042972294,
-            "posterior_probability_llama": 0.15160047992682685
+            "LLM_interpretation_likelihood_llama": 0.75,
+            "LLM_interpretation_explanation_llama": "Likely interpretation with plausible phases, but conditions need to support VO\u2082 formation."
         },
         "I_6": {
             "phases": [
@@ -3177,19 +3032,16 @@
             "unnormalized_posterior": 0.6007589878395246,
             "LLM_phases_likelihood_llama": {
                 "MgV2O6 (space group 12)": 0.8,
-                "VO2 (space group 136)": 0.5,
+                "VO2 (space group 136)": 0.4,
                 "C (space group 31)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "MgV2O6 (space group 12)": "MgV\u2082O\u2086 is plausible at 72.0%, but conditions should be checked for carbide or carbonate stability.",
-                "VO2 (space group 136)": "VO\u2082 (SG 136) is a possible polymorph; 19.28% presence is moderate.",
-                "C (space group 31)": "Solid carbon is highly unlikely under these synthesis conditions."
+                "MgV2O6 (space group 12)": "Expected phase.",
+                "VO2 (space group 136)": "Less common polymorph, possible under specific conditions.",
+                "C (space group 31)": "Carbon is unlikely to form as a solid under these conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "The presence of solid carbon is implausible, significantly reducing interpretation credibility.",
-            "prior_probability_llama": 0.6747333333333333,
-            "unnormalized_posterior_llama": 0.56581813846304,
-            "posterior_probability_llama": 0.10814881925016553
+            "LLM_interpretation_explanation_llama": "Inclusion of carbon makes this interpretation highly unlikely."
         },
         "I_7": {
             "phases": [
@@ -3229,13 +3081,10 @@
                 "VO2 (space group 14)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "VO2 (space group 14)": "VO\u2082 as the sole product is chemically inconsistent with the target and precursors."
+                "VO2 (space group 14)": "VO\u2082 as a single phase does not match the target composition and is unlikely."
             },
             "LLM_interpretation_likelihood_llama": 0.0,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly implausible due to the absence of Mg and mismatch with target composition.",
-            "prior_probability_llama": 0.21874999999999997,
-            "unnormalized_posterior_llama": 0.14486307022516504,
-            "posterior_probability_llama": 0.02768870231053716
+            "LLM_interpretation_explanation_llama": "This interpretation is highly implausible as it does not address the target composition."
         },
         "I_8": {
             "phases": [
@@ -3275,13 +3124,10 @@
                 "C (space group 31)": 0.0
             },
             "LLM_phases_explanation_llama": {
-                "C (space group 31)": "Solid carbon as a product is chemically and physically implausible under these conditions."
+                "C (space group 31)": "Carbon is not expected to form under these synthesis conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.0,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly implausible due to the absence of relevant phases and presence of only carbon.",
-            "prior_probability_llama": 0.0,
-            "unnormalized_posterior_llama": 0.0,
-            "posterior_probability_llama": 0.0
+            "LLM_interpretation_explanation_llama": "This interpretation is implausible as carbon does not relate to the target synthesis."
         },
         "I_9": {
             "phases": [
@@ -3321,13 +3167,10 @@
                 "MgV2O6 (space group 12)": 0.95
             },
             "LLM_phases_explanation_llama": {
-                "MgV2O6 (space group 12)": "MgV\u2082O\u2086 as the sole product is plausible but should be checked against possible side products."
+                "MgV2O6 (space group 12)": "Expected stable phase under synthesis conditions."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "This interpretation is plausible but may overlook potential side products or unreacted precursors.",
-            "prior_probability_llama": 0.941475,
-            "unnormalized_posterior_llama": 0.7288777374993467,
-            "posterior_probability_llama": 0.1393155527011009
+            "LLM_interpretation_likelihood_llama": 0.95,
+            "LLM_interpretation_explanation_llama": "Highly plausible interpretation with the expected phase."
         },
         "Synth_Conditions": {
             "Target": "MgVO3",
@@ -3375,16 +3218,13 @@
             "adjusted_posterior_probability": 0.4968372690733735,
             "unnormalized_posterior": 0.757434171883485,
             "LLM_phases_likelihood_llama": {
-                "LiV3O8 (space group 11)": 0.95
+                "LiV3O8 (space group 11)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (space group 11) is a known phase that can form under solid-state synthesis conditions from Li\u2082CO\u2083 and V\u2082O\u2085. The oxidation states are plausible, and it matches the target composition."
+                "LiV3O8 (space group 11)": "LiV\u2083O\u2088 (SG 11) is a known phase that can form under these conditions. However, its stability and direct formation from Li\u2082CO\u2083 and V\u2082O\u2085 need consideration of redox and kinetics. The synthesis atmosphere (air) and temperature (873.15 K) are plausible for its formation."
             },
-            "LLM_interpretation_likelihood_llama": 0.95,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly plausible as it matches the target composition and the synthesis conditions. LiV\u2083O\u2088 is a known product from similar reactions.",
-            "prior_probability_llama": 0.9791666666666665,
-            "unnormalized_posterior_llama": 0.8899851519630948,
-            "posterior_probability_llama": 0.6237021623116198
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "This interpretation seems plausible as LiV\u2083O\u2088 can form under the given conditions. The phase individually has a good likelihood."
         },
         "I_2": {
             "phases": [
@@ -3421,16 +3261,13 @@
             "adjusted_posterior_probability": 0.5031627309266264,
             "unnormalized_posterior": 0.7670774117506047,
             "LLM_phases_likelihood_llama": {
-                "Li14V43O114 (space group 11)": 0.0
+                "Li14V43O114 (space group 11)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "Li14V43O114 (space group 11)": "The phase Li\u2081\u2084V\u2084\u2083O\u2081\u2081\u2084 seems to be an incorrect or hypothetical formula. It does not align with common vanadate chemistry or the expected precursors."
+                "Li14V43O114 (space group 11)": "Li\u2081\u2084V\u2084\u2083O\u2081\u2081\u2084 (SG 11) has a composition approximately equal to LiV\u2083O\u2088, suggesting it could be a valid polymorph or variant under these synthesis conditions. The formation conditions (873.15 K in air) are suitable for vanadate phases."
             },
-            "LLM_interpretation_likelihood_llama": 0.0,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly implausible due to the unusual and likely incorrect chemical formula provided.",
-            "prior_probability_llama": 0.5833333333333334,
-            "unnormalized_posterior_llama": 0.5369541882254233,
-            "posterior_probability_llama": 0.37629783768838015
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "This interpretation is also plausible given that Li\u2081\u2084V\u2084\u2083O\u2081\u2081\u2084 approximates to the target composition and forms under similar conditions."
         },
         "Synth_Conditions": {
             "Target": "LiV3O4",
@@ -3494,22 +3331,21 @@
             "adjusted_posterior_probability": 0.013255459115806773,
             "unnormalized_posterior": 0.38219580767178896,
             "LLM_phases_likelihood_llama": {
-                "CaC2 (space group 2)": 0.05,
-                "CaO2 (space group 5)": 0.05,
-                "Ca (space group 194)": 0.05,
-                "V5O9 (space group 2)": 0.6
+                "CaC2 (space group 2)": 0.6,
+                "CaC2 (space group 12)": 0.05,
+                "CaO2 (space group 5)": 0.4,
+                "Ca (space group 194)": 0.7,
+                "V5O9 (space group 2)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "CaC2 (space group 2)": "CaC\u2082 formation is highly unlikely under these conditions as it requires a specific C-rich environment. Carbonates decompose at high temperatures, and free C would not form CaC\u2082.",
-                "CaO2 (space group 5)": "CaO\u2082 is not a stable phase under these conditions. It might form under specific oxidizing conditions but is less likely here.",
-                "Ca (space group 194)": "Pure Ca metal is not expected to form in an Ar atmosphere with oxide precursors.",
-                "V5O9 (space group 2)": "V\u2085O\u2089 is a possible vanadium oxide phase, but its stability depends on the specific V-O phase diagram at these conditions."
+                "CaC2 (space group 2)": "CaC\u2082 (SG 2) is a known carbide, but its formation under these conditions is questionable due to the presence of V\u2082O\u2085 and CaCO\u2083, which might favor carbonate or oxide formation.",
+                "CaC2 (space group 12)": "This polymorph of CaC\u2082 is less common and likely kinetically trapped. Its low weight fraction (2.65%) suggests a minor or transient phase.",
+                "CaO2 (space group 5)": "CaO\u2082 is not a typical stable phase under these conditions; it might form under specific oxidizing conditions but is less likely here.",
+                "Ca (space group 194)": "Metallic Ca is unlikely to form and persist in an Argon atmosphere at 700\u202f\u00b0C, especially with oxidizable precursors present.",
+                "V5O9 (space group 2)": "V\u2085O\u2089 is a reduced vanadium oxide phase. Its formation is plausible under reducing conditions or with incomplete oxidation of V\u2082O\u2085."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation includes highly unlikely phases (CaC\u2082, CaO\u2082, Ca) and seems chemically inconsistent with the target composition and synthesis conditions.",
-            "prior_probability_llama": 0.5481083333333333,
-            "unnormalized_posterior_llama": 0.3430754146547374,
-            "posterior_probability_llama": 0.12191072683929759
+            "LLM_interpretation_likelihood_llama": 0.3,
+            "LLM_interpretation_explanation_llama": "This interpretation includes several implausible phases like metallic Ca and less common CaC\u2082 polymorphs. The presence of CaO\u2082 and V\u2085O\u2089 suggests a complex redox environment, but overall, it seems chemically inconsistent."
         },
         "I_2": {
             "phases": [
@@ -3562,22 +3398,21 @@
             "adjusted_posterior_probability": 0.1890826009640454,
             "unnormalized_posterior": 0.5451835108899397,
             "LLM_phases_likelihood_llama": {
-                "CaC2 (space group 2)": 0.05,
-                "Ca5V3O13 (space group 176)": 0.8,
+                "CaC2 (space group 2)": 0.7,
+                "Ca5V3O13 (space group 176)": 0.6,
                 "V9O17 (space group 2)": 0.7,
-                "CaCO3 (space group 167)": 0.4
+                "CaCO3 (space group 167)": 0.5,
+                "CaC2 (space group 12)": 0.1
             },
             "LLM_phases_explanation_llama": {
-                "CaC2 (space group 2)": "Same as in I_1; highly unlikely.",
-                "Ca5V3O13 (space group 176)": "This phase seems plausible as it combines Ca and V oxides, which could form under these conditions.",
-                "V9O17 (space group 2)": "V\u2089O\u2081\u2087 is a possible Magn\u00e9li phase; its formation is plausible under reducing or specific V-rich conditions.",
-                "CaCO3 (space group 167)": "Residual CaCO\u2083 is plausible if not fully decomposed during heating."
+                "CaC2 (space group 2)": "A common carbide phase, potentially forming from carbon-rich precursors or conditions.",
+                "Ca5V3O13 (space group 176)": "This phase is plausible as a vanadate under certain conditions, but its stability at 700\u202f\u00b0C in Argon needs verification.",
+                "V9O17 (space group 2)": "A reduced vanadium oxide, which could form under the synthesis conditions, especially if V\u2082O\u2085 is not fully oxidized.",
+                "CaCO3 (space group 167)": "As a precursor, CaCO\u2083 may persist if not fully decomposed. Its presence is reasonable, especially if the dwell time or temperature is insufficient for complete reaction.",
+                "CaC2 (space group 12)": "Less common polymorph; its low weight fraction suggests a minor phase."
             },
-            "LLM_interpretation_likelihood_llama": 0.6,
-            "LLM_interpretation_explanation_llama": "While some phases are plausible, the presence of CaC\u2082 and specific weight fractions need further justification.",
-            "prior_probability_llama": 0.812275,
-            "unnormalized_posterior_llama": 0.5315502421351274,
-            "posterior_probability_llama": 0.18888464052579462
+            "LLM_interpretation_likelihood_llama": 0.65,
+            "LLM_interpretation_explanation_llama": "This interpretation seems more plausible with a mix of carbide, vanadate, and oxide phases. The presence of CaCO\u2083 as an unreacted precursor is reasonable."
         },
         "I_3": {
             "phases": [
@@ -3630,22 +3465,21 @@
             "adjusted_posterior_probability": 0.012526141832621808,
             "unnormalized_posterior": 0.3611673388982344,
             "LLM_phases_likelihood_llama": {
-                "CaC2 (space group 2)": 0.05,
-                "Ca60C20O143 (space group 62)": 0.1,
+                "CaC2 (space group 2)": 0.8,
+                "Ca60C20O143 (space group 62)": 0.2,
+                "CaC2 (space group 12)": 0.2,
                 "Ca (space group 194)": 0.05,
-                "V5O9 (space group 2)": 0.8
+                "V5O9 (space group 2)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "CaC2 (space group 2)": "Same as in I_1; highly unlikely.",
-                "Ca60C20O143 (space group 62)": "This complex phase seems unlikely and may not be a well-defined compound.",
-                "Ca (space group 194)": "Pure Ca metal is not expected.",
-                "V5O9 (space group 2)": "Same as in I_1; possible but depends on V-O phase stability."
+                "CaC2 (space group 2)": "Dominant carbide phase, likely formed under reducing conditions.",
+                "Ca60C20O143 (space group 62)": "This complex phase seems unlikely due to its unusual composition and low stability under typical solid-state synthesis conditions.",
+                "CaC2 (space group 12)": "Minor polymorph of CaC\u2082.",
+                "Ca (space group 194)": "Metallic Ca is highly unlikely to form or persist.",
+                "V5O9 (space group 2)": "Plausible reduced vanadium oxide phase."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation includes highly unlikely and complex phases, making it chemically implausible.",
-            "prior_probability_llama": 0.48604166666666665,
-            "unnormalized_posterior_llama": 0.33265037570058464,
-            "posterior_probability_llama": 0.11820622333382845
+            "LLM_interpretation_likelihood_llama": 0.25,
+            "LLM_interpretation_explanation_llama": "The presence of the complex Ca\u2083CO\u2087 phase and metallic Ca makes this interpretation unlikely."
         },
         "I_4": {
             "phases": [
@@ -3698,24 +3532,21 @@
             "adjusted_posterior_probability": 0.014238795197578367,
             "unnormalized_posterior": 0.41054842259836993,
             "LLM_phases_likelihood_llama": {
-                "CaC2 (space group 2)": 0.05,
-                "CaO2 (space group 5)": 0.05,
-                "Ca (space group 194)": 0.05,
+                "CaC2 (space group 2)": 0.8,
+                "CaO2 (space group 5)": 0.3,
+                "Ca (space group 194)": 0.1,
                 "V5O9 (space group 2)": 0.7,
-                "V2O5 (space group 15)": 0.8
+                "V2O5 (space group 15)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "CaC2 (space group 2)": "Same as in I_1; highly unlikely.",
-                "CaO2 (space group 5)": "Same as in I_1; unlikely.",
-                "Ca (space group 194)": "Same as in I_1; unlikely.",
-                "V5O9 (space group 2)": "Same as in I_1; possible.",
-                "V2O5 (space group 15)": "V\u2082O\u2085 is a stable vanadium oxide phase under these conditions."
+                "CaC2 (space group 2)": "Expected carbide phase.",
+                "CaO2 (space group 5)": "Unlikely due to instability under these conditions.",
+                "Ca (space group 194)": "Highly unlikely metallic phase.",
+                "V5O9 (space group 2)": "Plausible reduced vanadium oxide.",
+                "V2O5 (space group 15)": "Stable V\u2082O\u2085 polymorph; its presence as 6.71% suggests unreacted or excess precursor."
             },
-            "LLM_interpretation_likelihood_llama": 0.5,
-            "LLM_interpretation_explanation_llama": "While some phases like V\u2082O\u2085 and V\u2085O\u2089 are plausible, the presence of CaC\u2082, CaO\u2082, and Ca metal reduces the interpretation likelihood.",
-            "prior_probability_llama": 0.7319333333333332,
-            "unnormalized_posterior_llama": 0.4632964468812317,
-            "posterior_probability_llama": 0.16463087755266834
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "This interpretation includes unlikely phases like CaO\u2082 and metallic Ca, reducing its credibility."
         },
         "I_5": {
             "phases": [
@@ -3768,24 +3599,21 @@
             "adjusted_posterior_probability": 0.20772433289497025,
             "unnormalized_posterior": 0.5989333789970706,
             "LLM_phases_likelihood_llama": {
-                "CaC2 (space group 2)": 0.05,
-                "Ca5V3O13 (space group 176)": 0.8,
+                "CaC2 (space group 2)": 0.7,
+                "Ca5V3O13 (space group 176)": 0.6,
                 "V9O17 (space group 2)": 0.7,
-                "CaCO3 (space group 167)": 0.4,
-                "V2O5 (space group 15)": 0.8
+                "CaCO3 (space group 167)": 0.6,
+                "V2O5 (space group 15)": 0.5
             },
             "LLM_phases_explanation_llama": {
-                "CaC2 (space group 2)": "Same as in I_1; highly unlikely.",
-                "Ca5V3O13 (space group 176)": "Same as in I_2; plausible.",
-                "V9O17 (space group 2)": "Same as in I_2; plausible.",
-                "CaCO3 (space group 167)": "Same as in I_2; plausible.",
-                "V2O5 (space group 15)": "Same as in I_4; stable and plausible."
+                "CaC2 (space group 2)": "Dominant carbide phase.",
+                "Ca5V3O13 (space group 176)": "Plausible vanadate phase.",
+                "V9O17 (space group 2)": "Reduced vanadium oxide phase.",
+                "CaCO3 (space group 167)": "Reasonable as an unreacted precursor.",
+                "V2O5 (space group 15)": "Stable oxide phase; its presence suggests incomplete reaction or excess V\u2082O\u2085."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation seems more plausible with a mix of likely phases, but the presence of CaC\u2082 still reduces the likelihood.",
-            "prior_probability_llama": 0.870275,
-            "unnormalized_posterior_llama": 0.5849308405150989,
-            "posterior_probability_llama": 0.20785326162086235
+            "LLM_interpretation_explanation_llama": "This interpretation seems plausible with a mix of expected phases, including unreacted precursors and reduced vanadium oxides."
         },
         "I_6": {
             "phases": [
@@ -3839,21 +3667,20 @@
             "unnormalized_posterior": 0.5852802542280987,
             "LLM_phases_likelihood_llama": {
                 "CaCO3 (space group 2)": 0.4,
+                "CaCO3 (space group 167)": 0.5,
                 "V2O5 (space group 15)": 0.8,
-                "V6O13 (space group 69)": 0.6,
-                "CaC2 (space group 12)": 0.05
+                "V6O13 (space group 69)": 0.3,
+                "CaC2 (space group 12)": 0.2
             },
             "LLM_phases_explanation_llama": {
-                "CaCO3 (space group 2)": "Residual CaCO\u2083 is plausible.",
-                "V2O5 (space group 15)": "Same as in I_4; stable and plausible.",
-                "V6O13 (space group 69)": "V\u2086O\u2081\u2083 is a possible vanadium oxide phase under specific conditions.",
-                "CaC2 (space group 12)": "Same as in I_1; highly unlikely."
+                "CaCO3 (space group 2)": "Uncommon polymorph of CaCO\u2083.",
+                "CaCO3 (space group 167)": "Common and stable polymorph of CaCO\u2083; likely an unreacted precursor.",
+                "V2O5 (space group 15)": "Stable and expected V\u2082O\u2085 phase under these conditions.",
+                "V6O13 (space group 69)": "Reduced vanadium oxide; less common but plausible.",
+                "CaC2 (space group 12)": "Minor carbide phase."
             },
-            "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases like V\u2082O\u2085 and CaCO\u2083, making it more chemically consistent.",
-            "prior_probability_llama": 0.8740666666666668,
-            "unnormalized_posterior_llama": 0.558649491350073,
-            "posterior_probability_llama": 0.19851427012754863
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation includes stable phases like V\u2082O\u2085 and CaCO\u2083, making it relatively plausible."
         },
         "Synth_Conditions": {
             "Target": "CaVO2",
@@ -3915,20 +3742,17 @@
             "posterior_probability": 0.31220585848944554,
             "adjusted_posterior_probability": 0.31220585848944554,
             "LLM_phases_likelihood_llama": {
-                "CaP2(HO2)4 (space group 2)": 0.0,
+                "CaP2(HO2)4 (space group 2)": 0.1,
                 "TiO2 (space group 61)": 0.8,
                 "CaTi4(PO4)6 (space group 148)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "CaP2(HO2)4 (space group 2)": "The formation of CaP\u2082(HO\u2082)\u2084 (or approximately equal to CaP\u2082H\u2084O\u2088) under solid-state synthesis in air at 900\u202f\u00b0C is highly unlikely. Phosphates like this are more typical of hydrothermal or low-temperature synthesis. The presence of hydrogen in the product is also implausible in an ambient air furnace.",
-                "TiO2 (space group 61)": "TiO\u2082 with space group 61 (P2\u2081/m) could form, but rutile (SG 136) is more stable at 900\u202f\u00b0C. Anatase (SG 141) transforms to rutile >600\u2013800\u202f\u00b0C. If kinetically trapped, anatase could persist, but rutile is preferred.",
-                "CaTi4(PO4)6 (space group 148)": "CaTi\u2084(PO\u2084)\u2086 (or approximately equal to CaTi\u2082P\u2083O\u2081\u2082) is a plausible phase under these conditions. It forms in solid-state reactions and has a stable structure."
+                "CaP2(HO2)4 (space group 2)": "The formation of CaP\u2082(HO\u2082)\u2084 (approximately equal to CaP\u2082H\u2084O\u2088) is unlikely under high-temperature solid-state synthesis in air due to dehydration reactions typically occurring at such temperatures.",
+                "TiO2 (space group 61)": "TiO\u2082 with space group 61 (P2\u2081/m) is a common and stable polymorph of titanium dioxide at high temperatures, making it a likely phase.",
+                "CaTi4(PO4)6 (space group 148)": "CaTi\u2084(PO\u2084)\u2086 (approximately equal to CaTi\u2082P\u2083O\u2081\u2082) could form under these conditions but might be less stable or common compared to other phases like CaTiO\u2083 or TiO\u2082; however, its presence is plausible."
             },
-            "LLM_interpretation_likelihood_llama": 0.3,
-            "LLM_interpretation_explanation_llama": "The presence of CaP\u2082(HO\u2082)\u2084 is highly unlikely due to its hydrothermal nature and hydrogen content. TiO\u2082 and CaTi\u2084(PO\u2084)\u2086 are plausible, but the interpretation's credibility is reduced by the unlikely phase.",
-            "prior_probability_llama": 0.5437983333333334,
-            "unnormalized_posterior_llama": 0.39122799018447246,
-            "posterior_probability_llama": 0.31088998410123403
+            "LLM_interpretation_likelihood_llama": 0.5,
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases but the presence and proportions need to align with synthesis conditions and target composition."
         },
         "I_2": {
             "phases": [
@@ -3979,20 +3803,17 @@
             "posterior_probability": 0.3176942701138981,
             "adjusted_posterior_probability": 0.3176942701138981,
             "LLM_phases_likelihood_llama": {
-                "CaP2(HO2)4 (space group 2)": 0.0,
+                "CaP2(HO2)4 (space group 2)": 0.1,
                 "Ti12O25 (space group 61)": 0.4,
-                "CaTi4(PO4)6 (space group 148)": 0.6
+                "CaTi4(PO4)6 (space group 148)": 0.5
             },
             "LLM_phases_explanation_llama": {
-                "CaP2(HO2)4 (space group 2)": "Same as I_1; CaP\u2082(HO\u2082)\u2084 is implausible for solid-state synthesis in air at 900\u202f\u00b0C.",
-                "Ti12O25 (space group 61)": "Ti\u2081\u2082O\u2082\u2085 is not a standard TiO\u2082 polymorph; it seems to approximate TiO\u2082. However, rutile (SG 136) is more stable at high temperatures. This phase might be kinetically trapped.",
-                "CaTi4(PO4)6 (space group 148)": "Same as I_1; CaTi\u2084(PO\u2084)\u2086 is plausible and has a stable structure."
+                "CaP2(HO2)4 (space group 2)": "Similar to I_1, CaP\u2082(HO\u2082)\u2084 formation is unlikely due to dehydration at high temperatures.",
+                "Ti12O25 (space group 61)": "Ti\u2081\u2082O\u2082\u2085 is not a standard titanium oxide phase; TiO\u2082 phases are more common. This might indicate a metastable or defective TiO\u2082 phase.",
+                "CaTi4(PO4)6 (space group 148)": "Plausible as in I_1, but the combination and proportions with other phases must be assessed for overall plausibility."
             },
-            "LLM_interpretation_likelihood_llama": 0.25,
-            "LLM_interpretation_explanation_llama": "The inclusion of unlikely CaP\u2082(HO\u2082)\u2084 and less common Ti\u2081\u2082O\u2082\u2085 reduces the interpretation's likelihood. Ti\u2081\u2082O\u2082\u2085 seems redundant with TiO\u2082.",
-            "prior_probability_llama": 0.5659566666666667,
-            "unnormalized_posterior_llama": 0.39921794497432755,
-            "posterior_probability_llama": 0.3172392151887551
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "The presence of unusual or less common phases like Ti\u2081\u2082O\u2082\u2085 and low likelihood of CaP\u2082(HO\u2082)\u2084 reduce the interpretation's credibility."
         },
         "I_3": {
             "phases": [
@@ -4039,18 +3860,15 @@
             "posterior_probability": 0.37009987139665634,
             "adjusted_posterior_probability": 0.37009987139665634,
             "LLM_phases_likelihood_llama": {
-                "Ti12O25 (space group 61)": 0.4,
-                "CaTi4(PO4)6 (space group 148)": 0.6
+                "Ti12O25 (space group 61)": 0.5,
+                "CaTi4(PO4)6 (space group 148)": 0.7
             },
             "LLM_phases_explanation_llama": {
-                "Ti12O25 (space group 61)": "Ti\u2081\u2082O\u2082\u2085 approximates TiO\u2082 but is not a standard polymorph. Ratile (SG 136) is preferred at 900\u202f\u00b0C, but it could be kinetically trapped.",
-                "CaTi4(PO4)6 (space group 148)": "Same as I_1; CaTi\u2084(PO\u2084)\u2086 is plausible and stable."
+                "Ti12O25 (space group 61)": "As mentioned, Ti\u2081\u2082O\u2082\u2085 is not standard; it might represent a reduced or defective form of TiO\u2082.",
+                "CaTi4(PO4)6 (space group 148)": "This phase is plausible under the synthesis conditions, similar to its assessment in I_1 and I_2."
             },
-            "LLM_interpretation_likelihood_llama": 0.5,
-            "LLM_interpretation_explanation_llama": "This interpretation omits Ca and P-containing phases, which are expected from the precursors. Although individual phases are plausible, the lack of a Ca-P phase makes it incomplete.",
-            "prior_probability_llama": 0.6220916666666667,
-            "unnormalized_posterior_llama": 0.4679670411083231,
-            "posterior_probability_llama": 0.371870800710011
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "The absence of Ca and P-containing phases besides CaTi\u2084(PO\u2084)\u2086 and the presence of Ti\u2081\u2082O\u2082\u2085 make this less likely than interpretations with more balanced phase compositions."
         },
         "Synth_Conditions": {
             "Target": "CaTiNiP2O9",
@@ -4107,19 +3925,16 @@
             "unnormalized_posterior": 0.7941922402494863,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "CaO (space group 225)": 0.7,
-                "Ca5V3O13 (space group 176)": 0.6
+                "CaO (space group 225)": 0.6,
+                "Ca5V3O13 (space group 176)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "R-3c (SG 167) is the correct and stable structure for V\u2082O\u2083. Its formation is expected under reducing conditions.",
-                "CaO (space group 225)": "Fm-3m (SG 225) is the correct structure for CaO. It may form as a side product or from decomposition of CaCO\u2083.",
-                "Ca5V3O13 (space group 176)": "This phase is less common but may form under specific conditions. Its presence requires careful consideration of kinetics and thermodynamics."
+                "V2O3 (space group 167)": "R-3c (SG 167) is a stable and common polymorph of V\u2082O\u2083. Its formation is plausible under the reducing atmosphere of Argon.",
+                "CaO (space group 225)": "Fm-3m (SG 225) is the correct and stable structure for CaO. It may persist as an unreacted precursor or form from decomposition of CaCO\u2083.",
+                "Ca5V3O13 (space group 176)": "This phase is less commonly reported but could form under specific conditions. Its presence at 13% is plausible but not expected as a major phase."
             },
-            "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the presence of Ca\u2085V\u2083O\u2081\u2083 requires specific conditions. The composition balance score of 0.993 supports its credibility.",
-            "prior_probability_llama": 0.9334490740740741,
-            "unnormalized_posterior_llama": 0.8720436239090683,
-            "posterior_probability_llama": 0.163882252409842
+            "LLM_interpretation_likelihood_llama": 0.6,
+            "LLM_interpretation_explanation_llama": "This interpretation includes plausible phases, but the presence of Ca\u2085V\u2083O\u2081\u2083 and the weight fractions suggest it might not fully represent the synthesis product."
         },
         "I_2": {
             "phases": [
@@ -4161,17 +3976,14 @@
             "unnormalized_posterior": 0.6456946499822414,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "Ca5V3O13 (space group 176)": 0.6
+                "Ca5V3O13 (space group 176)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "As above, R-3c (SG 167) is the expected structure for V\u2082O\u2083.",
-                "Ca5V3O13 (space group 176)": "Same as above; its formation is less common but possible."
+                "V2O3 (space group 167)": "As above, R-3c (SG 167) V\u2082O\u2083 is stable and expected.",
+                "Ca5V3O13 (space group 176)": "This phase is plausible but not as commonly observed. Its 13% weight fraction is minor and could result from specific synthesis conditions."
             },
             "LLM_interpretation_likelihood_llama": 0.7,
-            "LLM_interpretation_explanation_llama": "This interpretation lacks CaO, a likely product or side phase, reducing its plausibility compared to others.",
-            "prior_probability_llama": 0.837562962962963,
-            "unnormalized_posterior_llama": 0.6977625690447324,
-            "posterior_probability_llama": 0.13112979480284864
+            "LLM_interpretation_explanation_llama": "This interpretation is chemically plausible, with V\u2082O\u2083 as the dominant phase and a minor amount of Ca\u2085V\u2083O\u2081\u2083. The absence of CaO suggests a possible complete reaction pathway."
         },
         "I_3": {
             "phases": [
@@ -4213,17 +4025,14 @@
             "unnormalized_posterior": 0.7935517651662973,
             "LLM_phases_likelihood_llama": {
                 "V2O3 (space group 167)": 0.8,
-                "CaO (space group 225)": 0.7
+                "CaO (space group 225)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "Expected structure for V\u2082O\u2083 as above.",
-                "CaO (space group 225)": "Expected structure for CaO as above."
+                "V2O3 (space group 167)": "Stable V\u2082O\u2083 polymorph as discussed.",
+                "CaO (space group 225)": "Stable CaO as discussed."
             },
-            "LLM_interpretation_likelihood_llama": 0.9,
-            "LLM_interpretation_explanation_llama": "This interpretation is chemically plausible, with both V\u2082O\u2083 and CaO as expected phases. The balance score of 0.979 supports its likelihood.",
-            "prior_probability_llama": 0.946349074074074,
-            "unnormalized_posterior_llama": 0.8496665326958688,
-            "posterior_probability_llama": 0.15967694890224818
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "This interpretation includes two stable phases expected under the synthesis conditions. The absence of Ca\u2085V\u2083O\u2081\u2083 suggests a straightforward reaction pathway."
         },
         "I_4": {
             "phases": [
@@ -4268,20 +4077,17 @@
             "adjusted_posterior_probability": 0.14762153568507128,
             "unnormalized_posterior": 0.77227582018519,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.4,
-                "CaO (space group 225)": 0.7,
-                "Ca5V3O13 (space group 176)": 0.6
+                "V2O3 (space group 15)": 0.2,
+                "CaO (space group 225)": 0.6,
+                "Ca5V3O13 (space group 176)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "C2/c (SG 15) is not the typical structure for V\u2082O\u2083; R-3c (SG 167) is more common.",
-                "CaO (space group 225)": "Expected structure for CaO as above.",
-                "Ca5V3O13 (space group 176)": "Same as above; its formation is less common but possible."
+                "V2O3 (space group 15)": "C2/c (SG 15) is less common for V\u2082O\u2083; R-3c (SG 167) is more stable.",
+                "CaO (space group 225)": "Stable CaO as discussed.",
+                "Ca5V3O13 (space group 176)": "Plausible but less common phase as discussed."
             },
-            "LLM_interpretation_likelihood_llama": 0.65,
-            "LLM_interpretation_explanation_llama": "The use of an uncommon V\u2082O\u2083 polymorph reduces the credibility of this interpretation.",
-            "prior_probability_llama": 0.8501157407407408,
-            "unnormalized_posterior_llama": 0.7916770271123826,
-            "posterior_probability_llama": 0.14877904135428155
+            "LLM_interpretation_likelihood_llama": 0.4,
+            "LLM_interpretation_explanation_llama": "The use of an uncommon V\u2082O\u2083 polymorph (SG 15) reduces the credibility of this interpretation."
         },
         "I_5": {
             "phases": [
@@ -4322,18 +4128,15 @@
             "adjusted_posterior_probability": 0.11673980223107545,
             "unnormalized_posterior": 0.6107193377841139,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.4,
-                "Ca5V3O13 (space group 176)": 0.6
+                "V2O3 (space group 15)": 0.2,
+                "Ca5V3O13 (space group 176)": 0.4
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "As above, C2/c (SG 15) is not typical for V\u2082O\u2083.",
-                "Ca5V3O13 (space group 176)": "Same as above; its formation is less common."
+                "V2O3 (space group 15)": "As above, this is a less common polymorph.",
+                "Ca5V3O13 (space group 176)": "As above, this phase is plausible but less common."
             },
-            "LLM_interpretation_likelihood_llama": 0.55,
-            "LLM_interpretation_explanation_llama": "This interpretation is less plausible due to the lack of CaO and use of an uncommon V\u2082O\u2083 polymorph.",
-            "prior_probability_llama": 0.775062962962963,
-            "unnormalized_posterior_llama": 0.645416321124288,
-            "posterior_probability_llama": 0.12129241880558894
+            "LLM_interpretation_likelihood_llama": 0.5,
+            "LLM_interpretation_explanation_llama": "This interpretation's credibility is reduced by the less common V\u2082O\u2083 polymorph and the absence of CaO."
         },
         "I_6": {
             "phases": [
@@ -4370,16 +4173,13 @@
             "adjusted_posterior_probability": 0.007117394494025791,
             "unnormalized_posterior": 0.3723434826055115,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.0
+                "V2O3 (space group 15)": 0.2
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "This interpretation is implausible as it only includes V\u2082O\u2083, which does not match the target composition of CaV\u2082O\u2083."
+                "V2O3 (space group 15)": "As above, C2/c (SG 15) is not the preferred polymorph for V\u2082O\u2083."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely as it does not account for Ca or the correct stoichiometry.",
-            "prior_probability_llama": 0.3665123456790123,
-            "unnormalized_posterior_llama": 0.28993959711084905,
-            "posterior_probability_llama": 0.0544880473115904
+            "LLM_interpretation_likelihood_llama": 0.2,
+            "LLM_interpretation_explanation_llama": "This single-phase interpretation with a less common polymorph of V\u2082O\u2083 is highly unlikely."
         },
         "I_7": {
             "phases": [
@@ -4416,16 +4216,13 @@
             "adjusted_posterior_probability": 0.008373902597328826,
             "unnormalized_posterior": 0.4380771725813313,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 167)": 0.0
+                "V2O3 (space group 167)": 0.8
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 167)": "Similar to I_6, this interpretation is implausible as it only includes V\u2082O\u2083."
+                "V2O3 (space group 167)": "This is the stable and expected V\u2082O\u2083 polymorph."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely for the same reasons as I_6.",
-            "prior_probability_llama": 0.3665123456790123,
-            "unnormalized_posterior_llama": 0.2898142854820785,
-            "posterior_probability_llama": 0.05446449762736243
+            "LLM_interpretation_likelihood_llama": 0.8,
+            "LLM_interpretation_explanation_llama": "While chemically plausible, a single-phase interpretation may not fully account for potential side products or unreacted precursors."
         },
         "I_8": {
             "phases": [
@@ -4462,16 +4259,13 @@
             "adjusted_posterior_probability": 0.0017977006239739551,
             "unnormalized_posterior": 0.09404594779373458,
             "LLM_phases_likelihood_llama": {
-                "CaO (space group 225)": 0.0
+                "CaO (space group 225)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "CaO (space group 225)": "This interpretation is implausible as it only includes CaO, which does not match the target composition of CaV\u2082O\u2083."
+                "CaO (space group 225)": "Stable CaO as discussed."
             },
-            "LLM_interpretation_likelihood_llama": 0.05,
-            "LLM_interpretation_explanation_llama": "This interpretation is highly unlikely as it does not account for V or the correct stoichiometry.",
-            "prior_probability_llama": 0.12885802469135804,
-            "unnormalized_posterior_llama": 0.0633293277482003,
-            "posterior_probability_llama": 0.011901414780665132
+            "LLM_interpretation_likelihood_llama": 0.3,
+            "LLM_interpretation_explanation_llama": "A single-phase interpretation with only CaO is unlikely given the target composition and precursors."
         },
         "I_9": {
             "phases": [
@@ -4512,18 +4306,15 @@
             "adjusted_posterior_probability": 0.13582395732586927,
             "unnormalized_posterior": 0.710557287985466,
             "LLM_phases_likelihood_llama": {
-                "V2O3 (space group 15)": 0.8,
-                "CaO (space group 225)": 0.7
+                "V2O3 (space group 15)": 0.2,
+                "CaO (space group 225)": 0.6
             },
             "LLM_phases_explanation_llama": {
-                "V2O3 (space group 15)": "As above, C2/c (SG 15) is not typical for V\u2082O\u2083.",
-                "CaO (space group 225)": "Expected structure for CaO as above."
+                "V2O3 (space group 15)": "Less common V\u2082O\u2083 polymorph.",
+                "CaO (space group 225)": "Stable CaO as discussed."
             },
-            "LLM_interpretation_likelihood_llama": 0.85,
-            "LLM_interpretation_explanation_llama": "Despite the uncommon V\u2082O\u2083 polymorph, this interpretation is plausible with a good balance score of 0.979.",
-            "prior_probability_llama": 0.9255157407407407,
-            "unnormalized_posterior_llama": 0.8215103354745708,
-            "posterior_probability_llama": 0.15438558400557276
+            "LLM_interpretation_likelihood_llama": 0.5,
+            "LLM_interpretation_explanation_llama": "This interpretation includes a stable phase (CaO) and a less common V\u2082O\u2083 polymorph, making it moderately plausible."
         },
         "Synth_Conditions": {
             "Target": "CaV2O3",

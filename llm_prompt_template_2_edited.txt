@@ -24,7 +24,8 @@ Instructions:
 - Do not copy, add, or infer phases from one interpretation into another. Each interpretation must be evaluated only using the exact list of phases it provides. Phases from other interpretations must not be introduced under any condition, even if they are plausible or similar.
 - Phases with the same formula but different space groups must be treated as separate, unique phases. Do not merge or remove them. If both appear in an interpretation, evaluate each separately. Their phase likelihoods may differ based on stability or polymorph identity.
 - Penalize interpretations with phases that normally appear in gas form (e.g. CO, O2).
-- Penalize interpretations with unfavorable space groups.
+- Penalize interpretations with unfavorable space groups for the given synthesis information.
+- Penalize phases that are unfavorable in the atmospheric conditions. 
 
 
 **Completeness Check – Requirement:**
@@ -51,13 +52,18 @@ Finally, remember that these phase interpretations are from x-ray diffraction me
 
 
 **Do not** confuse gas-phase species (e.g., CO, O₂) with solid phases — disqualify them appropriately.
+
 **Format Instructions**
-Format your response as a dictionary where each interpretation key maps to a nested dictionary with:
-For ** ALL interpretations ** provide:
-- "Likelihoods": {{phase (space group #): value(float)}}
-- "Explanations": {{phase (space group #): explanation(str)}}
-- "Interpretation_Likelihood": float
-- "Interpretation_Explanation": str
+Format your response as a dictionary where each interpretation key maps to a nested dictionary.
+- For **each interpretation**, provide:
+"I_#": {
+"Likelihoods": {{phase (space group #): value(float) (rate using approximate equal phase)}} 
+"Explanations": {{phase (space group #): explanation(str)}}
+"Interpretation_Likelihood": float
+"Interpretation_Explanation": str
+},
+"I_#"
+... 
 
 The following examples are provided for demonstration purposes:
 

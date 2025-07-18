@@ -339,7 +339,7 @@ def describe_clean_composition(formula_str, digits=4, max_denominator=30):
     return f"{formula_str}, fractional_composition = {frac_dict}, approximately equal to {quantized_str}"
 
 # === Full function ===
-def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1):
+def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1,max_retries=0):
     """
     This function is used to run the Llama AI model on a specific run's data.
     It loads the JSON file, extracts the necessary information, and constructs a prompt for the model.
@@ -385,8 +385,8 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 
     # ---Prompt Information---
     prompt = textwrap.dedent(f"""\
-    ** Important **
-    - You are mixing phases from interpretation 2 into interpretation 1 in some samples. include both. Then check Format Instructions for how to format your response.
+     ** Important **
+    You are mixing phases from interpretation 2 into interpretation 1 in some samples. include both. Then check Format Instructions for how to format your response.
     
     Given the following synthesis data:
     {synthesis_data}
@@ -428,22 +428,24 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
         
         extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
 
-        if extracted_dict and retries < 5: #for every response that has a dictionary
+        if extracted_dict: #for every response that has a dictionary
             for interpret in extracted_dict: # could be useful to make sure llama is outputing the correct amount of phases
                 num_phases = len(list(extracted_dict[interpret]["Likelihoods"].keys()))
                 num_phases_prompt = len(json_file[run_name][interpret]["phases"])
                 if num_phases != num_phases_prompt:
                     print(f"Did not include correct number of phases in {interpret}")
-                    Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
-                    return # exit out
+                    if retries < (max_retries+1):
+                        Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
+                        return # exit out
             for interpret in json_file[run_name]: 
                 if interpret != "Synth_Conditions":
                     if not interpret in extracted_dict: # filters out all interpretations that Llama did not include in its response
                         print(f"Did not evaluate interpretation: {interpret}") # prints a statement saying that the interpretation was not included
-                        Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
-                        return # exit out     
+                        if retries < (max_retries + 1):
+                            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
+                            return # exit out     
 
-        if not extracted_dict and retries < 5: # if it cannot get the dictionary
+        if not extracted_dict and retries < max_retries: # if it cannot get the dictionary
             failed_dict = load_json("Data/prompt3/LLM_failedDictionary.json")
             if save_json_file not in failed_dict:
                 failed_dict[save_json_file] = {}
@@ -493,7 +495,7 @@ for run in run_name: # (use for DEBUG)
         if has_interpretation:
             run_name = run
             print(f"Running Llama response for: {run_name}")
-            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse)
+            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,max_retries=0)
             
 #Comment out 
 #Llama_response_oneRun(json_file,"TRI_181",save_json_file, save_promptresponse) # Example run for debugging or running an individual sample 
