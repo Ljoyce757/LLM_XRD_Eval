@@ -55,9 +55,9 @@ Finally, remember that these phase interpretations are from x-ray diffraction me
 
 **Format Instructions**
 Format your response as a dictionary where each interpretation key maps to a nested dictionary.
-- For **each interpretation**, provide:
+- For **ALL interpretations**, provide:
 "I_#": {
-"Likelihoods": {{phase (space group #): value(float) (rate using approximate equal phase)}} 
+"Likelihoods": {{phase (space group #): value(float) (assign value using approximate equal phase)}} 
 "Explanations": {{phase (space group #): explanation(str)}}
 "Interpretation_Likelihood": float
 "Interpretation_Explanation": str
