@@ -10,6 +10,8 @@ import re
 import time 
 import glob
 
+### Old Prompt ###
+
 load_dotenv()
 
 # --- Start llama API ---
