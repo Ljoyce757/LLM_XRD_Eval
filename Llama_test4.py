@@ -10,8 +10,11 @@ import re
 import time 
 import glob
 from pymatgen.core import Composition
+import random
+import sys
 
-### Edited Base Prompt to get results closer ### 
+### Extra Tests ### 
+# does llama give different results if the order of interpretations is randomized
 
 
 load_dotenv()
@@ -113,77 +116,7 @@ def phase_list(run_conditions):
         phases = [run_conditions["Precursor 1"], run_conditions["Precursor 2"], run_conditions["Precursor 3"]]
     return phases
 
-# def extract_dict_from_llm_output(llm_output, max_size_mb=10):
-#     """
-#     Extracts and parses a dictionary from a language model output string.
-#     Handles markdown code blocks, malformed JSON, and large payloads.
-#     """
 
-#     def extract_dict_string(text):
-#         # Try to extract JSON from code block
-#         code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
-#         if code_block:
-#             return code_block.group(1)
-
-#         # Fall back to the largest brace block
-#         curly_block = re.search(r"(\{.*\})", text, re.DOTALL)
-#         if curly_block:
-#             return curly_block.group(1)
-
-#         return None
-
-#     def is_large_payload(text, limit_mb):
-#         size_mb = len(text.encode('utf-8')) / 1024 / 1024
-#         return size_mb > limit_mb, size_mb
-
-#     def try_json_parse(text):
-#         try:
-#             return json.loads(text)
-#         except json.JSONDecodeError:
-#             return None
-
-#     def clean_json_string(text):
-#         # Fix common LLM formatting issues
-#         text = text.replace("'", '"')
-#         text = re.sub(r",\s*([}\]])", r"\1", text)  # Remove trailing commas
-#         text = re.sub(r'(?<!")(\b\w+\b)\s*:', r'"\1":', text)  # Quote unquoted keys
-#         return text
-
-#     dict_str = extract_dict_string(llm_output)
-#     if not dict_str:
-#         print("No dictionary-like structure found in the output.")
-#         return None
-
-#     # Handle large payloads with ijson
-#     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
-#     if too_large:
-#         print(f"Dictionary is large ({size_mb:.2f} MB). Using streaming parser.")
-#         with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
-#             tmpfile.write(dict_str)
-#             tmpfile.flush()
-#             tmpfile.seek(0)
-#             result = {}
-#             for key, value in ijson.kvitems(tmpfile, ''):
-#                 result[key] = value
-#         return result
-
-#     # Try standard JSON parse
-#     parsed = try_json_parse(dict_str)
-#     if parsed is not None:
-#         return parsed
-
-#     # Try again after cleaning
-#     cleaned = clean_json_string(dict_str)
-#     parsed = try_json_parse(cleaned)
-#     if parsed is not None:
-#         return parsed
-
-#     # Last resort: literal_eval
-#     try:
-#         return ast.literal_eval(dict_str)
-#     except Exception as e:
-#         print(f"Failed to parse dictionary using literal_eval: {e}")
-#         return None
 import re
 import json
 import ast
@@ -192,6 +125,7 @@ import ijson
 
 # def extract_dict_from_llm_output(llm_output, max_size_mb=10):
 #     """
+#     Edits the dictionary if there is formatting issues.
 #     Extracts and parses a dictionary from LLM output.
 #     Handles markdown code blocks, malformed JSON, large payloads, and nested braces.
 #     """
@@ -320,7 +254,7 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
         try:
             return json.loads(text)
         except json.JSONDecodeError as e:
-            print(f"JSON decode failed: {e}")
+            #print(f"JSON decode failed: {e}")
             return None
 
     dict_str = extract_dict_string(llm_output)
@@ -371,6 +305,29 @@ def put_response_in_json(extracted_dict, json_file,run_name,save_json_file):
         # Write the data to the new JSON file
         with open(save_json_file, "w", encoding="utf-8") as f:  
             json.dump(json_file, f, indent=4)
+def put_response_in_json_reorganize(extracted_dict, json_file,run_name,save_json_file, interpret_key):
+    if extracted_dict is not None:
+        # Update the JSON file with the new interpretation
+        for renamed_interpret in extracted_dict:
+            interpret = interpret_key[renamed_interpret]
+            if interpret not in json_file[run_name] and interpret.startswith("I_"):
+                # This will hopefully catch any false interpreations where LLM was not given interpretation info
+                print(f"Interpretation name not in JSON file: {interpret}")
+                continue #skip this interpretation
+     
+            LLM_phases_likelihood_llama = extracted_dict[interpret].get("Likelihoods", {})
+            LLM_phases_explanation_llama = extracted_dict[interpret].get("Explanations", {})
+            LLM_interpretation_likelihood_llama = extracted_dict[interpret].get("Interpretation_Likelihood", None)
+            LLM_interpretation_explanation_llama = extracted_dict[interpret].get("Interpretation_Explanation", None)
+            json_file[run_name][interpret]["LLM_phases_likelihood_llama"] = LLM_phases_likelihood_llama
+            json_file[run_name][interpret]["LLM_phases_explanation_llama"] = LLM_phases_explanation_llama
+            json_file[run_name][interpret]["LLM_interpretation_likelihood_llama"] = LLM_interpretation_likelihood_llama
+            json_file[run_name][interpret]["LLM_interpretation_explanation_llama"] = LLM_interpretation_explanation_llama
+        # Write the data to the new JSON file
+        with open(save_json_file, "w", encoding="utf-8") as f:  
+            json.dump(json_file, f, indent=4)
+
+
 def store_prompt_response(run_name, llm_input_response, extracted_dict, prompt, content):
     if not os.path.exists(llm_input_response):
         # Create an empty JSON file
@@ -408,7 +365,7 @@ def describe_clean_composition(formula_str, digits=4, max_denominator=30):
     return f"{formula_str}, fractional_composition = {frac_dict}, approximately equal to {quantized_str}"
 
 # === Full function ===
-def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1):
+def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1,max_retries=0):
     """
     This function is used to run the Llama AI model on a specific run's data.
     It loads the JSON file, extracts the necessary information, and constructs a prompt for the model.
@@ -462,21 +419,30 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     - Whether the oxidation state is thermodynamically plausible (based on precursors, temperature, and synthesis atmosphere).
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
     - Whether the overall elemental composition of the phases, weighted by their fractions, matches the expected target composition. Interpretations with large elemental imbalances (e.g., excess or missing cations) should be penalized. Use the provided composition balance score as an indicator of this match.
-
     """)
+    new_interpret_info = []
+    interpret_key = {}
+    for ((old_name, phases), score) in zip(all_phases.items(),composition_balance_scores.values()): 
+        # create a list of the original name, phase information, and balance score
+        new_interpret_info.append((old_name, phases, score))
+    random.shuffle(new_interpret_info) # shuffle this information to randomize the order of interpretations
+
+    for (new_name, (old_name, _, _)) in zip(all_phases.keys(), new_interpret_info):
+        # create a key to understand how the interpretations have been shuffled to then unshuffle when inserting the results into the json 
+        interpret_key[new_name] = old_name
 
     # Add interpretation info
-    prompt += "\nInterpretations:\n"
-    for name, phases in all_phases.items():
-        prompt += f"- {name}: {', '.join(phases)}\n"
+    prompt += "\nInterpretations:\n" #create a new interpretation order using the new shuffled interpretation order
+    for (new_name, (_, phases, _)) in zip(all_phases.keys(),new_interpret_info):
+        prompt += f"- {new_name}: {', '.join(phases)}\n"
 
     # Add composition balance scores
     prompt += "\nComposition balance scores:\n"
-    for name, score in composition_balance_scores.items():
-        prompt += f"- {name}: {round(score, 3)}\n"
+    for (new_name, (_, _, score)) in zip(composition_balance_scores.keys(), new_interpret_info):
+        prompt += f"- {new_name}: {round(score, 3)}\n"
 
-    prompt += load_prompt_template("llm_prompt_template_2_edited2.txt")
-    #print(prompt)
+    prompt += load_prompt_template("llm_prompt_template_2_edited_2.txt")
+    
     #--- Prompt --- 
     try:
         response = client.chat.completions.create(
@@ -492,13 +458,34 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
             )
         
         content = response.choices[0].message.content.strip() # Get the content from the response 
-        
         extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
-        if not extracted_dict and retries < 5: # if it cannot get the dictionary
+        #print(extracted_dict)
+        if extracted_dict: #for every response that has a dictionary
+            for new_interpret in extracted_dict: # could be useful to make sure llama is outputing the correct amount of phases
+                old_interpret = interpret_key[new_interpret]
+                num_phases = len(list(extracted_dict[new_interpret]["Likelihoods"].keys()))
+                num_phases_prompt = len(json_file[run_name][old_interpret]["phases"])
+                if num_phases != num_phases_prompt:
+                    print(f"Did not include correct number of phases in {old_interpret}")
+                    if retries < (max_retries+1):
+                        Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
+                        return # exit out
+            for new_interpret in json_file[run_name]: 
+                if new_interpret != "Synth_Conditions":
+                    old_interpret = interpret_key[new_interpret] # rename key back to original 
+                    if not new_interpret in extracted_dict: # filters out all interpretations that Llama did not include in its response
+                        print(f"Did not evaluate interpretation: {old_interpret}") # prints a statement saying that the interpretation was not included
+                        if retries < (max_retries + 1):
+                            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
+                            return # exit out     
+
+        if not extracted_dict and retries < max_retries: # if it cannot get the dictionary
             failed_dict = load_json("Data/prompt3/LLM_failedDictionary.json")
             if save_json_file not in failed_dict:
                 failed_dict[save_json_file] = {}
-            failed_dict[save_json_file][run_name] = content
+            if retries not in failed_dict[save_json_file]:
+                failed_dict[save_json_file][retries] = {}
+            failed_dict[save_json_file][retries][run_name] = content
             save_json("Data/prompt3/LLM_failedDictionary.json", failed_dict)
             Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) #recursively call the function again
             return # exit out of this run 
@@ -506,7 +493,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
         #stores prompt and response information for every run (usefull for debugging)
         store_prompt_response(run_name, save_promptresponse, extracted_dict, prompt, content) 
 
-        put_response_in_json(extracted_dict, json_file, run_name,save_json_file) # save the response to the json file 
+        put_response_in_json_reorganize(extracted_dict, json_file, run_name,save_json_file,interpret_key) # save the response to the json file 
         
     except Exception as e:
             print(f"Error calling model: {e}")
@@ -518,14 +505,14 @@ start_time = time.time()  # Start timer
 json_file = load_json("Data/test_final_weights.json")
 
 # === Find the next available file name ===
-base = "Data/prompt3/interpretations_llm_v1_llama"
+base = "Data/prompt4/interpretations_llm_v2_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt3/llm_prompt_v1_response"
+base1 = "Data/prompt4/llm_prompt_v2_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num
@@ -533,13 +520,16 @@ save_promptresponse = f"{base1}{next_num1}.json"  # File to save the results
 
 os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exists
 
-for run in json_file:
+run_name = ["TRI_87","ARR_39", "TRI_41"] #DEBUG for adjusting prompt with specific samples
+
+#for run in json_file:
+for run in run_name: # (use for DEBUG)
     if "Synth_Conditions" in json_file[run]:
         has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
         if has_interpretation:
-            run_name = run
-            print(f"Running Llama response for: {run_name}")
-            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse)
+      
+            print(f"Running Llama response for: {run}")
+            Llama_response_oneRun(json_file, run, save_json_file, save_promptresponse,max_retries=0)
             
 #Comment out 
 #Llama_response_oneRun(json_file,"TRI_181",save_json_file, save_promptresponse) # Example run for debugging or running an individual sample 
