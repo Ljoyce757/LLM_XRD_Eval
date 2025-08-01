@@ -1,0 +1,6 @@
+- visualize_FinalGraphics_DataAnalysis.ipynb: this file has just the main functions and graphs relevant to the paper each cell should contain all helper functions needed
+- visualize_useful_graphics.ipynb: I selected out any interesting graphics or functions that could be used in the future. I tried to clean up some of the code to make it easier to understand
+- All other visualization files were somewhat unorganized, I tried to organize the relevant functions in the above two files, but every function in the other files should be labeled. This list is the order in which I made the files, more relevant functions may be towards the bottom of the list:
+    1. visualize_llamaOutput.ipynb
+    2. visualize_llamaOutput2.ipynb
+    3. visualize_ChatLlamaRwp.ipynb
