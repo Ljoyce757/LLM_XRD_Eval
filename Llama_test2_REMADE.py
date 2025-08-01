@@ -10,14 +10,8 @@ import re
 import time 
 import glob
 from pymatgen.core import Composition
-import random
-import sys
 
-### Extra Tests ### 
-# does llama give different results if the order of interpretations is randomized
-# shuffle_interpretations option added to the Llama_response_one_run
-#   shuffle_interpretations = False  -- No Shuffle
-#   shuffle_interpretations = True -- Shuffles interpretations in prompt and unshuffles in response
+### Base Prompt, adjusted parser to account for missing dictionaries ###
 
 
 load_dotenv()
@@ -126,100 +120,11 @@ import ast
 import tempfile
 import ijson
 
-import re
-import json
-import ast
-import tempfile
-import ijson
-
-def extract_dict_from_llm_output(llm_output, max_size_mb=10):
-    """
-    Extracts and parses a dictionary from LLM output.
-    Handles markdown code blocks, nested braces, large payloads,
-    and optionally cleans malformed JSON (e.g., trailing commas).
-    """
-
-    def extract_dict_string(text): 
-        # 1. Try to extract JSON from markdown code block
-        code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
-        if code_block:
-            return code_block.group(1)
-
-        # 2. Try balanced brace extraction
-        return extract_balanced_braces(text)
-
-    def extract_balanced_braces(text):
-        start = text.find('{')
-        if start == -1:
-            return None
-        depth = 0
-        for i in range(start, len(text)):
-            if text[i] == '{':
-                depth += 1
-            elif text[i] == '}':
-                depth -= 1
-                if depth == 0:
-                    return text[start:i+1]
-        return None
-
-    def is_large_payload(text, limit_mb):
-        size_mb = len(text.encode('utf-8')) / 1024 / 1024
-        return size_mb > limit_mb, size_mb
-
-    def try_json_parse(text):
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError as e:
-            return None
-
-    def clean_json_like_string(s):
-        # Remove trailing commas before closing braces/brackets
-        s = re.sub(r',\s*([}\]])', r'\1', s)
-        # Fix some missing commas between entries (heuristic, not perfect)
-        s = re.sub(r'"\s*("[^"]+"\s*:)', r'", \1', s)
-        return s
-
-    dict_str = extract_dict_string(llm_output)
-    if not dict_str:
-        print("No dictionary-like structure found in the output.")
-        return None
-
-    too_large, size_mb = is_large_payload(dict_str, max_size_mb)
-    if too_large:
-        print(f"Payload too large ({size_mb:.2f} MB). Using ijson.")
-        with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
-            tmpfile.write(dict_str)
-            tmpfile.flush()
-            tmpfile.seek(0)
-            result = {}
-            for key, value in ijson.kvitems(tmpfile, ''):
-                result[key] = value
-        return result
-
-    # First attempt: raw JSON parse
-    parsed = try_json_parse(dict_str)
-    if parsed is not None:
-        return parsed
-
-    # Clean and retry
-    cleaned_str = clean_json_like_string(dict_str)
-    parsed_clean = try_json_parse(cleaned_str)
-    if parsed_clean is not None:
-        return parsed_clean
-
-    # Final fallback: literal_eval for Python-like dicts
-    try:
-        return ast.literal_eval(dict_str)
-    except Exception as e:
-        print(f"literal_eval failed: {e}")
-        return None
-
-
 # def extract_dict_from_llm_output(llm_output, max_size_mb=10):
 #     """
+#     Edits the dictionary if there is formatting issues.
 #     Extracts and parses a dictionary from LLM output.
-#     Handles markdown code blocks, nested braces, and large payloads.
-#     Does NOT modify or clean malformed JSON.
+#     Handles markdown code blocks, malformed JSON, large payloads, and nested braces.
 #     """
 
 #     def extract_dict_string(text):
@@ -253,13 +158,28 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
 #         try:
 #             return json.loads(text)
 #         except json.JSONDecodeError as e:
-#             #print(f"JSON decode failed: {e}")
+#             print(f"JSON decode failed: {e}")
 #             return None
+
+#     def clean_json_string(text):
+#         # 1. Replace single quotes with double quotes
+#         text = text.replace("'", '"')
+
+#         # 2. Remove trailing commas inside objects and arrays
+#         text = re.sub(r",\s*([}\]])", r"\1", text)
+
+#         # 3. Quote unquoted keys (e.g., V2O3: → "V2O3":)
+#         text = re.sub(r'(?<!")(\b[\w\s\-/]+\b)\s*:', r'"\1":', text)
+
+#         return text
 
 #     dict_str = extract_dict_string(llm_output)
 #     if not dict_str:
 #         print("No dictionary-like structure found in the output.")
 #         return None
+
+#     # print("Raw extracted string (first 500 chars):")
+#     # print(dict_str[:500])
 
 #     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
 #     if too_large:
@@ -273,17 +193,95 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
 #                 result[key] = value
 #         return result
 
-#     # First and only attempt: raw JSON parsing
+#     # First attempt: raw
 #     parsed = try_json_parse(dict_str)
 #     if parsed is not None:
 #         return parsed
 
-#     # Optional fallback to literal_eval (if input might be Python dicts)
+#     # Second attempt: cleaned
+#     cleaned = clean_json_string(dict_str)
+#     # print("Trying cleaned version (first 500 chars):")
+#     # print(cleaned[:500])
+#     parsed = try_json_parse(cleaned)
+#     if parsed is not None:
+#         return parsed
+
+#     # Last resort: literal_eval
 #     try:
 #         return ast.literal_eval(dict_str)
 #     except Exception as e:
 #         print(f"literal_eval failed: {e}")
 #         return None
+
+def extract_dict_from_llm_output(llm_output, max_size_mb=10):
+    """
+    Extracts and parses a dictionary from LLM output.
+    Handles markdown code blocks, nested braces, and large payloads.
+    Does NOT modify or clean malformed JSON.
+    """
+
+    def extract_dict_string(text):
+        # 1. Try to extract JSON from markdown code block
+        code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
+        if code_block:
+            return code_block.group(1)
+
+        # 2. Try balanced brace extraction
+        return extract_balanced_braces(text)
+
+    def extract_balanced_braces(text):
+        start = text.find('{')
+        if start == -1:
+            return None
+        depth = 0
+        for i in range(start, len(text)):
+            if text[i] == '{':
+                depth += 1
+            elif text[i] == '}':
+                depth -= 1
+                if depth == 0:
+                    return text[start:i+1]
+        return None
+
+    def is_large_payload(text, limit_mb):
+        size_mb = len(text.encode('utf-8')) / 1024 / 1024
+        return size_mb > limit_mb, size_mb
+
+    def try_json_parse(text):
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as e:
+            #print(f"JSON decode failed: {e}")
+            return None
+
+    dict_str = extract_dict_string(llm_output)
+    if not dict_str:
+        print("No dictionary-like structure found in the output.")
+        return None
+
+    too_large, size_mb = is_large_payload(dict_str, max_size_mb)
+    if too_large:
+        print(f"Payload too large ({size_mb:.2f} MB). Using ijson.")
+        with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.json') as tmpfile:
+            tmpfile.write(dict_str)
+            tmpfile.flush()
+            tmpfile.seek(0)
+            result = {}
+            for key, value in ijson.kvitems(tmpfile, ''):
+                result[key] = value
+        return result
+
+    # First and only attempt: raw JSON parsing
+    parsed = try_json_parse(dict_str)
+    if parsed is not None:
+        return parsed
+
+    # Optional fallback to literal_eval (if input might be Python dicts)
+    try:
+        return ast.literal_eval(dict_str)
+    except Exception as e:
+        print(f"literal_eval failed: {e}")
+        return None
 
 def put_response_in_json(extracted_dict, json_file,run_name,save_json_file):
     if extracted_dict is not None:
@@ -304,29 +302,6 @@ def put_response_in_json(extracted_dict, json_file,run_name,save_json_file):
         # Write the data to the new JSON file
         with open(save_json_file, "w", encoding="utf-8") as f:  
             json.dump(json_file, f, indent=4)
-def put_response_in_json_reorganize(extracted_dict, json_file,run_name,save_json_file, interpret_key):
-    if extracted_dict is not None:
-        # Update the JSON file with the new interpretation
-        for renamed_interpret in extracted_dict:
-            interpret = interpret_key[renamed_interpret]
-            if interpret not in json_file[run_name] and interpret.startswith("I_"):
-                # This will hopefully catch any false interpreations where LLM was not given interpretation info
-                print(f"Interpretation name not in JSON file: {interpret}")
-                continue #skip this interpretation
-     
-            LLM_phases_likelihood_llama = extracted_dict[interpret].get("Likelihoods", {})
-            LLM_phases_explanation_llama = extracted_dict[interpret].get("Explanations", {})
-            LLM_interpretation_likelihood_llama = extracted_dict[interpret].get("Interpretation_Likelihood", None)
-            LLM_interpretation_explanation_llama = extracted_dict[interpret].get("Interpretation_Explanation", None)
-            json_file[run_name][interpret]["LLM_phases_likelihood_llama"] = LLM_phases_likelihood_llama
-            json_file[run_name][interpret]["LLM_phases_explanation_llama"] = LLM_phases_explanation_llama
-            json_file[run_name][interpret]["LLM_interpretation_likelihood_llama"] = LLM_interpretation_likelihood_llama
-            json_file[run_name][interpret]["LLM_interpretation_explanation_llama"] = LLM_interpretation_explanation_llama
-        # Write the data to the new JSON file
-        with open(save_json_file, "w", encoding="utf-8") as f:  
-            json.dump(json_file, f, indent=4)
-
-
 def store_prompt_response(run_name, llm_input_response, extracted_dict, prompt, content):
     if not os.path.exists(llm_input_response):
         # Create an empty JSON file
@@ -364,7 +339,7 @@ def describe_clean_composition(formula_str, digits=4, max_denominator=30):
     return f"{formula_str}, fractional_composition = {frac_dict}, approximately equal to {quantized_str}"
 
 # === Full function ===
-def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1,max_retries=0,shuffle_interpretations=False):
+def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptresponse, retries=1,max_retries=0):
     """
     This function is used to run the Llama AI model on a specific run's data.
     It loads the JSON file, extracts the necessary information, and constructs a prompt for the model.
@@ -410,9 +385,6 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 
     # ---Prompt Information---
     prompt = textwrap.dedent(f"""\
-    ** Important **
-    You are mixing phases from interpretation 2 into interpretation 1 in some samples. include both. Then check Format Instructions for how to format your response.
-    
     Given the following synthesis data:
     {synthesis_data}
 
@@ -422,30 +394,19 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     - Whether the specific polymorph (space group) is known to be stable at the synthesis temperature and pressure. If multiple polymorphs exist for the same composition, prefer the polymorph known to be stable under the synthesis conditions.
     - Whether the overall elemental composition of the phases, weighted by their fractions, matches the expected target composition. Interpretations with large elemental imbalances (e.g., excess or missing cations) should be penalized. Use the provided composition balance score as an indicator of this match.
     """)
-    new_interpret_info = []
-    interpret_key = {}
-    for ((old_name, phases), score) in zip(all_phases.items(),composition_balance_scores.values()): 
-        # create a list of the original name, phase information, and balance score
-        new_interpret_info.append((old_name, phases, score))
-    if shuffle_interpretations==True:
-        random.shuffle(new_interpret_info) # shuffle this information to randomize the order of interpretations
-
-    for (new_name, (old_name, _, _)) in zip(all_phases.keys(), new_interpret_info):
-        # create a key to understand how the interpretations have been shuffled to then unshuffle when inserting the results into the json 
-        interpret_key[new_name] = old_name
 
     # Add interpretation info
-    prompt += "\nInterpretations:\n" #create a new interpretation order using the new shuffled interpretation order
-    for (new_name, (_, phases, _)) in zip(all_phases.keys(),new_interpret_info):
-        prompt += f"- {new_name}: {', '.join(phases)}\n"
+    prompt += "\nInterpretations:\n"
+    for name, phases in all_phases.items():
+        prompt += f"- {name}: {', '.join(phases)}\n"
 
     # Add composition balance scores
     prompt += "\nComposition balance scores:\n"
-    for (new_name, (_, _, score)) in zip(composition_balance_scores.keys(), new_interpret_info):
-        prompt += f"- {new_name}: {round(score, 3)}\n"
+    for name, score in composition_balance_scores.items():
+        prompt += f"- {name}: {round(score, 3)}\n"
 
-    prompt += load_prompt_template("llm_prompt_template_2_edited.txt")
-    
+    prompt += load_prompt_template("llm_prompt_template_2.txt")
+    #print(prompt)
     #--- Prompt --- 
     try:
         response = client.chat.completions.create(
@@ -461,25 +422,24 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
             )
         
         content = response.choices[0].message.content.strip() # Get the content from the response 
+        
         extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
-        #print(extracted_dict)
+
         if extracted_dict: #for every response that has a dictionary
-            for new_interpret in extracted_dict: # could be useful to make sure llama is outputing the correct amount of phases
-                old_interpret = interpret_key[new_interpret]
-                num_phases = len(list(extracted_dict[new_interpret]["Likelihoods"].keys()))
-                num_phases_prompt = len(json_file[run_name][old_interpret]["phases"])
+            for interpret in extracted_dict: # could be useful to make sure llama is outputing the correct amount of phases
+                num_phases = len(list(extracted_dict[interpret]["Likelihoods"].keys()))
+                num_phases_prompt = len(json_file[run_name][interpret]["phases"])
                 if num_phases != num_phases_prompt:
-                    print(f"Did not include correct number of phases in {old_interpret}")
+                    print(f"Did not include correct number of phases in {interpret}")
                     if retries < (max_retries+1):
-                        Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1, shuffle_interpretations=shuffle) # retries samples to hopefully correct it
+                        Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
                         return # exit out
-            for new_interpret in json_file[run_name]: 
-                if new_interpret != "Synth_Conditions":
-                    old_interpret = interpret_key[new_interpret] # rename key back to original 
-                    if not new_interpret in extracted_dict: # filters out all interpretations that Llama did not include in its response
-                        print(f"Did not evaluate interpretation: {old_interpret}") # prints a statement saying that the interpretation was not included
+            for interpret in json_file[run_name]: 
+                if interpret != "Synth_Conditions":
+                    if not interpret in extracted_dict: # filters out all interpretations that Llama did not include in its response
+                        print(f"Did not evaluate interpretation: {interpret}") # prints a statement saying that the interpretation was not included
                         if retries < (max_retries + 1):
-                            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1, shuffle_interpretations=shuffle) # retries samples to hopefully correct it
+                            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) # retries samples to hopefully correct it
                             return # exit out     
 
         if not extracted_dict and retries < max_retries: # if it cannot get the dictionary
@@ -490,13 +450,13 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
                 failed_dict[save_json_file][retries] = {}
             failed_dict[save_json_file][retries][run_name] = content
             save_json("Data/prompt3/LLM_failedDictionary.json", failed_dict)
-            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1, shuffle_interpretations=shuffle) #recursively call the function again
+            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,retries=retries+1) #recursively call the function again
             return # exit out of this run 
 
         #stores prompt and response information for every run (usefull for debugging)
         store_prompt_response(run_name, save_promptresponse, extracted_dict, prompt, content) 
 
-        put_response_in_json_reorganize(extracted_dict, json_file, run_name,save_json_file,interpret_key) # save the response to the json file 
+        put_response_in_json(extracted_dict, json_file, run_name,save_json_file) # save the response to the json file 
         
     except Exception as e:
             print(f"Error calling model: {e}")
@@ -506,16 +466,16 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 start_time = time.time()  # Start timer
 
 json_file = load_json("Data/larger_sample_file_for_test.json")
-shuffle = False
+
 # === Find the next available file name ===
-base = "Data/prompt3/moresamples/interpretations_llm_v3_llama"
+base = "Data/prompt3/moresamples/interpretations_llm_v1_REMADE_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt3/moresamples/llm_prompt_v3_response"
+base1 = "Data/prompt3/moresamples/llm_prompt_v1_REMADE_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num
@@ -523,16 +483,16 @@ save_promptresponse = f"{base1}{next_num1}.json"  # File to save the results
 
 os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exists
 
-run_name = ["TRI_87","ARR_39", "TRI_41"] #DEBUG for adjusting prompt with specific samples
+run_names = ["TRI_41","ARR_39", "TRI_87"] #DEBUG for adjusting prompt with specific samples
 
 for run in json_file:
-#for run in run_name: # (use for DEBUG)
+#for run in run_names: # (use for DEBUG)
     if "Synth_Conditions" in json_file[run]:
         has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
         if has_interpretation:
-      
-            print(f"Running Llama response for: {run}")
-            Llama_response_oneRun(json_file, run, save_json_file, save_promptresponse,max_retries=0, shuffle_interpretations=shuffle)
+            run_name = run
+            print(f"Running Llama response for: {run_name}")
+            Llama_response_oneRun(json_file, run_name, save_json_file, save_promptresponse,max_retries=0)
             
 #Comment out 
 #Llama_response_oneRun(json_file,"TRI_181",save_json_file, save_promptresponse) # Example run for debugging or running an individual sample 

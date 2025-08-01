@@ -468,17 +468,17 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 # --- Main Execution for All Runs --- 
 start_time = time.time()  # Start timer
 
-json_file = load_json("Data/test_final_weights.json")
+json_file = load_json("Data/larger_sample_file_for_test.json")
 
 # === Find the next available file name ===
-base = "Data/prompt3/PromptTest/interpretations_llm_v2_llama"
+base = "Data/prompt3/moresamples/interpretations_llm_v3_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt3/PromptTest/llm_prompt_v2_response"
+base1 = "Data/prompt3/moresamples/llm_prompt_v3_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num
@@ -488,8 +488,8 @@ os.makedirs(os.path.dirname(save_json_file), exist_ok=True)  # Ensure Data/ exis
 
 run_name = ["TRI_41","ARR_39", "TRI_87"] #DEBUG for adjusting prompt with specific samples
 
-#for run in json_file:
-for run in run_name: # (use for DEBUG)
+for run in json_file:
+#for run in run_name: # (use for DEBUG)
     if "Synth_Conditions" in json_file[run]:
         has_interpretation = any(k.startswith("I_") for k in json_file[run].keys())
         if has_interpretation:
