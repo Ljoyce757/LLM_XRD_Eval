@@ -468,17 +468,17 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 # --- Main Execution for All Runs --- 
 start_time = time.time()  # Start timer
 
-json_file = load_json("Data/larger_sample_file_for_test.json")
+json_file = load_json("Data/test_final_weights.json")
 
 # === Find the next available file name ===
-base = "Data/prompt3/moresamples/interpretations_llm_v3_llama"
+base = "Data/prompt3/Shuffled/interpretations_llm_v3_notshuffle_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt3/moresamples/llm_prompt_v3_response"
+base1 = "Data/prompt3/Shuffled/llm_prompt_v3_notshuffle_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num

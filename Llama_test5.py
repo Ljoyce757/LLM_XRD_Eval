@@ -14,10 +14,7 @@ import random
 import sys
 
 ### Extra Tests ### 
-# does llama give different results if the order of interpretations is randomized
-# shuffle_interpretations option added to the Llama_response_one_run
-#   shuffle_interpretations = False  -- No Shuffle
-#   shuffle_interpretations = True -- Shuffles interpretations in prompt and unshuffles in response
+# See how I can adjust the prompt from V3 to further stop hallucinations
 
 
 load_dotenv()
@@ -119,6 +116,13 @@ def phase_list(run_conditions):
         phases = [run_conditions["Precursor 1"], run_conditions["Precursor 2"], run_conditions["Precursor 3"]]
     return phases
 
+
+import re
+import json
+import ast
+import tempfile
+import ijson
+
 import re
 import json
 import ast
@@ -129,12 +133,12 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     """
     Extracts and parses a dictionary from LLM output.
     Handles markdown code blocks, nested braces, large payloads,
-    and optionally cleans malformed JSON or Python-style dicts.
+    and optionally cleans malformed JSON (e.g., trailing commas).
     """
 
-    def extract_dict_string(text):  
-        # 1. Try to extract JSON/Python dict from markdown code block
-        code_block = re.search(r"```(?:json|python)?\s*({.*?})\s*```", text, re.DOTALL)
+    def extract_dict_string(text): 
+        # 1. Try to extract JSON from markdown code block
+        code_block = re.search(r"```(?:json)?\s*({.*?})\s*```", text, re.DOTALL)
         if code_block:
             return code_block.group(1)
 
@@ -162,13 +166,7 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
     def try_json_parse(text):
         try:
             return json.loads(text)
-        except json.JSONDecodeError:
-            return None
-
-    def try_literal_eval(text):
-        try:
-            return ast.literal_eval(text)
-        except Exception:
+        except json.JSONDecodeError as e:
             return None
 
     def clean_json_like_string(s):
@@ -183,7 +181,6 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
         print("No dictionary-like structure found in the output.")
         return None
 
-    # Check for large input
     too_large, size_mb = is_large_payload(dict_str, max_size_mb)
     if too_large:
         print(f"Payload too large ({size_mb:.2f} MB). Using ijson.")
@@ -196,29 +193,24 @@ def extract_dict_from_llm_output(llm_output, max_size_mb=10):
                 result[key] = value
         return result
 
-    # Try literal_eval first for Python-style dictionaries
-    parsed = try_literal_eval(dict_str)
-    if parsed is not None:
-        return parsed
-
-    # Try raw JSON
+    # First attempt: raw JSON parse
     parsed = try_json_parse(dict_str)
     if parsed is not None:
         return parsed
 
-    # Clean the string and try again
+    # Clean and retry
     cleaned_str = clean_json_like_string(dict_str)
+    parsed_clean = try_json_parse(cleaned_str)
+    if parsed_clean is not None:
+        return parsed_clean
 
-    parsed = try_literal_eval(cleaned_str)
-    if parsed is not None:
-        return parsed
+    # Final fallback: literal_eval for Python-like dicts
+    try:
+        return ast.literal_eval(dict_str)
+    except Exception as e:
+        print(f"literal_eval failed: {e}")
+        return None
 
-    parsed = try_json_parse(cleaned_str)
-    if parsed is not None:
-        return parsed
-
-    print("Failed to parse dictionary.")
-    return None
 
 # def extract_dict_from_llm_output(llm_output, max_size_mb=10):
 #     """
@@ -412,15 +404,13 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
     # Temperature: 1273.15 K (1000°C)  
     # Dwell Duration: 4.0 hours  
     # Furnace: Box furnace with ambient air
-    #** Important **
-    #You are mixing phases from interpretation 2 into interpretation 1 in some samples. include both. Then check Format Instructions for how to format your response.
-    
+
 
     # ---Prompt Information---
     prompt = textwrap.dedent(f"""\
     ** Important **
     You are mixing phases from interpretation 2 into interpretation 1 in some samples. include both. Then check Format Instructions for how to format your response.
-                             
+    
     Given the following synthesis data:
     {synthesis_data}
 
@@ -469,8 +459,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
             )
     except Exception as e:
         print(f"Error calling model: {e}")
-    if shuffle == True:
-        print(interpret_key)
+    #print(interpret_key)
     content = response.choices[0].message.content.strip() # Get the content from the response 
     extracted_dict = extract_dict_from_llm_output(content) # take out the dictionary from the response content
     #print(extracted_dict)
@@ -509,6 +498,7 @@ def Llama_response_oneRun(json_file, run_name,save_json_file, save_promptrespons
 
     put_response_in_json_reorganize(extracted_dict, json_file, run_name,save_json_file,interpret_key) # save the response to the json file 
         
+    
 # --- End of the Big Function ---
 
 # --- Main Execution for All Runs --- 
@@ -517,14 +507,14 @@ start_time = time.time()  # Start timer
 json_file = load_json("Data/test_final_weights.json")
 shuffle = False
 # === Find the next available file name ===
-base = "Data/prompt3/Shuffled/interpretations_llm_v3_notshuffle_llama"
+base = "Data/prompt3/PromptTest/interpretations_llm_v3_edits_llama"
 existing = glob.glob(f"{base}*.json")
 nums = [int(re.search(r"llama(\d+)\.json", f).group(1)) for f in existing if re.search(r"llama(\d+)\.json", f)]
 next_num = max(nums) + 1 if nums else 1
 save_json_file = f"{base}{next_num}.json"  # File to save the results
 
 # === Find the next available file name ===
-base1 = "Data/prompt3/Shuffled/llm_prompt_v3_notshuffle_response"
+base1 = "Data/prompt3/PromptTest/llm_prompt_v3_edits_response"
 # existing1 = glob.glob(f"{base1}*.json")
 # nums1 = [int(re.search(r"response(\d+)\.json", f).group(1)) for f in existing1 if re.search(r"response(\d+)\.json", f)]
 next_num1 = next_num
